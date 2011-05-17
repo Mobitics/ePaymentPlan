@@ -1,27 +1,22 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.beta1'
-
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
-
-# Asset template engines
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
-
 gem 'jquery-rails'
+gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'master'
 
-# Use unicorn as the web server
-# gem 'unicorn'
+group :development, :test do
+  gem 'sqlite3'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+end
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+group :production do
+  gem 'unicorn'
+  gem 'pg'
+  gem 'therubyracer'
+end
 
 group :test do
   # Pretty printed test output
