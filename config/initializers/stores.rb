@@ -1,0 +1,1 @@
+StoreConfig = YAML.load_file(File.open("#{Rails.root}/config/store.yml"))
