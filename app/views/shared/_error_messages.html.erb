@@ -1,11 +1,11 @@
-<% if f.errors.any? %>
+<% if target.errors.any? %>
   <div id="errorExplanation">
     <h2>
-      <%= pluralize(f.errors.count, "error") %>
+      <%= pluralize(target.errors.count, "error") %>
       prohibited this record from being saved:
     </h2> 
     <ul>
-      <% f.errors.full_messages.each do |msg| %>
+      <% target.errors.full_messages.each do |msg| %>
         <li>
           <%= msg %>
         </li>  
