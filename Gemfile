@@ -1,12 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.beta1'
+gem 'rails', :git => "https://github.com/rails/rails.git"
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'pjax-rails'
 gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'master'
+gem 'shopify'
 
 group :development, :test do
   gem 'sqlite3'
