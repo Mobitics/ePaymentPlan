@@ -1,5 +1,7 @@
 Epaymentplans::Application.routes.draw do
 
+  get "payment_plans/new"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
  match "/site/purchase" => "site#purchase"

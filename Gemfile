@@ -10,6 +10,9 @@ gem 'pjax-rails'
 gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'master'
 gem 'shopify_api'
 
+#Authentication
+gem 'devise', '>= 1.3.0'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'ruby-debug19', :require => 'ruby-debug'
