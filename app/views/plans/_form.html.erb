@@ -25,7 +25,7 @@
 </fieldset>
 <fieldset>
 <%= f.label :plan_type, "Plan type" %>
-<%= f.select :plan_type, options_for_select(@plan_types) %>
+<%= f.select :plan_type, options_for_select(@plan_types, plan.plan_type) %>
 </fieldset>
 <fieldset>
 <%= f.label :min_price, "Min price" %>
