@@ -37,7 +37,7 @@ class PlansController < ApplicationController
     else
       @plan_types = [["By price range", "by_price"], ["By Product", "by_product"]]
       @products = [] #it need be changed when products be done
-      render :new
+      render :edit
     end
   end
 

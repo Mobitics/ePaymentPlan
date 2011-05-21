@@ -22,6 +22,12 @@ describe PlansController do
       response.should render_template('index')
     end
     
+    it "should response success on GET without plans to #index" do
+      get :index
+      assigns[:plans].should be_empty
+      response.should render_template('index')
+    end
+    
     it "should response success on GET to #show" do
       @plan = Factory(:plan)
       get :show, :id => @plan.id
@@ -43,6 +49,18 @@ describe PlansController do
       put :update, :id => @plan.id, :plan => attributes
       updated_plan = Plan.find @plan.id
       updated_plan.name.should be == "Updated Name"
+      assigns[:plan].should_not be_nil      
+      response.should redirect_to(plan_path(@plan))
+    end
+    
+    it "should response failed on PUT to #update" do
+      @plan = Factory(:plan)
+      attributes = @plan.attributes
+      name = attributes["name"]
+      attributes["name"] = "" 
+      put :update, :id => @plan.id, :plan => attributes
+      updated_plan = Plan.find @plan.id
+      updated_plan.name.should be == name
       assigns[:plan].should_not be_nil      
       response.should render_template('edit')
     end
