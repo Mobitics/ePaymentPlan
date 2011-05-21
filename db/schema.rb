@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110521004613) do
     t.string   "min_price"
     t.string   "max_price"
     t.integer  "product_id"
+    t.string   "name"
   end
 
 end
