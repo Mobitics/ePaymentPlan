@@ -2,14 +2,15 @@ Epaymentplans::Application.routes.draw do
 
   devise_for :users
 
-  get "payment_plans/new"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
- match "/site/purchase" => "site#purchase"
+  match "/site/purchase" => "site#purchase"
+
   root :to => 'site#home'
-  
+
   resources :plans
+
+  resources :payment_plans, :only => [:new, :create]
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
