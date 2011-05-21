@@ -1,5 +1,7 @@
 Epaymentplans::Application.routes.draw do
 
+  devise_for :users
+
   get "payment_plans/new"
 
   # The priority is based upon order of creation:

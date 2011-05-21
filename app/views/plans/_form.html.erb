@@ -1,5 +1,9 @@
 <%= render 'shared/error_messages', :target => plan %>
 <fieldset>
+<%= f.label :name, "Name" %>
+<%= f.text_field :name %>
+</fieldset>
+<fieldset>
 <%= f.label :payments_count, "Number of payments" %>
 <%= f.text_field :payments_count %>
 </fieldset>

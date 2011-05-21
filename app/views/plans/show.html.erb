@@ -1,4 +1,6 @@
 <div>
+  <p><strong>Name</strong> 
+  <%= @plan.name %></p>
   <p><strong>Number of Payments</strong> 
   <%= @plan.payments_count %></p>
   <p><strong>1st payment includes shipping</strong>
@@ -18,3 +20,6 @@
   <p><strong>Product</strong>
   <%= @plan.product_id %></p>
 </div>
+<div>
+  <%= link_to "Edit", edit_plan_path(@plan) %> | <%= link_to "Plans", plans_path %> | <%= link_to "Delete", plan_path(@plan), :method => :delete %>
+</div>  
