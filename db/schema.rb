@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110519012753) do
+ActiveRecord::Schema.define(:version => 20110519234237) do
 
   create_table "plans", :force => true do |t|
     t.datetime "created_at"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20110519012753) do
     t.string   "min_price"
     t.string   "max_price"
     t.integer  "product_id"
+    t.string   "name"
   end
 
 end
