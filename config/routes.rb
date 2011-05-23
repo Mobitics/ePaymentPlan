@@ -4,7 +4,8 @@ Epaymentplans::Application.routes.draw do
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  match "/site/purchase" => "site#purchase"
+  match "/site/purchase" => "order#new"
+  resources :order, :only=>[:create]
 
   root :to => 'site#home'
 

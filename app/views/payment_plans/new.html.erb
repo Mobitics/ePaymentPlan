@@ -1,2 +1,10 @@
-<h1>PaymentPlans#new</h1>
-<p>Find me in app/views/payment_plans/new.html.erb</p>
+<h1>Make your payment using ePaymentPlans</h1>
+
+<%= form_for @payment_plan do |form| %>
+  <p>Select your Payment Plan:</p>
+  <% @plans.each do |plan| %>
+    <%= form.radio_button :plan_id, plan.id %>
+    <%= form.label :plan_id, plan.id %>
+  <% end %>
+<% end %>
+

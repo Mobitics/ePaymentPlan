@@ -1,2 +1,10 @@
-<h1>Site#home</h1>
-<p>Find me in app/views/site/home.html.erb</p>
+<h1>Welcome to ePaymentPlans</h1>
+
+<p>Dashboard</p>
+<nav>
+  <ul>
+    <li><%= link_to "Manage plans", plans_path %></li>
+    <li>---</li>
+    <li><%= link_to "Go to checkout page", new_payment_plan_path %></li>
+  </ul>
+</nav>

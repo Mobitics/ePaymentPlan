@@ -12,39 +12,82 @@ describe PlansController do
   
   before(:each) do
     @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("darth:vader")
-    @plan = Factory(:plan)
   end
   
   context "on METHOD to #action" do
     it "should response success on GET to #index" do
+      @plan = Factory(:plan)
       get :index
+      assigns[:plans].should_not be_empty
+      response.should render_template('index')
+    end
+    
+    it "should response success on GET without plans to #index" do
+      get :index
+      assigns[:plans].should be_empty
       response.should render_template('index')
     end
     
     it "should response success on GET to #show" do
+      @plan = Factory(:plan)
       get :show, :id => @plan.id
+      assigns[:plan].should_not be_nil
       response.should render_template('show')
     end
     
     it "should response success on GET to #edit" do
+      @plan = Factory(:plan)
       get :edit, :id => @plan.id
+      assigns[:plan].should_not be_nil      
       response.should render_template('edit')
     end
     
-    it "should response success on GET to #create" do
-      @valid_attributes = Factory.attributes_for(:plan)
-      post :create, @valid_attributes
-      assign(:plans).should_not be_empty
-      response.should render_template('index')
+    it "should response success on PUT to #update" do
+      @plan = Factory(:plan)
+      attributes = @plan.attributes
+      attributes[:name] = "Updated Name" 
+      put :update, :id => @plan.id, :plan => attributes
+      updated_plan = Plan.find @plan.id
+      updated_plan.name.should be == "Updated Name"
+      assigns[:plan].should_not be_nil      
+      response.should redirect_to(plan_path(@plan))
     end
     
-    it "should response success on GET to #create" do
+    it "should response failed on PUT to #update" do
+      @plan = Factory(:plan)
+      attributes = @plan.attributes
+      name = attributes["name"]
+      attributes["name"] = "" 
+      put :update, :id => @plan.id, :plan => attributes
+      updated_plan = Plan.find @plan.id
+      updated_plan.name.should be == name
+      assigns[:plan].should_not be_nil      
+      response.should render_template('edit')
+    end
+    
+    it "should response success on POST to #create" do
+      @valid_attributes = Factory.attributes_for(:plan)
+      post :create, :plan => @valid_attributes
+      assigns[:plan].should be_valid
+      response.should redirect_to(plans_path)      
+    end
+    
+    it "should response failed on POST to #create" do
       @valid_attributes = Factory.attributes_for(:plan)
       @valid_attributes[:name] = ""
       @invalid_attributes = @valid_attributes
-      post :create, @invalid_attributes
-      response.should render_template('new')
+      post :create, :plan => @invalid_attributes
+      assigns[:plan].should_not be_valid
+      response.should render_template('new')      
+      response.should be_success
     end
+    
+    it "should response success on DELETE to #destroy" do
+      @plan = Factory(:plan)
+      delete :destroy, :id => @plan.id
+      response.should redirect_to(plans_path)    
+    end
+    
   end
 
 end

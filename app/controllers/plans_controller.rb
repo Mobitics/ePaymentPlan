@@ -10,7 +10,7 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-    @plan_types = [["By price range", "by_price"], ["By Product", "by_product"]]
+    @plan_types = Plan::PLAN_TYPES.to_a.map(&:reverse)
     @products = [] #it need be changed when products be done
   end
 
@@ -19,7 +19,7 @@ class PlansController < ApplicationController
     if @plan.save
       redirect_to plans_path
     else
-      @plan_types = [["By price range", "by_price"], ["By Product", "by_product"]]
+      @plan_types = Plan::PLAN_TYPES.to_a.map(&:reverse)
       @products = [] #it need be changed when products be done
       render :new
     end
@@ -27,7 +27,7 @@ class PlansController < ApplicationController
   end
 
   def edit
-    @plan_types = [["By price range", "by_price"], ["By Product", "by_product"]]
+    @plan_types = Plan::PLAN_TYPES.to_a.map(&:reverse)
     @products = [] #it need be changed when products be done
   end
 
@@ -35,14 +35,14 @@ class PlansController < ApplicationController
     if @plan.update_attributes params[:plan]
       redirect_to plan_path @plan
     else
-      @plan_types = [["By price range", "by_price"], ["By Product", "by_product"]]
+      @plan_types = Plan::PLAN_TYPES.to_a.map(&:reverse)
       @products = [] #it need be changed when products be done
-      render :new
+      render :edit
     end
   end
 
   def destroy
-    @plan.destroy
+    @plan.destroy    
     redirect_to plans_path  
   end
 
@@ -51,4 +51,5 @@ class PlansController < ApplicationController
   def find_plan
     @plan = Plan.find params[:id]
   end
+  
 end
