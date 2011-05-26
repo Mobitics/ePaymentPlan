@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.beta1'
-gem 'sprockets', '2.0.0.beta.2'
+gem 'rails', '3.1.0.rc1'
+gem 'rake', '= 0.8.7'
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
@@ -13,7 +13,7 @@ gem 'shopify_api'
 group :development, :test do
   gem 'sqlite3'
   gem 'ruby-debug19', :require => 'ruby-debug'
-  gem 'rspec-rails', '~> 2.4'
+  gem 'rspec-rails', '2.6.1.beta1'
   gem 'autotest'
   gem 'rcov'
   gem 'factory_girl_rails'
