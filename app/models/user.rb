@@ -1,8 +1,10 @@
 require 'active_merchant'
 class User < ActiveRecord::Base
   include ActiveMerchant::Utils
+  
+  validates_presence_of :email
 
-  has_many :payment_profiles
+  has_many :payment_profiles, :dependent => :destroy
 
   def create
     if super and create_cim_profile
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def update
-    if super < 0 and update_cim_profile
+    if super and update_cim_profile
       return true
     end
     return false
