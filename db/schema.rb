@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20110526233130) do
     t.string   "cancel_return_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "account"
+    t.string   "num"
   end
 
   create_table "payment_profiles", :force => true do |t|
