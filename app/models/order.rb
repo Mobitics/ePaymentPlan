@@ -9,6 +9,6 @@ class Order < ActiveRecord::Base
     http = Net::HTTP.new(notify_url)
     response = http.request(request, {:security_key=>"akjsndk777777", :transaction_id => 123444,
                                       :order_id => num , :received_at => created_at, 
-                                      :status => "completed"})
+                                      :status => "completed", :test => 'test'})
   end
 end
