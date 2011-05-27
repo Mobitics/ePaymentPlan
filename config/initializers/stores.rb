@@ -11,8 +11,7 @@ module ActiveMerchant
 
       gateway = ActiveMerchant::Billing::AuthorizeNetCimGateway.new(
         :login => StoreConfig['Store1']['authorizenet']['api_key'],
-        :password => StoreConfig['Store1']['authorizenet']['secret'],
-        #
+        :password => StoreConfig['Store1']['authorizenet']['secret']
         )
       if not gateway
         raise AuthenticationFailed, 'Authentication with CIM Gateway could not be completed.'
