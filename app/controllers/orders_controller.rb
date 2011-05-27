@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def edit
-    @order = Order.new(params[:order_info])
+    @order = Order.new(params[:order])
     if @order.save
       flash[:notice] = "Order Succesfully created"
     end
