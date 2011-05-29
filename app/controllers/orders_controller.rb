@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
       flash[:notice] = "Order Succesfully created"
     end
   end
-  
+
   def update
     @order = Order.find(params[:id])
     if @order.update_attributes(params[:order])
@@ -13,6 +13,16 @@ class OrdersController < ApplicationController
     else
       flash[:error] = @order.errors.full_messages
       render :action => 'edit'
+    end
+  end
+
+  def confirmation
+    Rails.logger("-"*100)
+    Rails.logger(params.inspect)
+    if params[:security_token] == "akjsndk777777"
+     render :text => "AUTHORISED"
+    else
+     render :text => "DECLINED"
     end
   end
 end

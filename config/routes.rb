@@ -4,6 +4,7 @@ Epaymentplans::Application.routes.draw do
   # first created -> highest priority.
   match "test/order/purchase" => "orders#edit"
   match "/order/purchase" => "orders#edit"
+  match "/order/confirmation" => "orders#confirmation"
   resources :orders
   root :to => 'site#home'
   
