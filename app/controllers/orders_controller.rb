@@ -17,9 +17,8 @@ class OrdersController < ApplicationController
   end
 
   def confirmation
-    Rails.logger("-"*100)
-    Rails.logger(params.inspect)
-    if params[:security_token] == "akjsndk777777"
+    Rails.logger.info(params.inspect)
+    if params[:security_key] == "akjsndk777777"
      render :text => "AUTHORISED"
     else
      render :text => "DECLINED"
