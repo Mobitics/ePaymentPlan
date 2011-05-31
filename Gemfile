@@ -2,9 +2,9 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.rc1'
 gem 'rake', '= 0.8.7'
-gem 'sass'
-gem 'coffee-script'
-gem 'uglifier'
+#gem 'sass'
+#gem 'coffee-script'
+#gem 'uglifier'
 gem 'jquery-rails'
 gem 'pjax-rails'
 gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'epaymentplan'
@@ -28,5 +28,5 @@ end
 group :production do
   gem 'unicorn'
   gem 'pg'
-  gem 'therubyracer'
+  #gem 'therubyracer'
 end
