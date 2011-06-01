@@ -5,6 +5,7 @@ gem 'rake', '= 0.8.7'
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
+#gem 'therubyracer'
 gem 'jquery-rails'
 gem 'pjax-rails'
 gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'epaymentplan'
@@ -27,6 +28,5 @@ end
 
 group :production do
   gem 'unicorn'
-  gem 'pg'
-  gem 'therubyracer'
+  gem 'mysql2'  
 end

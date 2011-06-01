@@ -3,12 +3,19 @@ class Order < ActiveRecord::Base
   after_save :notify_store
   
   def notify_store
-    request = Net::HTTP::Post.new(notify_url)
-    request['Content-Type'] = "application/x-www-form-urlencoded" 
+    #url = URI.parse(notify_url)
+    #request = Net::HTTP::Post.new(url.path)
+    #request['Content-Type'] = "application/x-www-form-urlencoded" 
+    #request.set_form_data({:security_key=>"akjsndk777777", :transaction_id => 123444,
+    #                                    :order_id => num , :received_at => created_at, 
+    #                                    :status => "completed", :test => 'test'}, ';')
 
-    http = Net::HTTP.new(notify_url)
-    response = http.request(request, {:security_key=>"akjsndk777777", :transaction_id => 123444,
-                                      :order_id => num , :received_at => created_at, 
-                                      :status => "completed", :test => 'test'})
+    #response = Net::HTTP.new(url.host, url.port).start {|http| http.request(request) }
+    Rails.logger.info "Llegue a ePaymentPlans: Order#notify_store"
+    response = Net::HTTP.post_form(URI.parse(notify_url), 
+                                   {:security_key=>"akjsndk777777", :transaction_id => 123444,
+                                    :order_id => num , :received_at => created_at, 
+                                    :status => "completed", :test => 'test'})
+    Rails.logger.info "Termine ePaymentPlans: Order#notify_store"
   end
 end
