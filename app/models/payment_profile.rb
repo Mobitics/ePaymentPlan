@@ -4,6 +4,7 @@ class PaymentProfile < ActiveRecord::Base
   include ActiveMerchant::Utils
   
   belongs_to :user
+  has_many :transactions
 
   attr_accessor :address
   attr_accessor :credit_card

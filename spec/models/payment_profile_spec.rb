@@ -3,8 +3,7 @@ require 'spec_helper'
 describe PaymentProfile do
   
   before(:all) do
-    @user = User.new Factory.attributes_for(:user)
-    @user.save
+    @user = Factory(:user)
     
     @valid_credit_card = {
       :number => 4007000000027,
