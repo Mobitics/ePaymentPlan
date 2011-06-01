@@ -8,6 +8,7 @@ Epaymentplans::Application.routes.draw do
   root :to => 'site#home'
   
   resources :plans
+  resources :users
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

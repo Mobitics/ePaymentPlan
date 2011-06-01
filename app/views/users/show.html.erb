@@ -1,0 +1,9 @@
+<div>
+  <p><strong>Email</strong> 
+  <%= @user.email %></p>
+  <p><strong>Customer CIM ID</strong> 
+  <%= @user.customer_cim_id %></p>
+</div>
+<div>
+  <%= link_to "Edit", edit_user_path(@user) %> | <%= link_to "Users", users_path %> | <%= link_to "Delete", user_path(@user), :method => :delete %>
+</div>

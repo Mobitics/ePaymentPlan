@@ -64,9 +64,6 @@ class User < ActiveRecord::Base
   end
 
   def delete_cim_profile
-    if not self.customer_cim_id
-      return false
-    end
     @gateway = get_payment_gateway
 
     response = @gateway.delete_customer_profile(:customer_profile_id => self.customer_cim_id)

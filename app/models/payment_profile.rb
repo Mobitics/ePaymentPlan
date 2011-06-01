@@ -12,7 +12,6 @@ class PaymentProfile < ActiveRecord::Base
 
   def create
     if super and create_payment_profile
-      user.update_attributes({:payment_profile_id => self.id})
       return true
     else
       if self.id
@@ -39,9 +38,10 @@ class PaymentProfile < ActiveRecord::Base
   private
   
   def create_payment_profile
-    if not self.payment_cim_id
+    unless self.payment_cim_id.blank?
       return false
     end
+
     @gateway = get_payment_gateway
 
     @profile = {:customer_profile_id => self.user.customer_cim_id,
