@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(:version => 20110601231923) do
     t.datetime "updated_at"
   end
 
+  create_table "payment_plans", :force => true do |t|
+    t.float    "interest"
+    t.float    "late_fee"
+    t.float    "payment_value"
+    t.boolean  "includes_shipping"
+    t.boolean  "includes_tax"
+    t.integer  "payments_count"
+    t.integer  "payment_profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "plans", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"

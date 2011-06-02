@@ -2,9 +2,63 @@
 
 <%= form_for @payment_plan do |form| %>
   <p>Select your Payment Plan:</p>
-  <% @plans.each do |plan| %>
-    <%= form.radio_button :plan_id, plan.id %>
-    <%= form.label :plan_id, plan.id %>
-  <% end %>
+  <ul>
+    <% @plans.each do |plan| %>
+      <li>
+        <%= form.radio_button :plan_id, plan.id %>
+        <%= form.label :plan_id, plan.name %>
+        (Pay <%= (@amount.to_f / plan.payments_count.to_f) * (1.to_f + plan.interest.to_f / 100.to_f) %> during <%= plan.payments_count.to_i %> months)
+      </li>
+    <% end %>
+  </ul>
+  <p>&nbsp;</p>
 <% end %>
 
+<% if signed_in? %>
+  <p>Hello!</p>
+<% else %>
+  <p>Please <a href="javascript:void(0)" class="login">login</a> or <a href="<%= new_user_registration_path %>" class="register">register</a> to complete your payment.</p>
+  <% content_for :javascript do %>
+    <script type="text/javascript">
+  		$(document).ready(function(){
+  			$("a.register").colorbox({width:"300", height:"400", iframe:true});
+  			$("a.login").click(login);
+  		});
+
+      function login() {
+        var email = $('#sign_in_form #user_email').val();
+        var password = $('#sign_in_form #user_password').val();
+        var data = {remote: true, commit: "Sign in", utf8: "✓",
+                    user: {remember_me: 1, password: password, email: email}};
+        $.post('/users/sign_in.json', data, function(resp) {
+          console.log(resp);
+          if(resp.success) {
+            console.log("Ok")
+            // process success case
+          } else {
+            console.log("Not Ok")
+            // let the user know they failed authentication
+          }
+        });
+        return false;
+      }
+    </script>
+  <% end %>
+
+	<div style='display:none'>
+		<div id='login_form' style='padding:10px; background:#fff;'>
+      <%= form_for("user", :url => user_session_path, :html => {:id => "sign_in_form"}) do |f| %>
+        <%= f.text_field :email %>
+        <%= f.password_field :password %>
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+        <%= f.submit 'Sign in' %>
+        <%= link_to "Forgot your password?", new_password_path('user') %>
+      <% end %>
+		</div>
+	</div>
+<% end %>
+
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag "colorbox" %>
+<% end %>

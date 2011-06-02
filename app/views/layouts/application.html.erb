@@ -3,13 +3,15 @@
 <head>
   <title>Epaymentplans</title>
   <%= stylesheet_link_tag    "application" %>
+  <%= yield :stylesheet %>
   <%= javascript_include_tag "application" %>
+  <%= yield :javascript %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <% flash.each do |key, text| -%>
-  <p class="<%= key %>"><%= value %></p>
+  <p class="<%= key %>"><%= text %></p>
 <% end -%>
 
 <%= yield %>
