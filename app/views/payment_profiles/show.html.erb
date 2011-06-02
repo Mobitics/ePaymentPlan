@@ -1,0 +1,9 @@
+<div>
+  <p><strong>Payment Profile CIM</strong> 
+  <%= @payment_profile.payment_cim_id %></p>
+  <p><strong><%= link_to "Transactions", user_payment_profile_transactions_path(@user, @payment_profile) %></strong> 
+  </p>
+</div>
+<div>
+  <%= link_to "New Transaction", new_user_payment_profile_transaction_path(@user, @payment_profile) %> | <%= link_to "Edit", edit_user_payment_profile_path(@user, @payment_profile) %> | <%= link_to "Payment Profiles", user_payment_profiles_path(@user) %> | <%= link_to "Delete", user_payment_profile_path(@user, @payment_profile), :method => :delete %>
+</div>

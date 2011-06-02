@@ -1,16 +1,29 @@
 Epaymentplans::Application.routes.draw do
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
 
+  # match "/site/purchase" => "order#new"
+  # resources :order, :only=>[:create]
+  # 
+  # root :to => 'site#home'
+  # 
+  # resources :plans
+  
   devise_for :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  match "/site/purchase" => "order#new"
-  resources :order, :only=>[:create]
-
-  root :to => 'site#home'
-
+  match "test/order/purchase" => "orders#edit"
+  match "/order/purchase" => "orders#edit"
+  match "/order/confirmation" => "orders#confirmation"
+  resources :orders
   resources :plans
-
+  resources :users do 
+    resources :payment_profiles do
+      resources :transactions
+    end
+  end
+  root :to => 'site#home'
   resources :payment_plans, :only => [:new, :create]
 
   # Sample of regular route:

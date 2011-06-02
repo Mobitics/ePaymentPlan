@@ -1,0 +1,9 @@
+<h1>Transactions</h1>
+
+<% @transactions.each do |transaction| %>
+  <p>
+    <%= link_to transaction.confirmation_id, "javascript:void(0)" %>
+  </p>  
+<% end %>
+
+<%= link_to "Back", user_payment_profiles_path(@user) %>
