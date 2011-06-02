@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe User do
-  
   before :all do
     @valid_params = Factory.attributes_for(:user)
   end
