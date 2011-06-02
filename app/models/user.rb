@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include ActiveMerchant::Utils
   
   validates_presence_of :email
+  validates_uniqueness_of :email
 
   has_many :payment_profiles, :dependent => :destroy
 
@@ -39,11 +40,11 @@ class User < ActiveRecord::Base
     @user = {:profile => user_profile}
 
     response = @gateway.create_customer_profile(@user)
-
     if response.success? and response.authorization
       update_attributes({:customer_cim_id => response.authorization})
       return true
     end
+    self.errors.add_to_base response.params['messages']['message']['text']
     return false
   end
 

@@ -1,0 +1,7 @@
+<h1>new Payment Profile</h1>
+
+<div>
+  <%= form_for @payment_profile, :url => user_payment_profiles_path(@user) do |f| %>
+    <%= render 'form', {:f => f, :payment_profile => @payment_profile} %>
+  <% end %>
+</div>

@@ -1,0 +1,9 @@
+<h1>Payment Profiles</h1>
+
+<% @payment_profiles.each do |payment_profile| %>
+  <p>
+    <%= link_to "Show", user_payment_profile_path(@user, payment_profile) %>
+  </p>  
+<% end %>
+
+<%= link_to "New Payment Profile", new_user_payment_profile_path(@user) %> | <%= link_to "Back", user_path(@user) %>

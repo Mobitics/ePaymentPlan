@@ -6,6 +6,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :payment_profile
   
   attr_accessor :amount
+  
+  validates_presence_of :amount
 
   def create
     if super and process

@@ -12,8 +12,5 @@ describe Transaction do
     @transaction.save.should == true
     @transaction.confirmation_id.should_not be_nil
   end
-  
-  after :all do
-    @user.destroy
-  end
+
 end

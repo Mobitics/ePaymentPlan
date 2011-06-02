@@ -1,0 +1,58 @@
+<%= render 'shared/error_messages', :target => payment_profile %>
+<%= f.fields_for :credit_card do |cc| %>
+  <fieldset>
+    <%= cc.label :number %>
+    <%= cc.text_field :number  %>
+  </fieldset>
+  <fieldset>
+    <%= cc.label :month %>
+    <%= cc.text_field :month  %>
+  </fieldset>
+  <fieldset>
+    <%= cc.label :year %>
+    <%= cc.text_field :year  %>
+  </fieldset>
+  <fieldset>
+    <%= cc.label :first_name %>
+    <%= cc.text_field :first_name  %>
+  </fieldset>
+  <fieldset>
+    <%= cc.label :last_name %>
+    <%= cc.text_field :last_name  %>
+  </fieldset>
+  <fieldset>
+    <%= cc.label :verification_value %>
+    <%= cc.text_field :verification_value  %>
+  </fieldset>
+<% end %>
+<%= f.fields_for :address do |address| %>
+  <fieldset>
+    <%= address.label :name %>
+    <%= address.text_field :name  %>
+  </fieldset>
+  <fieldset>
+    <%= address.label :address1 %>
+    <%= address.text_field :address1  %>
+  </fieldset>
+  <fieldset>
+    <%= address.label :city %>
+    <%= address.text_field :city  %>
+  </fieldset>
+  <fieldset>
+    <%= address.label :state %>
+    <%= address.text_field :state  %>
+  </fieldset>
+  <fieldset>
+    <%= address.label :country %>
+    <%= address.text_field :country  %>
+  </fieldset>
+  <fieldset>
+    <%= address.label :zip %>
+    <%= address.text_field :zip  %>
+  </fieldset>
+  <fieldset>
+    <%= address.label :phone %>
+    <%= address.text_field :phone  %>
+  </fieldset>
+<% end %>
+<%= f.submit "Submit" %>
