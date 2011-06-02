@@ -33,10 +33,11 @@ class Transaction < ActiveRecord::Base
     if response.success?
       self.update_attributes({:confirmation_id => response.params['direct_response']['transaction_id']})
       return true
-    else
+    else 
       self.update_attributes({:error => !response.success?,
                          :error_code => response.params['messages']['message']['code'],
                          :error_message => response.params['messages']['message']['text']})
+      self.errors[:base] << response.message                          
       return false
     end
   end

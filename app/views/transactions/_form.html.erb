@@ -3,4 +3,4 @@
   <%= f.label :amount%>
   <%= f.text_field :amount %>
 </fieldset>
-<%= f.submit "Submit" %>
+<%= f.submit "Submit" %> | <%= link_to "Cancel", user_payment_profile_path(@user, @payment_profile) %>

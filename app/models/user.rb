@@ -2,8 +2,7 @@ require 'active_merchant'
 class User < ActiveRecord::Base
   include ActiveMerchant::Utils
   
-  validates_presence_of :email
-  validates_uniqueness_of :email
+  validates :email, :presence => true, :uniqueness => true, :format => {:with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i} 
 
   has_many :payment_profiles, :dependent => :destroy
 
@@ -44,7 +43,7 @@ class User < ActiveRecord::Base
       update_attributes({:customer_cim_id => response.authorization})
       return true
     end
-    self.errors.add_to_base response.params['messages']['message']['text']
+    self.errors[:base] << response.message
     return false
   end
 
