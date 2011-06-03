@@ -4,7 +4,7 @@ class PaymentProfile < ActiveRecord::Base
   include ActiveMerchant::Utils
   
   belongs_to :user
-  has_many :transactions
+  has_many :transactions, :dependent => :destroy
 
   attr_accessor :address
   attr_accessor :credit_card
@@ -57,6 +57,7 @@ class PaymentProfile < ActiveRecord::Base
       self.credit_card = {}
       return true
     end
+    self.errors[:base] << response.message
     return false
   end
 
