@@ -1,0 +1,199 @@
+<div id="main"> <!-- begin overview --> 
+  <div id="overview" class="clearfix"> 
+    <div id="products"> 
+      <h2>You're purchasing this&hellip;</h2> 
+      <table id="thumbs" cellspacing="0" cellpadding="0"> 
+        <tr> 
+          <td> 
+            <div><img alt="Chanel Denim Mini Flap Bag Handbag" class="images" src="https://cdn.shopify.com/s/files/1/0066/5272/products/100885-01_thumb.jpeg?185820" /></div> 
+            <h3 class="plisthead" title="Chanel Denim Mini Flap Bag Handbag">Chanel Denim Mini Flap Bag Handbag</h3> 
+            <span class="plist-line-price">1x $725.00</span> 
+          </td> 
+        </tr> 
+      </table> 
+    </div> 
+    <div id="wallet"> 
+      <span id="cost"><%= number_to_currency(@payment_plan.amount) %> <img alt="Spinner_big" id="spinner" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /></span> 
+      <br /><span id="tax_span" class="hint">.. including <%= number_to_currency(@payment_plan.tax) %> taxes.</span> 
+      <br /> 
+      <span id="steps">
+        step 2 of 2
+      </span> 
+    </div> 
+    <div style="clear:left"></div> 
+  </div> <!-- /end overview --> 
+  <div id="content"> 
+    <div id="discounts"> 
+      <div class="group clearfix"> 
+        <h3>Discounts</h3> 
+        <form accept-charset="UTF-8" action="/orders/665272/79d91e39779accb54081bcfe678b3771/apply_discount" method="post">
+          <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="k9F4XgCro78JUlCQy5cYtQBLnBrslkZO1kFW5xTuZMs=" /></div> 
+          <div id="discounts-body"> 
+            <p>Have a discount code? Enter it here:</p> 
+            <p id="discount-errors" style="color:red;display:none"> 
+            </p> 
+            <input id="discount_code" name="discount[code]" size="25" type="text" /> 
+            <input name="commit" type="submit" value="Apply" /> 
+          </div> 
+        </form> 
+      </div> 
+    </div> 
+    <%= form_for @payment_plan do |form| %>
+    <!-- <form accept-charset="UTF-8" action="/orders/665272/79d91e39779accb54081bcfe678b3771/commit" method="post"> -->
+      <!-- <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="k9F4XgCro78JUlCQy5cYtQBLnBrslkZO1kFW5xTuZMs=" /></div>  -->
+      <%= form.hidden_field :order_id, :value => @payment_plan.num %>
+      <%= form.hidden_field :amount %>
+      <%= form.hidden_field :shipping %>
+      <%= form.hidden_field :tax %>
+      <%= form.hidden_field :notify_url %>
+      <%= form.hidden_field :return_url %>
+      <%= form.hidden_field :cancel_return_url %>
+
+      <div id="payment">
+        <div class="group clearfix"> 
+          <h3>Shipping method</h3> 
+          <p>Please select how you would like your products to be delivered.</p> 
+          <p class="sst"> 
+            <select name='shipping_rate' id="shipping-rates"> 
+              <option value="shopify-usps-parcel-post-0.00" selected="selected">USPS Parcel Post - $0.00</option> 
+              <option value="shopify-usps-priority-mail-19.95" >USPS Priority Mail - $19.95</option> 
+              <option value="shopify-usps-express-mail-34.95" >USPS Express Mail - $34.95</option> 
+            </select> 
+          </p> 
+        </div> 
+      </div> 
+      <div class="group"> 
+        <h3>How would you like to pay for your order?</h3> 
+        <p class="hint"> 
+          All transactions are secure and encrypted, and we never store your credit card information. To learn more, please view our privacy policy.
+        </p> 
+        <div class="sst"> 
+          <div class="gleft "> 
+            <span class="error-message"></span> 
+            <ul id="payment-methods"> 
+              <li id="credit-cards"> 
+                <input checked="checked" class="payment-method" id="direct-payment" name="gateway" type="radio" value="1027542" /> 
+                <label for="direct-payment"><img alt="Visa" class="credit-card" id="credit-card-visa" src="https://cdn.shopify.com/s/images/admin/icons/payment/visa.png?2ecdc17fef99b94dd8eea4beacd3e171d350335b" title="The credit card type is automatically detected when you enter your card number" /><img alt="Master" class="credit-card" id="credit-card-master" src="https://cdn.shopify.com/s/images/admin/icons/payment/master.png?2ecdc17fef99b94dd8eea4beacd3e171d350335b" title="The credit card type is automatically detected when you enter your card number" /><img alt="American_express" class="credit-card" id="credit-card-american_express" src="https://cdn.shopify.com/s/images/admin/icons/payment/american_express.png?2ecdc17fef99b94dd8eea4beacd3e171d350335b" title="The credit card type is automatically detected when you enter your card number" /><img alt="Discover" class="credit-card" id="credit-card-discover" src="https://cdn.shopify.com/s/images/admin/icons/payment/discover.png?2ecdc17fef99b94dd8eea4beacd3e171d350335b" title="The credit card type is automatically detected when you enter your card number" /></label> 
+              </li>				
+              <li id="paypal-payments"> 
+                <input disabled="disabled" class="payment-method" id="paypal_express" name="gateway" type="radio" value="paypal_express" /> 
+                <label for="paypal_express"><img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" alt="PayPal Express Logo" /></label> 
+              </li> 
+            </ul> 
+          </div> 
+          <%= fields_for @user do |f| %>
+            <%= f.hidden_field :email %>
+          <% end %>
+          <%= fields_for @payment_profile do |f| %>
+            <%= f.fields_for :credit_card do |cc| %>
+            <div class="gright" id="credit-card-info"> 
+              <noscript> 
+                <p>Your credit card details are only required if you have chosen to pay by credit card.</p>
+              </noscript> 
+              <table border="0"> 
+                <tr> 
+                  <td><%= cc.label :first_name, "First Name" %></td> 
+                  <td><%= cc.label :last_name, "Last Name" %></td> 
+                </tr> 
+                <tr> 
+                  <td><%= cc.text_field :first_name, :size => "11", :value => @user.first_name %></td> 
+                  <td><%= cc.text_field :last_name, :size => "13", :value => @user.last_name %></td> 
+                </tr> 
+                <tr> 
+                  <td colspan="2" style="padding-top: 7px">
+                    <%= cc.label :number %><img alt="Check2" id="credit-card-valid" src="https://cdn.shopify.com/s/images/admin/icons/check2.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /> 
+                  </td> 
+                </tr> 
+                <tr> 
+                  <td colspan="2">
+                    <%= cc.text_field :number, :size => "26", :autocomplete => "off" %>
+                </tr> 
+                <tr> 
+                  <td colspan="2" style="padding-top: 7px">
+                    <%= cc.label :month, "Expiration Date" %>
+                  </td> 
+                </tr> 
+                <tr> 
+                  <td colspan="2" class="">                
+                    <select id="payment_profile_credit_card_month" name="payment_profile[credit_card][month]">
+                      <option value="1">1 - January</option> 
+                      <option value="2">2 - February</option> 
+                      <option value="3">3 - March</option> 
+                      <option value="4">4 - April</option> 
+                      <option value="5">5 - May</option> 
+                      <option value="6">6 - June</option> 
+                      <option value="7">7 - July</option> 
+                      <option value="8">8 - August</option> 
+                      <option value="9">9 - September</option> 
+                      <option value="10">10 - October</option> 
+                      <option value="11">11 - November</option> 
+                      <option value="12">12 - December</option>
+                    </select>
+                    <select id="payment_profile_credit_card_year" name="payment_profile[credit_card][year]">
+                      <option value="2011">2011</option> 
+                      <option value="2012">2012</option> 
+                      <option value="2013">2013</option> 
+                      <option value="2014">2014</option> 
+                      <option value="2015">2015</option> 
+                      <option value="2016">2016</option> 
+                      <option value="2017">2017</option> 
+                      <option value="2018">2018</option> 
+                      <option value="2019">2019</option> 
+                      <option value="2020">2020</option> 
+                      <option value="2021">2021</option> 
+                      <option value="2022">2022</option> 
+                      <option value="2023">2023</option> 
+                      <option value="2024">2024</option> 
+                      <option value="2025">2025</option> 
+                      <option value="2026">2026</option> 
+                      <option value="2027">2027</option> 
+                      <option value="2028">2028</option> 
+                      <option value="2029">2029</option> 
+                      <option value="2030">2030</option> 
+                      <option value="2031">2031</option>
+                    </select> 
+                  </td> 
+                </tr> 
+                <tr> 
+                  <td colspan="2" style="padding-top: 20px">
+                    <%= cc.label :verification_value, "Card Security Code" %>
+                    <%= cc.text_field :verification_value, :size => "4" %>
+                    <span class="hint"> 
+                      <a href="#" onclick="window.open('/orders/665272/79d91e39779accb54081bcfe678b3771/cvv', 'cvv', 'width=720,height=600,directories=no,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no'); return false;">what is this?</a> 
+                    </span> 
+                  </td> 
+                </tr> 
+              </table> 
+            </div> 
+            <% end %>
+            <%= f.fields_for :address do |a| %>
+                <%= a.hidden_field :name, :value => "#{@user.first_name} #{@user.last_name}" %>
+                <%= a.hidden_field :address1, :value => @user.address1 %>
+                <%= a.hidden_field :address2, :value => @user.address2 %>
+                <%= a.hidden_field :city, :value => @user.city %>
+                <%= a.hidden_field :state, :value => @user.state %>
+                <%= a.hidden_field :country, :value => @user.country %>
+                <%= a.hidden_field :zip, :value => @user.zip %>
+                <%= a.hidden_field :phone, :value => @user.phone %>
+            <% end %>
+          <% end %>
+        </div> 
+        <p style="clear:both;height: 0"></p> 
+      </div> 
+      <div id="marketing-box" class="group clearfix"> 
+        <h3>Keep me updated</h3> 
+        <p class="sst"> 
+          <input type="checkbox" name="buyer_accepts_marketing" checked="checked" value="true" id="marketing" /> 
+          <label for="marketing" style="font-weight:normal">I want to receive occasional emails about new products, promotions and other news.</label>  
+        </p> 
+      </div> 
+      <table border="0" cellspacing="0" cellpadding="0" style="height: 55px; width: 100%" id="buttons"> 
+        <tr> 
+          <td style="vertical-align:middle"><input id="complete-purchase" name="commit" onclick="this.setAttribute('originalValue', this.value);this.disabled=true;this.value='Completing order...';;result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue'); this.disabled = false };return false" type="submit" value="Complete my purchase" />  <small id="cancel-purchase">or <a href="http://www.luxedesignerhandbags.com">cancel, and return to store</a></small></td> 
+          <td style="text-align:right;vertical-align:bottom"><span id="purchase-progress" style="display:none"><img alt="Spinner_big" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" /></span></td> 
+        </tr> 
+      </table> 
+    <!-- </form>  -->
+    <% end %>
+  </div> 
+</div> 

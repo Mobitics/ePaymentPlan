@@ -1,7 +1,10 @@
 require 'active_merchant'
 class User < ActiveRecord::Base
   include ActiveMerchant::Utils
-  
+
+  attr_accessor :first_name, :last_name, :phone, :country, :city, :address1, :address2, :state, :zip
+  attr_accessor :billing_address, :shipping_address
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

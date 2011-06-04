@@ -11,9 +11,9 @@
           </td> 
         </tr> 
       </table> 
-    </div> 
+    </div>
     <div id="wallet">
-      <span id="cost">$725.00 <img alt="Spinner_big" id="spinner" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /></span> 
+      <span id="cost"><%= number_to_currency(@payment_plan.amount) %> <img alt="Spinner_big" id="spinner" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /></span> 
       <br /> 
       <span id="steps">
         step 1 of 2
@@ -21,51 +21,64 @@
     </div>
     <div style="clear:left"></div> 
   </div><!-- /end overview -->
-  <div id="content"> 
-    <form accept-charset="UTF-8" action="/payment_plans" class="order_new" id="order_new" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="k9F4XgCro78JUlCQy5cYtQBLnBrslkZO1kFW5xTuZMs=" /></div> 
+  <div id="content">
+    <%= form_for @payment_plan, :url => order_purchase_step2_path, :html => {:class => "new_order"} do |form| %>
+    <!-- <form accept-charset="UTF-8" action="/payment_plans" class="order_new" id="order_new" method="post"> -->
+      <!-- <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="k9F4XgCro78JUlCQy5cYtQBLnBrslkZO1kFW5xTuZMs=" /></div>  -->
+      <%= form.hidden_field :num %>
+      <%= form.hidden_field :amount %>
+      <%= form.hidden_field :shipping %>
+      <%= form.hidden_field :tax %>
+      <%= form.hidden_field :notify_url %>
+      <%= form.hidden_field :return_url %>
+      <%= form.hidden_field :cancel_return_url %>
+
+      <%= fields_for @user do |u| -%>
       <div id="email"> 
-        <label for="order_email">Your Contact Email</label> 
-        <input id="order_email" name="order[email]" size="30" tabindex="1" type="text" value="<%= @payment_plan.email %>" /> 
+        <%= u.label :email, "Your Contact Email" %>
+        <%= u.text_field :email %>
       </div>
       <!-- begin addresses --> 
       <div class="group clearfix" id="addresses"> 
         <div class="gleft"> 
           <h3>Billing address</h3> 
+          <%= u.fields_for :billing_address do |b| -%>
           <table cellspacing="0" cellpadding="0" class="form" id="billing"> 
             <tr> 
-              <td class="lbl"><label for="billing_address_first_name">First Name</label></td> 
-              <td><input class="short" id="billing_address_first_name" name="billing_address[first_name]" size="30" tabindex="2" type="text" value="<%= @payment_plan.first_name %>" /></td> 
+              <td class="lbl"><%= b.label :first_name, "First Name" %></td> 
+              <td><%= b.text_field :first_name, :class => "short", :tabindex => "2", :value => @user.first_name %></td> 
             </tr> 
             <tr> 
-              <td class="lbl"><label for="billing_address_last_name">Last Name</label></td> 
-              <td><input class="short" id="billing_address_last_name" name="billing_address[last_name]" size="30" tabindex="3" type="text" value="<%= @payment_plan.last_name %>" /></td> 
+              <td class="lbl"><%= b.label :last_name, "Last Name" %></td> 
+              <td><%= b.text_field :last_name, :class => "short", :tabindex => "3", :value => @user.last_name %></td> 
+            </tr> 
+            <tr>
+              <td class="lbl"><%= b.label :company %></td> 
+              <td><%= b.text_field :company, :class => "short", :tabindex => "4" %></td> 
             </tr> 
             <tr> 
-              <td class="lbl"><label for="billing_address_company">Company</label></td>
-              <td><input class="short" id="billing_address_company" name="billing_address[company]" size="30" tabindex="4" type="text" /></td> 
+              <td class="lbl"><%= b.label :address1, "Address" %></td> 
+              <td style="width: 260px"><%= b.text_field :address1, :tabindex => "5", :value => @user.address1 %></td> 
             </tr> 
             <tr> 
-              <td class="lbl"><label for="billing_address_address1">Address</label></td> 
-              <td style="width: 260px"><input id="billing_address_address1" name="billing_address[address1]" size="30" tabindex="5" type="text" value="<%= @payment_plan.address1 %>" /></td> 
+              <td class="lbl"><%= b.label :address2 %></td> 
+              <td style="width: 260px"><%= b.text_field :address2, :tabindex => "6", :value => @user.address2 %></td> 
             </tr> 
-            <tr> 
-              <td class="lbl"><label for="billing_address_address2">Address2</label></td> 
-              <td style="width: 260px"><input autocomplete="off" id="billing_address_address2" name="billing_address[address2]" size="30" tabindex="6" type="text" value="<%= @payment_plan.address2 %>" /></td> 
+            <tr>
+              <td class="lbl"><%= b.label :city %></td> 
+              <td><%= b.text_field :city, :class => "medium", :tabindex => "7", :value => @user.city %></td> 
             </tr> 
-            <tr> 
-              <td class="lbl"><label for="billing_address_city">City</label></td> 
-              <td><input class="medium" id="billing_address_city" name="billing_address[city]" size="30" tabindex="7" type="text" value="<%= @payment_plan.city %>" /></td> 
-            </tr> 
-            <tr> 
-              <td class="lbl"><label for="billing_address_zip">Postal/ZIP Code</label></td> 
-              <td><input class="short" id="billing_address_zip" name="billing_address[zip]" size="30" tabindex="8" type="text" value="<%= @payment_plan.zip %>" /></td> 
+            <tr>
+              <td class="lbl"><%= b.label :zip, "Postal/ZIP Code" %></td> 
+              <td><%= b.text_field :zip, :class => "short", :tabindex => "8", :value => @user.zip %></td> 
             </tr> 
             <tr> 
               <td colspan="2" style="width: 360px"> 
                 <ul class="inline"> 
                   <li style="width: 160px"> 
-                    <label for="billing_address_country">Country</label> 
-                    <select id="billing_address_country" name="billing_address[country]" style="width:150px" tabindex="9"><option value="">- Please Select --</option> 
+                    <label for="user_billing_address_country">Country</label>
+                    <select id="user_billing_address_country" name="user[billing_address][country]" style="width:150px" tabindex="9">
+                      <option value="">- Please Select --</option> 
                       <option value="United States" selected="selected">United States</option> 
                       <option value="Canada">Canada</option> 
                       <option value="Australia">Australia</option> 
@@ -311,16 +324,16 @@
                       <option value="Zimbabwe">Zimbabwe</option>
                     </select> 
                   </li> 
-                  <li id="billing_address_province_li" style="width: 160px;margin-right: 5px"> 
-                    <label for="billing_address_province" id="billing_zonelabel">State / Province</label> 
-                    <input id="billing_address_province" name="billing_address[province]" size="30" style="width:150px" tabindex="10" type="text" value="<%= @payment_plan.state %>" /> 
+                  <li id="billing_address_province_li" style="width: 160px;margin-right: 5px">
+                    <%= b.label :state, "State / Province" %>
+                    <%= b.text_field :state, :tabindex => "10", :style => "width:150px", :value => @user.state %>
                   </li> 
                 </ul> 
               </td> 
             </tr> 
             <tr> 
-              <td class="lbl"><label for="billing_address_phone">Phone</label></td> 
-              <td><input class="short" id="billing_address_phone" name="billing_address[phone]" size="30" tabindex="11" type="text" value="<%= @payment_plan.phone %>" /></td> 
+              <td class="lbl"><%= b.label :phone %></td> 
+              <td><%= b.text_field :phone, :class => "short", :tabindex => "11", :value => @user.phone %></td> 
             </tr> 
             <tr id="billing-is-shipping"> 
               <td colspan="2"> 
@@ -329,47 +342,50 @@
               </td> 
             </tr> 
           </table>
+          <% end -%>
         </div>
         <div class="gright"> 
           <h3>Shipping address</h3> 
           <div id="shipping-same" class="address-notification" style='display:none;'> 
             <span>Item(s) will be shipped to your billing address.</span> 
           </div>
+          <%= u.fields_for :shipping_address do |b| -%>
           <table id="shipping" cellspacing="0" cellpadding="0" class="form"> 
             <tr> 
-              <td class="lbl"><label for="shipping_address_first_name">First Name</label></td> 
-              <td><input class="short" id="shipping_address_first_name" name="shipping_address[first_name]" size="30" tabindex="21" type="text" /></td> 
+              <td class="lbl"><%= b.label :first_name, "First Name" %></td> 
+              <td><%= b.text_field :first_name, :class => "short", :tabindex => "2", :value => @user.first_name %></td> 
             </tr> 
             <tr> 
-              <td class="lbl"><label for="shipping_address_last_name">Last Name</label></td> 
-              <td><input class="short" id="shipping_address_last_name" name="shipping_address[last_name]" size="30" tabindex="22" type="text" /></td> 
+              <td class="lbl"><%= b.label :last_name, "Last Name" %></td> 
+              <td><%= b.text_field :last_name, :class => "short", :tabindex => "3", :value => @user.last_name %></td> 
+            </tr> 
+            <tr>
+              <td class="lbl"><%= b.label :company %></td> 
+              <td><%= b.text_field :company, :class => "short", :tabindex => "4" %></td> 
             </tr> 
             <tr> 
-              <td class="lbl"><label for="shipping_address_company">Company</label></td> 
-              <td><input class="short" id="shipping_address_company" name="shipping_address[company]" size="30" tabindex="23" type="text" /></td> 
-            </tr>      
-            <tr> 
-              <td class="lbl"><label for="shipping_address_address1">Address</label></td> 
-              <td style="width: 260px"><input id="shipping_address_address1" name="shipping_address[address1]" size="30" tabindex="24" type="text" /></td> 
+              <td class="lbl"><%= b.label :address1, "Address" %></td> 
+              <td style="width: 260px"><%= b.text_field :address1, :tabindex => "5", :value => @user.address1 %></td> 
             </tr> 
             <tr> 
-              <td class="lbl"><label for="shipping_address_address2">Address2</label></td> 
-              <td style="width: 260px"><input autocomplete="off" id="shipping_address_address2" name="shipping_address[address2]" size="30" tabindex="25" type="text" /></td> 
+              <td class="lbl"><%= b.label :address2 %></td> 
+              <td style="width: 260px"><%= b.text_field :address2, :tabindex => "6", :value => @user.address2 %></td> 
             </tr> 
-            <tr> 
-              <td class="lbl"><label for="shipping_address_city">City</label></td> 
-              <td><input class="medium" id="shipping_address_city" name="shipping_address[city]" size="30" tabindex="26" type="text" /></td> 
+            <tr>
+              <td class="lbl"><%= b.label :city %></td> 
+              <td><%= b.text_field :city, :class => "medium", :tabindex => "7", :value => @user.city %></td> 
             </tr> 
-            <tr> 
-              <td class="lbl"><label for="shipping_address_zip">Postal/ZIP Code</label></td> 
-              <td><input class="short" id="shipping_address_zip" name="shipping_address[zip]" size="30" tabindex="27" type="text" /></td> 
+            <tr>
+              <td class="lbl"><%= b.label :zip, "Postal/ZIP Code" %></td> 
+              <td><%= b.text_field :zip, :class => "short", :tabindex => "8", :value => @user.zip %></td> 
             </tr> 
             <tr> 
               <td colspan="2"> 
                 <ul class="inline"> 
                   <li style="width: 150px; margin-right: 10px"> 
-                    <label for="shipping_address_country">Country</label> 
-                    <select id="shipping_address_country" name="shipping_address[country]" style="width:150px" tabindex="28"><option value="">- Please Select --</option> 
+                    <label for="user_shipping_address_country">Country</label> 
+                    <select id="user_shipping_address_country" name="user[shipping_address][country]" style="width:150px" tabindex="28">
+                      <option value="">- Please Select --</option> 
                       <option value="United States" selected="selected">United States</option> 
                       <option value="Canada">Canada</option> 
                       <option value="Australia">Australia</option> 
@@ -616,26 +632,29 @@
                     </select> 
                   </li> 
                   <li style="width: 150px" id="shipping_address_province_li"> 
-                    <label for="shipping_address_province" id="shipping_zonelabel">State / Province</label> 
-                    <input id="shipping_address_province" name="shipping_address[province]" size="30" style="width:150px" tabindex="29" type="text" /> 
+                    <%= b.label :state, "State / Province" %>
+                    <%= b.text_field :state, :tabindex => "10", :style => "width:150px", :value => @user.state %>
                   </li> 
                 </ul> 
               </td> 
             </tr> 
             <tr> 
-              <td class="lbl"><label for="shipping_address_phone">Phone</label></td> 
-              <td><input class="short" id="shipping_address_phone" name="shipping_address[phone]" size="30" tabindex="30" type="text" /></td> 
+              <td class="lbl"><%= b.label :phone %></td> 
+              <td><%= b.text_field :phone, :class => "short", :tabindex => "11", :value => @user.phone %></td> 
             </tr> 
           </table>
+          <% end -%>
         </div>
         <div style="clear: both"></div>
       </div>
+      <% end -%>
       <!-- /end addresses -->
       <div id="buttons">
         <input id="commit-button" name="commit" tabindex="40" type="submit" value="Continue to next step" />
-        <small id="cancel-purchase">or <a href="http://www.luxedesignerhandbags.com">return to store</a></small>
+        <small id="cancel-purchase">or <a href="<%= @payment_plan.cancel_return_url %>">return to store</a></small>
       </div>
-    </form>
+    <!-- </form> -->
+    <% end %>
   </div>
 </div>
 

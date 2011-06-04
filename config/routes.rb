@@ -15,8 +15,11 @@ Epaymentplans::Application.routes.draw do
   # first created -> highest priority.
   match "test/order/purchase" => "orders#edit"
   # match "/order/purchase" => "orders#edit"
-  match "/order/purchase" => "payment_plans#new"
-  match "/order/confirmation" => "orders#confirmation"
+  match "/order/purchase" => "payment_plans#step1"
+  match "/order/purchase/step2" => "payment_plans#step2"
+  # match "/order/confirmation" => "orders#confirmation"
+  match "/order/confirmation" => "payment_plans#confirmation"
+  resources :payment_plans, :only => [:create]
   resources :orders
   resources :plans
   resources :users do 
@@ -25,7 +28,6 @@ Epaymentplans::Application.routes.draw do
     end
   end
   root :to => 'site#home'
-  resources :payment_plans, :only => [:new, :create]
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

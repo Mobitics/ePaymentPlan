@@ -1,5 +1,5 @@
 class PaymentPlan < ActiveRecord::Base
-  attr_accessor :first_name, :last_name, :email, :phone, :country, :city, :address1, :address2, :state, :zip, :num, :plan_id
+  attr_accessor :customer, :num, :plan_id
   
   attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account
 
@@ -38,7 +38,7 @@ class PaymentPlan < ActiveRecord::Base
 
 
   after_save :notify_store
-  
+
   def notify_store
     #url = URI.parse(notify_url)
     #request = Net::HTTP::Post.new(url.path)
