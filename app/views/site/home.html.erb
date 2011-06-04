@@ -3,8 +3,29 @@
 <p>Dashboard</p>
 <nav>
   <ul>
-    <li><%= link_to "Manage plans", plans_path %></li>
-    <li>---</li>
-    <li><%= link_to "Go to checkout page", new_payment_plan_path %></li>
+    <li><%= link_to "Plans", plans_path %></li>
+    <li><%= link_to "Users", users_path %></li>
   </ul>
 </nav>
+<br/>
+<form accept-charset="UTF-8" action="http://localhost:3000/order/purchase" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="JKnnvTj5NbWLFmH0N6yFSky38TJpvaUwZofwgjNxaSM=" /></div> 
+  <input name="commit" type="submit" value="Test Payment" /> 
+
+  <input id="order_num" name="order[num]" type="hidden" value="1000" /> 
+  <input id="order_amount" name="order[amount]" type="hidden" value="50.0" /> 
+  <input id="order_first_name" name="order[first_name]" type="hidden" value="Cody" /> 
+  <input id="order_last_name" name="order[last_name]" type="hidden" value="Fauser" /> 
+  <input id="order_email" name="order[email]" type="hidden" value="codyfauser@gmail.com" /> 
+  <input id="order_phone" name="order[phone]" type="hidden" value="(555)555-5555" /> 
+  <input id="order_country" name="order[country]" type="hidden" value="CA" /> 
+  <input id="order_city" name="order[city]" type="hidden" value="Ottawa" /> 
+  <input id="order_address1" name="order[address1]" type="hidden" value="21 Snowy Brook Lane" /> 
+  <input id="order_address2" name="order[address2]" type="hidden" value="Apt. 36" /> 
+  <input id="order_state" name="order[state]" type="hidden" value="ON" /> 
+  <input id="order_zip" name="order[zip]" type="hidden" value="K1J1E5" /> 
+  <input id="order_shipping" name="order[shipping]" type="hidden" value="0.00" /> 
+  <input id="order_tax" name="order[tax]" type="hidden" value="0.00" /> 
+  <input id="order_notify_url" name="order[notify_url]" type="hidden" value="http://tiendafy.heroku.com/site/notify" /> 
+  <input id="order_return_url" name="order[return_url]" type="hidden" value="http://tiendafy.heroku.com/site/done" /> 
+  <input id="order_cancel_return_url" name="order[cancel_return_url]" type="hidden" value="http://mystore.com" /> 
+</form>
