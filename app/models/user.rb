@@ -42,6 +42,13 @@ class User < ActiveRecord::Base
     return false
   end
 
+  def has_payment_profile_with?(params)
+    self.payment_profiles.each do |payment_profile|
+      return payment_profile if payment_profile.matches?(params.dup.to_hash)
+    end
+    return nil
+  end
+
   private
   
   def create_cim_profile

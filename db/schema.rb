@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110601231923) do
+ActiveRecord::Schema.define(:version => 20110606012921) do
 
   create_table "orders", :force => true do |t|
     t.float    "amount"
@@ -60,6 +60,13 @@ ActiveRecord::Schema.define(:version => 20110601231923) do
     t.datetime "updated_at"
   end
 
+  create_table "payments", :force => true do |t|
+    t.float    "payment"
+    t.integer  "payment_plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "plans", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -83,6 +90,8 @@ ActiveRecord::Schema.define(:version => 20110601231923) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "payment_profile_id"
+    t.integer  "payment_id"
+    t.string   "auth_code"
   end
 
   create_table "users", :force => true do |t|

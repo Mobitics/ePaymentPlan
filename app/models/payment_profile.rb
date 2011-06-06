@@ -4,6 +4,7 @@ class PaymentProfile < ActiveRecord::Base
   include ActiveMerchant::Utils
   
   belongs_to :user
+  has_many :payment_plans
   has_many :transactions, :dependent => :destroy
 
   attr_accessor :address
@@ -32,6 +33,36 @@ class PaymentProfile < ActiveRecord::Base
   def destroy
     if delete_payment_profile and super
       return true
+    end
+    return false
+  end
+
+  def matches?(params)
+    return false unless params
+    params.symbolize_keys!
+    return false unless params[:address] && params[:credit_card]
+    params[:address] = params[:address].to_hash.symbolize_keys!
+    params[:credit_card] = params[:credit_card].to_hash.symbolize_keys!
+
+    @gateway = get_payment_gateway
+    profile = {
+      :customer_profile_id => self.user.customer_cim_id,
+      :customer_payment_profile_id => self.payment_cim_id
+    }
+    response = @gateway.get_customer_payment_profile(profile)
+    if response.success?
+      cc_info = response.params['payment_profile']['payment']['credit_card']
+      bill_info = response.params['payment_profile']['bill_to']
+
+      matches =
+        bill_info['address'].eql?(params[:address][:address1]) &&
+        bill_info['city'].eql?(   params[:address][:city]) &&
+        bill_info['state'].eql?(  params[:address][:state]) &&
+        bill_info['zip'].eql?(    params[:address][:zip]) &&
+        bill_info['country'].eql?(params[:address][:country]) &&
+        cc_info['card_number'].last(4).eql?(params[:credit_card][:number].to_s.last(4))
+
+      return matches
     end
     return false
   end

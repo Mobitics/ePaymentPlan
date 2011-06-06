@@ -3,3 +3,11 @@
  *= require_self
  *= require_tree . 
 */
+
+p.error {
+	background:#E99;
+	border:1px solid #B00;
+	margin-left:13px;
+	padding:10px;
+	width:754px;
+}

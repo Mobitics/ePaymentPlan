@@ -1,3 +1,5 @@
+<%= render 'shared/error_messages', :target => @user %>
+
 <div id="main"><!-- begin overview --> 
   <div id="overview" class="clearfix"> 
     <div id="products"> 
@@ -25,13 +27,25 @@
     <%= form_for @payment_plan, :url => order_purchase_step2_path, :html => {:class => "new_order"} do |form| %>
     <!-- <form accept-charset="UTF-8" action="/payment_plans" class="order_new" id="order_new" method="post"> -->
       <!-- <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="k9F4XgCro78JUlCQy5cYtQBLnBrslkZO1kFW5xTuZMs=" /></div>  -->
-      <%= form.hidden_field :num %>
+      <%= form.hidden_field :order_id, :value => @payment_plan.num %>
       <%= form.hidden_field :amount %>
       <%= form.hidden_field :shipping %>
       <%= form.hidden_field :tax %>
       <%= form.hidden_field :notify_url %>
       <%= form.hidden_field :return_url %>
       <%= form.hidden_field :cancel_return_url %>
+
+      <div class="group clearfix"> 
+        <p><strong>Select your Payment Plan:</strong></p>
+        <% @plans.each do |plan| %>
+          <p>
+            <%= form.radio_button :plan_id, plan.id %>
+            <%= form.label :plan_id, plan.name, :value => plan.id %>
+            (Pay <%= number_to_currency(plan.to_pay(@payment_plan.amount)) -%> during <%= plan.payments_count.to_i -%> months)
+          </p>
+        <% end %>
+        <p>&nbsp;</p>
+      </div>
 
       <%= fields_for @user do |u| -%>
       <div id="email"> 
