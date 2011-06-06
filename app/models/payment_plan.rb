@@ -1,7 +1,7 @@
 class PaymentPlan < ActiveRecord::Base
-  attr_accessor :plan_id, :num
+  attr_accessor :plan_id, :num, :account
   
-  attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num
+  attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account
 
   belongs_to :payment_profile
   has_many :payments, :dependent => :destroy
