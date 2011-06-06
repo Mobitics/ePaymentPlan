@@ -32,10 +32,15 @@ class Payment < ActiveRecord::Base
 
     #response = Net::HTTP.new(url.host, url.port).start {|http| http.request(request) }
     Rails.logger.info "Llegue a ePaymentPlans: Order#notify_store"
-    # response = Net::HTTP.post_form(URI.parse(notify_url), 
-    #                                {:security_key=>"akjsndk777777", :transaction_id => 123444,
-    #                                 :order_id => num , :received_at => created_at, 
-    #                                 :status => "completed", :test => 'test'})
+    transaction = self.transactions.last
+    response = Net::HTTP.post_form(URI.parse(self.payment_plan.notify_url), {
+      :security_key   => transaction.auth_code,
+      :transaction_id => transaction.id,
+      :order_id       => self.payment_plan.order_id,
+      :received_at    => transaction.created_at,
+      :status         => "completed",
+      :test           => 'test'
+    })
     Rails.logger.info "Termine ePaymentPlans: Order#notify_store"
   end
 

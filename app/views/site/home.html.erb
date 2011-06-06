@@ -8,24 +8,46 @@
   </ul>
 </nav>
 <br/>
-<form accept-charset="UTF-8" action="http://localhost:3000/order/purchase" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="JKnnvTj5NbWLFmH0N6yFSky38TJpvaUwZofwgjNxaSM=" /></div> 
-  <input name="commit" type="submit" value="Test Payment" /> 
 
-  <input id="order_num" name="order[num]" type="hidden" value="1000" /> 
-  <input id="order_amount" name="order[amount]" type="hidden" value="50.0" /> 
-  <input id="order_first_name" name="order[first_name]" type="hidden" value="Cody" /> 
-  <input id="order_last_name" name="order[last_name]" type="hidden" value="Fauser" /> 
-  <input id="order_email" name="order[email]" type="hidden" value="codyfauser@gmail.com" /> 
-  <input id="order_phone" name="order[phone]" type="hidden" value="(555)555-5555" /> 
-  <input id="order_country" name="order[country]" type="hidden" value="CA" /> 
-  <input id="order_city" name="order[city]" type="hidden" value="Ottawa" /> 
-  <input id="order_address1" name="order[address1]" type="hidden" value="21 Snowy Brook Lane" /> 
-  <input id="order_address2" name="order[address2]" type="hidden" value="Apt. 36" /> 
-  <input id="order_state" name="order[state]" type="hidden" value="ON" /> 
-  <input id="order_zip" name="order[zip]" type="hidden" value="K1J1E5" /> 
-  <input id="order_shipping" name="order[shipping]" type="hidden" value="0.00" /> 
-  <input id="order_tax" name="order[tax]" type="hidden" value="0.00" /> 
-  <input id="order_notify_url" name="order[notify_url]" type="hidden" value="http://tiendafy.heroku.com/site/notify" /> 
-  <input id="order_return_url" name="order[return_url]" type="hidden" value="http://tiendafy.heroku.com/site/done" /> 
-  <input id="order_cancel_return_url" name="order[cancel_return_url]" type="hidden" value="http://mystore.com" /> 
-</form>
+<div style="margin:0 auto; padding:20px; border:1px solid black; width:300px;">
+  <h3>Test Form</h3>
+  <form accept-charset="UTF-8" action="http://localhost:3000/order/purchase" id="payment-form" method="post">
+    <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="JKnnvTj5NbWLFmH0N6yFSky38TJpvaUwZofwgjNxaSM=" /></div>
+    <label style="font-size:12px; width:120px; display:inline-block;">Order Id</label>
+    <input id="order_num" name="order[num]" type="text" value="1000" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Amount $</label>
+    <input id="order_amount" name="order[amount]" type="text" value="50.0" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">First Name</label>
+    <input id="order_first_name" name="order[first_name]" type="text" value="Cody" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Last Name</label>
+    <input id="order_last_name" name="order[last_name]" type="text" value="Fauser" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Email</label>
+    <input id="order_email" name="order[email]" type="text" value="codyfauser@gmail.com" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Phone</label>
+    <input id="order_phone" name="order[phone]" type="text" value="(555)555-5555" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Country</label>
+    <input id="order_country" name="order[country]" type="text" value="CA" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">City</label>
+    <input id="order_city" name="order[city]" type="text" value="Ottawa" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Address1</label>
+    <input id="order_address1" name="order[address1]" type="text" value="21 Snowy Brook Lane" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Address2</label>
+    <input id="order_address2" name="order[address2]" type="text" value="Apt. 36" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">State</label>
+    <input id="order_state" name="order[state]" type="text" value="ON" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Zip</label>
+    <input id="order_zip" name="order[zip]" type="text" value="K1J1E5" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Shipping $</label>
+    <input id="order_shipping" name="order[shipping]" type="text" value="0.00" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Tax $</label>
+    <input id="order_tax" name="order[tax]" type="text" value="0.00" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Notify Url</label>
+    <input id="order_notify_url" name="order[notify_url]" type="text" value="http://tiendafy.heroku.com/site/notify" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Return Url</label>
+    <input id="order_return_url" name="order[return_url]" type="text" value="http://tiendafy.heroku.com/site/done" /><br/>
+    <label style="font-size:12px; width:120px; display:inline-block;">Cancel Url</label>
+    <input id="order_cancel_return_url" name="order[cancel_return_url]" type="text" value="http://tiendafy.heroku.com/" /><br/>
+
+    <input name="commit" type="submit" value="Test Payment" /> 
+  </form>
+</div>

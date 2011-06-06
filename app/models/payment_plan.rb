@@ -6,33 +6,11 @@ class PaymentPlan < ActiveRecord::Base
   belongs_to :payment_profile
   has_many :payments, :dependent => :destroy
 
-  # t.integer :order_id
-  # t.float :amount
-  # t.float :shipping
-  # t.float :tax
-  # t.float :interest
-  # t.float :late_fee
-  # t.boolean :includes_shipping
-  # t.boolean :includes_tax
-  # t.integer :payments_count
-  # t.integer :payment_profile_id
-  # t.string :notify_url
-  # t.string :return_url
-  # t.string :cancel_return_url
-
   def create
     return true if super and create_first_payment
     self.destroy if self.id
     false
   end
-
-  # NECESITO USAR UN CALLBACK DE AFTER SAVE PERO ANTES DE COMMIT
-  #   PARA HACER EL PRIMER PAGO, Y SI FALLA, ENTONCES MOSTRAR EL MENSAJE DE ERROR QUE CORRESPONDE
-  #   PAYMENT-PLAN -> (PAYMENT-PROFILE) PAYMENT -> TRANSACTION
-  # 
-  #   TAMBIEN HAY QUE VER QUE PASA SI EL PAGO FALLA CON LOS PAYMENT-PROFILES, PORQUE SE VA A CREAR UNO
-  #   CADA VEZ QUE HAYA UN ERROR CON LOS PAGOS  :S
-  #   
   
   def amount_to_pay
     payment = self.amount.to_f / self.payments_count.to_f

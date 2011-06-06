@@ -49,6 +49,16 @@ class PaymentPlansController < ApplicationController
     end
   end
 
+  def confirmation
+    Rails.logger.info(params.inspect)
+    transaction = Transaction.find_by_auth_code(params[:security_key])
+    if transaction
+     render :text => "AUTHORISED"
+    else
+     render :text => "DECLINED"
+    end
+  end
+
   private
 
   def get_user(params = {}, user = nil)
