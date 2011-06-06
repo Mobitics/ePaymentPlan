@@ -3,7 +3,7 @@ ShopifyAPI::Session.setup({:api_key => StoreConfig['Store1']['shopify']['api_key
                            :secret => StoreConfig['Store1']['shopify']['secret']
                          })
 
-ActiveMerchant::Billing::Base.mode = :test if (not Rails.env.eql?('production'))
+ActiveMerchant::Billing::Base.mode = :test #if (not Rails.env.eql?('production'))
                          
 module ActiveMerchant
   module Utils
