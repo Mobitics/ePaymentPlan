@@ -21,9 +21,7 @@ class User < ActiveRecord::Base
     if super and create_cim_profile
       return true
     else
-      if self.id
-        self.destroy
-      end
+      self.destroy if self.id
       return false
     end
   end
@@ -58,9 +56,13 @@ class User < ActiveRecord::Base
 
     response = @gateway.create_customer_profile(@user)
     if response.success? and response.authorization
-      update_attributes({:customer_cim_id => response.authorization})
+      self.update_attribute(:customer_cim_id, response.authorization)
       return true
     end
+    # if /A duplicate record with ID (\d+) already exists./.match(response.message)
+    #   update_attributes({:customer_cim_id => $1})
+    #   return true
+    # end
     self.errors[:base] << response.message
     return false
   end
