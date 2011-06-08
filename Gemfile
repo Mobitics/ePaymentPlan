@@ -25,8 +25,7 @@ group :development, :test do
   gem 'factory_girl'
 end
 
-group :staging do
+group :production do
   gem 'unicorn'
   gem 'pg'
-  gem 'therubyracer-heroku'
 end
