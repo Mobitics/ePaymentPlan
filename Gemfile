@@ -34,5 +34,5 @@ end
 group :production do
   gem 'unicorn'
   gem 'pg'
-  gem 'therubyracer'
+  gem 'therubyracer-heroku'
 end
