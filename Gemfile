@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-#gem 'rails', '3.1.0.rc1'
-gem "rails", :git => "git://github.com/rails/rails.git", :branch => "3-1-stable"
+gem 'rails', '3.1.0.rc1'
+#gem "rails", :git => "git://github.com/rails/rails.git", :branch => "3-1-stable"
 gem 'rake', '= 0.8.7'
 gem 'sass'
 gem 'coffee-script'
@@ -25,12 +25,13 @@ group :development, :test do
   gem 'factory_girl'
 end
 
-group :test do
-  # Pretty printed test output
-  gem 'turn', :require => false
+group :staging do
+  gem 'unicorn'
+  gem 'pg'
+  gem 'therubyracer-heroku'
 end
 
 group :production do
   gem 'unicorn'
-  gem 'mysql2'  
+  gem 'pg'
 end
