@@ -28,11 +28,5 @@ end
 group :staging do
   gem 'unicorn'
   gem 'pg'
-  #gem 'therubyracer-heroku'
-end
-
-group :production do
-  gem 'unicorn'
-  gem 'pg'
-  #gem 'therubyracer'
+  gem 'therubyracer-heroku'
 end
