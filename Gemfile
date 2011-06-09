@@ -11,6 +11,9 @@ gem 'pjax-rails'
 gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'epaymentplan'
 gem 'shopify_api'
 
+#admin
+#gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git', :branch => 'master'
+
 #Authentication
 gem 'devise', '>= 1.3.0'
 
