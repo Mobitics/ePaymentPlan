@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110606012921) do
+ActiveRecord::Schema.define(:version => 20110609042229) do
 
   create_table "orders", :force => true do |t|
     t.float    "amount"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20110606012921) do
     t.integer  "payment_plan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",          :default => "Pending"
   end
 
   create_table "plans", :force => true do |t|
