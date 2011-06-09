@@ -1,43 +1,44 @@
 class PaymentPlan < ActiveRecord::Base
-  attr_accessor :customer, :num, :plan_id
+  attr_accessor :plan_id, :num, :account
   
   attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account
 
-  #     "num"=>"1000",
-  #     "amount"=>"50.0",
-  #     "first_name"=>"Cody",
-  #     "last_name"=>"Fauser",
-  #     "email"=>"codyfauser@gmail.com",
-  #     "phone"=>"(555)555-5555",
-  #     "country"=>"CA",
-  #     "city"=>"Ottawa",
-  #     "address1"=>"21 Snowy Brook Lane",
-  #     "address2"=>"Apt. 36",
-  #     "state"=>"ON",
-  #     "zip"=>"K1J1E5",
-  #     "shipping"=>"0.00",
-  #     "tax"=>"0.00",
-  #     "notify_url"=>"http://tiendafy.heroku.com/site/notify",
-  #     "return_url"=>"http://tiendafy.heroku.com/site/done",
-  #     "cancel_return_url"=>"http://mystore.com"
+  belongs_to :payment_profile
+  has_many :payments, :dependent => :destroy
 
-  # t.integer :order_id
-  # t.float :amount
-  # t.float :shipping
-  # t.float :tax
-  # t.float :interest
-  # t.float :late_fee
-  # t.boolean :includes_shipping
-  # t.boolean :includes_tax
-  # t.integer :payments_count
-  # t.integer :payment_profile_id
-  # 
-  # t.string :notify_url
-  # t.string :return_url
-  # t.string :cancel_return_url
+  def create
+    notify_store and return true if super and create_first_payment
+    self.destroy if self.id
+    false
+  end
 
+  def amount_to_pay
+    payment = self.amount.to_f / self.payments_count.to_f
+    interests = payment * (self.interest.to_f / 100.to_f)
+    (payment + interests).finite? ? "%.2f" % (payment + interests) : nil
+  end
 
-  after_save :notify_store
+  def make_payment
+    payment = self.payments.build({'payment' => self.amount_to_pay})
+    return true if payments_pending? && payment.save
+
+    payment.errors.full_messages.each do |errmsg|
+      errors.add(:payment, errmsg)
+    end
+    false
+  end
+
+  def payments_pending?
+    self.payments.count < self.payments_count
+  end
+
+  private
+
+  # Este metodo puede ser utilizado por make_payment con el fin de reutilizar codigo
+  # Se renombra y se le da la estructura para poder reutilizarlo
+  def create_first_payment
+    make_payment
+  end
 
   def notify_store
     #url = URI.parse(notify_url)
@@ -49,10 +50,15 @@ class PaymentPlan < ActiveRecord::Base
 
     #response = Net::HTTP.new(url.host, url.port).start {|http| http.request(request) }
     Rails.logger.info "Llegue a ePaymentPlans: Order#notify_store"
-    response = Net::HTTP.post_form(URI.parse(notify_url), 
-                                   {:security_key=>"akjsndk777777", :transaction_id => 123444,
-                                    :order_id => num , :received_at => created_at, 
-                                    :status => "completed", :test => 'test'})
+    transaction = self.payments.first.transactions.last
+    response = Net::HTTP.post_form(URI.parse(self.notify_url), {
+      :security_key   => transaction.auth_code,
+      :transaction_id => transaction.id,
+      :order_id       => self.order_id,
+      :received_at    => transaction.created_at,
+      :status         => "completed",
+      :test           => 'test'
+    })
     Rails.logger.info "Termine ePaymentPlans: Order#notify_store"
   end
 end

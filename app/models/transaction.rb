@@ -4,6 +4,7 @@ class Transaction < ActiveRecord::Base
   include ActiveMerchant::Utils
   
   belongs_to :payment_profile
+  belongs_to :payment
   
   attr_accessor :amount
   
@@ -31,7 +32,10 @@ class Transaction < ActiveRecord::Base
         }
       })
     if response.success?
-      self.update_attributes({:confirmation_id => response.params['direct_response']['transaction_id']})
+      self.update_attributes({
+        :auth_code        => response.params['direct_response']['approval_code'],
+        :confirmation_id  => response.params['direct_response']['transaction_id']
+      })
       return true
     else 
       self.update_attributes({:error => !response.success?,
@@ -40,5 +44,9 @@ class Transaction < ActiveRecord::Base
       self.errors[:base] << response.message                          
       return false
     end
+  end
+
+  def authorized?
+    self.confirmation_id?
   end
 end

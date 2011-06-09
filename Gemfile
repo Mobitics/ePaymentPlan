@@ -1,23 +1,22 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.rc1'
+#gem "rails", :git => "git://github.com/rails/rails.git", :branch => "3-1-stable"
 gem 'rake', '= 0.8.7'
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
-#gem 'therubyracer'
 gem 'jquery-rails'
 gem 'pjax-rails'
 gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'epaymentplan'
 gem 'shopify_api'
-
-#admin
-#gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git', :branch => 'master'
+gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git', :branch => 'rails-3-1'
 
 #Authentication
 gem 'devise', '>= 1.3.0'
 
 group :development, :test do
+  gem 'therubyracer'
   gem 'sqlite3'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'rspec-rails', '2.6.1.beta1'
@@ -27,12 +26,8 @@ group :development, :test do
   gem 'factory_girl'
 end
 
-group :test do
-  # Pretty printed test output
-  gem 'turn', :require => false
-end
-
-group :production do
+group :staging do
   gem 'unicorn'
-  gem 'mysql2'  
+  gem 'pg'
+  gem 'therubyracer-heroku'
 end

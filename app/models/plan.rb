@@ -17,4 +17,9 @@ class Plan < ActiveRecord::Base
     PLAN_TYPES[self.plan_type]
   end
 
+  def to_pay(amount=0)
+    payment = amount.to_f / self.payments_count.to_f
+    interests = payment * (self.interest.to_f / 100.to_f)
+    (payment + interests)
+  end
 end
