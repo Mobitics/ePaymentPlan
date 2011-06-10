@@ -4,4 +4,5 @@ end
 
 Factory.define :user do |user|
   user.add_attribute :email, Factory.next(:email)
+  user.add_attribute :password, "password"
 end

@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Plan do
-  
-  before(:each) do
-
-  end
 
   describe "being created" do
     before(:each) do
