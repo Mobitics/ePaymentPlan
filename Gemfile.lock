@@ -9,7 +9,7 @@ GIT
       builder (>= 2.0.0)
 
 GIT
-  remote: git@github.com:guilleiguaran/rails.git
+  remote: git://github.com/guilleiguaran/rails.git
   revision: 850f5f47c8cccebefe666782e0cf25cdf85fa1b9
   branch: scss-compressor
   specs:
