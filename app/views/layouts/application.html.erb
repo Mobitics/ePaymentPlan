@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Epaymentplans</title>
-  <%= stylesheet_link_tag    "application" %>
+  <title>ePaymentPlans :: Give every customer a chance to buy</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <%= stylesheet_link_tag    "main" %>
   <%= yield :stylesheet %>
   <%= javascript_include_tag "application" %>
   <%= yield :javascript %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<% flash.each do |key, text| -%>
-  <p class="<%= key %>"><%= text %></p>
-<% end -%>
-
-<%= yield %>
-<% flash.discard %>
-
+  <div id="wrapper">
+    <div id="top">
+      <div id="logo"><a href="/"><h1>ePaymentPlans.com</h1></a></div>
+      <div id="info-top"><a href="#"><img src="/assets/info-top.png" /></a></div>
+      <div id="top-menu"><a href="#">Log in</a><a href="#"></a></div>
+    </div>
+    <% flash.each do |key, text| -%>
+    <p class="<%= key %>"><%= text %></p>
+    <% end -%>
+    <div id="mid">
+      <%= yield %>
+      <% flash.discard %>
+    </div>
+    <div id="bot">
+      <div id="links"><a href="#">Home</a><a href="#">About Us</a><a href="#">Contact Us</a></div>
+      <div id="tmark"><a href="#"><img src="/assets/logo-bot.png" /></a></div>
+    </div>
+  </div>
 </body>
 </html>
