@@ -1,18 +1,16 @@
 source 'http://rubygems.org'
 
 # Stack
-gem 'rails', '3.1.0.rc4'
-gem 'sass'
+gem 'rails', :git => 'git@github.com:guilleiguaran/rails.git', :branch => 'scss-compressor'
+gem 'sass-rails', '>= 3.1.0.rc.2'
 gem 'coffee-script'
 gem 'uglifier'
 gem 'jquery-rails'
-gem 'rake', '0.8.7'
 
 
 # Payments
 gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'epaymentplan'
 gem 'shopify_api'
-#gem 'activeadmin', :git => 'git://github.com/guilleiguaran/active_admin.git', :branch => 'rails-3-1'
 gem 'resque'
 gem 'resque-scheduler'
 
