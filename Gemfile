@@ -1,19 +1,23 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc1'
-#gem "rails", :git => "git://github.com/rails/rails.git", :branch => "3-1-stable"
-gem 'rake', '= 0.8.7'
-gem 'sass'
+# Stack
+gem 'rails', '>= 3.1.0.rc4'
+gem 'sass-rails', '>= 3.1.0.rc.2'
 gem 'coffee-script'
 gem 'uglifier'
 gem 'jquery-rails'
-gem 'pjax-rails'
+
+
+# Site base
 gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'epaymentplan'
 gem 'shopify_api'
+gem 'resque'
+gem 'resque-scheduler'
+gem "meta_search",  '>= 1.1.0.pre'
+gem 'devise', '>= 1.3.0'
+gem "meta_search", '>= 1.1.0.pre'
 gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git', :branch => 'rails-3-1'
 
-#Authentication
-gem 'devise', '>= 1.3.0'
 
 group :development, :test do
   gem 'therubyracer'
@@ -21,12 +25,11 @@ group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'rspec-rails', '2.6.1.beta1'
   gem 'autotest'
-  gem 'rcov'
   gem 'factory_girl_rails'
   gem 'factory_girl'
 end
 
-group :staging do
+group :production, :staging do
   gem 'unicorn'
   gem 'pg'
   gem 'therubyracer-heroku'

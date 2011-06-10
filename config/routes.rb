@@ -29,6 +29,8 @@ Epaymentplans::Application.routes.draw do
   end
   root :to => 'site#home'
 
+  match "/test" => "site#test"
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
