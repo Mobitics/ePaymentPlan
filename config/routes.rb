@@ -1,5 +1,5 @@
 Epaymentplans::Application.routes.draw do
-  mount "/resque" => Resque::Server.new
+  mount Resque::Server => "/resque"
 
   devise_for :users, :controllers => { :sessions => "sessions" }
 
