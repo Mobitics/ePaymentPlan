@@ -19,7 +19,6 @@ Factory.define :payment_profile do |pp|
     :state => 'CA',
     :country => 'US',
     :zip => '23456',
-    :phone => '(555)555-5555' 
+    :phone => '(555)555-5555'
   }
-  pp.association :user
 end

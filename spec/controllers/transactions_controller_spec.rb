@@ -3,8 +3,8 @@ require 'spec_helper'
 describe TransactionsController do
   
   before :all do
-    @pp = Factory(:payment_profile)
-    @user = @pp.user
+    @user = Factory(:user_with_payment_profile)
+    @pp = @user.payment_profiles.first
   end
 
   describe "GET 'index'" do
