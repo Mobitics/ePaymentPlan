@@ -13,6 +13,7 @@ gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.gi
 gem 'shopify_api'
 gem 'resque'
 gem 'resque-scheduler'
+gem 'fakeredis'
 gem "meta_search",  '>= 1.1.0.pre'
 gem 'devise', '>= 1.3.0'
 gem "meta_search", '>= 1.1.0.pre'
