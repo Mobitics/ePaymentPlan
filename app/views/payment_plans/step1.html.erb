@@ -2,25 +2,13 @@
 
 <div id="main"><!-- begin overview --> 
   <div id="overview" class="clearfix"> 
-    <div id="products"> 
-      <h2>You're purchasing this&hellip;</h2> 
-      <table id="thumbs" cellspacing="0" cellpadding="0"> 
-        <tr> 
-          <td> 
-            <div><img alt="Chanel Denim Mini Flap Bag Handbag" class="images" src="https://cdn.shopify.com/s/files/1/0066/5272/products/100885-01_thumb.jpeg?185820" /></div> 
-            <h3 class="plisthead" title="Chanel Denim Mini Flap Bag Handbag">Chanel Denim Mini Flap Bag Handbag</h3> 
-            <span class="plist-line-price">1x $725.00</span> 
-          </td> 
-        </tr> 
-      </table> 
-    </div>
-    <div id="wallet">
-      <span id="cost"><%= number_to_currency(@payment_plan.amount) %> <img alt="Spinner_big" id="spinner" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /></span> 
-      <br /> 
-      <span id="steps">
-        step 1 of 2
-      </span>
-    </div>
+    <h2>You were redirected here from Shopify to pay:</h2> 
+    <span id="cost"><%= number_to_currency(@payment_plan.amount) %> <img alt="Spinner_big" id="spinner" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /></span> 
+    <br /><span id="tax_span" class="hint">.. including <%= number_to_currency(@payment_plan.tax) %> taxes.</span> 
+    <br /> 
+    <span id="steps">
+      step 1 of 2
+    </span>
     <div style="clear:left"></div> 
   </div><!-- /end overview -->
   <div id="content">
