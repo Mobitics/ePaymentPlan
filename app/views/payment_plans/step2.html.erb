@@ -3,30 +3,17 @@
 
 <div id="main"> <!-- begin overview --> 
   <div id="overview" class="clearfix"> 
-    <div id="products"> 
-      <h2>You're purchasing this&hellip;</h2> 
-      <table id="thumbs" cellspacing="0" cellpadding="0"> 
-        <tr> 
-          <td> 
-            <div><img alt="Chanel Denim Mini Flap Bag Handbag" class="images" src="https://cdn.shopify.com/s/files/1/0066/5272/products/100885-01_thumb.jpeg?185820" /></div> 
-            <h3 class="plisthead" title="Chanel Denim Mini Flap Bag Handbag">Chanel Denim Mini Flap Bag Handbag</h3> 
-            <span class="plist-line-price">1x $725.00</span> 
-          </td> 
-        </tr> 
-      </table> 
-    </div> 
-    <div id="wallet"> 
-      <span id="cost"><%= number_to_currency(@payment_plan.amount) %> <img alt="Spinner_big" id="spinner" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /></span> 
-      <br /><span id="tax_span" class="hint">.. including <%= number_to_currency(@payment_plan.tax) %> taxes.</span> 
-      <br /> 
-      <span id="steps">
-        step 2 of 2
-      </span> 
-    </div> 
+    <h2>You were redirected here from Shopify to pay:</h2> 
+    <span id="cost"><%= number_to_currency(@payment_plan.amount) %> <img alt="Spinner_big" id="spinner" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /></span> 
+    <br /><span id="tax_span" class="hint">.. including <%= number_to_currency(@payment_plan.tax) %> taxes.</span> 
+    <br /> 
+    <span id="steps">
+      step 2 of 2
+    </span> 
     <div style="clear:left"></div> 
   </div> <!-- /end overview --> 
   <div id="content"> 
-    <div id="discounts"> 
+    <div id="discounts" style="display:none;"> 
       <div class="group clearfix"> 
         <h3>Discounts</h3> 
         <form accept-charset="UTF-8" action="/orders/665272/79d91e39779accb54081bcfe678b3771/apply_discount" method="post">
@@ -59,7 +46,7 @@
       <%= form.hidden_field :includes_tax %>
       <%= form.hidden_field :payments_count %>
 
-      <div id="payment">
+      <div id="payment" style="display:none;">
         <div class="group clearfix"> 
           <h3>Shipping method</h3> 
           <p>Please select how you would like your products to be delivered.</p> 
@@ -85,7 +72,7 @@
                 <input checked="checked" class="payment-method" id="direct-payment" name="gateway" type="radio" value="1027542" /> 
                 <label for="direct-payment"><img alt="Visa" class="credit-card" id="credit-card-visa" src="https://cdn.shopify.com/s/images/admin/icons/payment/visa.png?2ecdc17fef99b94dd8eea4beacd3e171d350335b" title="The credit card type is automatically detected when you enter your card number" /><img alt="Master" class="credit-card" id="credit-card-master" src="https://cdn.shopify.com/s/images/admin/icons/payment/master.png?2ecdc17fef99b94dd8eea4beacd3e171d350335b" title="The credit card type is automatically detected when you enter your card number" /><img alt="American_express" class="credit-card" id="credit-card-american_express" src="https://cdn.shopify.com/s/images/admin/icons/payment/american_express.png?2ecdc17fef99b94dd8eea4beacd3e171d350335b" title="The credit card type is automatically detected when you enter your card number" /><img alt="Discover" class="credit-card" id="credit-card-discover" src="https://cdn.shopify.com/s/images/admin/icons/payment/discover.png?2ecdc17fef99b94dd8eea4beacd3e171d350335b" title="The credit card type is automatically detected when you enter your card number" /></label> 
               </li>				
-              <li id="paypal-payments"> 
+              <li id="paypal-payments" style="display:none;"> 
                 <input disabled="disabled" class="payment-method" id="paypal_express" name="gateway" type="radio" value="paypal_express" /> 
                 <label for="paypal_express"><img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" alt="PayPal Express Logo" /></label> 
               </li> 
