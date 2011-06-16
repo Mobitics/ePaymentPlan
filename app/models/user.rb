@@ -1,6 +1,7 @@
 require 'active_merchant'
 class User < ActiveRecord::Base
   include ActiveMerchant::Utils
+  ROLES = [:user, :merchant]
 
   attr_accessor :first_name, :last_name, :phone, :country, :city, :address1, :address2, :state, :zip
   attr_accessor :billing_address, :shipping_address
@@ -16,6 +17,11 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :uniqueness => true, :format => {:with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i} 
 
   has_many :payment_profiles, :dependent => :destroy
+  has_and_belongs_to_many :roles
+  
+  def role?(role_sym)
+    roles.any? { |r| r.title.underscore.to_sym == role_sym }
+  end
 
   def create
     if super and create_cim_profile

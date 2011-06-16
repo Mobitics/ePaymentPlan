@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110609042229) do
+ActiveRecord::Schema.define(:version => 20110614022016) do
 
   create_table "orders", :force => true do |t|
     t.float    "amount"
@@ -81,6 +81,19 @@ ActiveRecord::Schema.define(:version => 20110609042229) do
     t.string   "max_price"
     t.integer  "product_id"
     t.string   "name"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "transactions", :force => true do |t|
