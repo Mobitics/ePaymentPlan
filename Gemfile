@@ -21,7 +21,7 @@ gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git', :branch
 
 
 group :development, :test do
-  gem 'therubyracer'
+  gem 'therubyracer', '0.9.1'
   gem 'sqlite3'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'rspec-rails', '2.6.1.beta1'

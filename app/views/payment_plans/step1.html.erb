@@ -56,7 +56,7 @@
             </tr> 
             <tr>
               <td class="lbl"><%= b.label :company %></td> 
-              <td><%= b.text_field :company, :class => "short", :tabindex => "4" %></td> 
+              <td><%= b.text_field :company, :class => "short", :tabindex => "4", :value => @user.company %></td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :address1, "Address" %></td> 
@@ -363,7 +363,7 @@
             </tr> 
             <tr>
               <td class="lbl"><%= b.label :company %></td> 
-              <td><%= b.text_field :company, :class => "short", :tabindex => "4" %></td> 
+              <td><%= b.text_field :company, :class => "short", :tabindex => "4", :value => @user.company %></td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :address1, "Address" %></td> 
