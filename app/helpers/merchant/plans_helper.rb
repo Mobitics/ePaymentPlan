@@ -1,0 +1,2 @@
+module Merchant::PlansHelper
+end

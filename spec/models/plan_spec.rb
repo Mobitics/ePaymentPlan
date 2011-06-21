@@ -4,6 +4,7 @@ describe Plan do
 
   describe "being created" do
     before(:each) do
+      @merchant = Factory(:merchant_with_plan)
       @plan_by_price_valid_attributes = {
         :name => "Plan Name",
         :payments_count => 10,
@@ -13,7 +14,8 @@ describe Plan do
         :late_fee => 15,
         :plan_type => 'by_price',
         :min_price => 100,
-        :max_price => 500
+        :max_price => 500,
+        :merchant_id => @merchant.id
       }
       @plan_by_price_invalid_attributes = {
         :name => "",
@@ -24,7 +26,8 @@ describe Plan do
         :late_fee => 15,
         :plan_type => 'by_price',
         :min_price => 100,
-        :max_price => 500
+        :max_price => 500,
+        :merchant_id => @merchant.id
       }
     end
 

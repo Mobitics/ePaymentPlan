@@ -1,0 +1,22 @@
+<h1>Listing Merchant Plans</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @merchant_plans.each do |merchant_plan| %>
+  <tr>
+    <td><%= merchant_plan.name %></td>
+    <td><%= link_to 'Show', merchant_plan_path(merchant_plan) %></td>
+    <td><%= link_to 'Edit', edit_merchant_plan_path(merchant_plan) %></td>
+    <td><%= link_to 'Destroy', merchant_plan_path(merchant_plan), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Plan', new_merchant_plan_path %>

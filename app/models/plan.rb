@@ -1,10 +1,13 @@
 class Plan < ActiveRecord::Base
-  validates_presence_of :name, :payments_count, :interest, :late_fee
+  validates :name, :presence => true, :uniqueness => true
+  validates_presence_of :payments_count, :interest, :late_fee, :merchant_id
   validates_presence_of :min_price, :max_price, :if => :by_price
   #validates_presence_of :product_id, :if => :by_product
   
-  PLAN_TYPES = {'by_price' => 'By price', 'by_product' => 'By product'}
+  belongs_to :merchant, :class_name => "User", :foreign_key => :merchant_id
   
+  PLAN_TYPES = {'by_price' => 'By price', 'by_product' => 'By product'}
+
   def by_price
     self.plan_type.eql? "by_price"
   end

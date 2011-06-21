@@ -1,5 +1,6 @@
 Epaymentplans::Application.routes.draw do
-  ActiveAdmin.routes(self)
+
+  get "merchants/index"
 
   mount Resque::Server => "/resque"
 
@@ -16,11 +17,18 @@ Epaymentplans::Application.routes.draw do
   resources :payment_plans, :only => [:create]
   resources :orders
   resources :plans
+  
   resources :users do 
     resources :payment_profiles do
       resources :transactions
     end
   end
+  
+  match "merchant" => "merchant#index"
+  namespace :merchant do
+    resources :plans, :orders, :payment_plans
+  end
+  
   root :to => 'site#home'
 
   match "/test" => "site#test"
