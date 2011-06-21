@@ -54,10 +54,11 @@ class PaymentPlan < ActiveRecord::Base
     params = {
       :security_key   => transaction.auth_code,
       :transaction_id => transaction.id,
-      :order_id       => self.order_id,
+      :item_id        => self.order_id,
       :received_at    => transaction.created_at,
       :status         => "completed",
-      :gross          => "%.2f" % self.amount.to_f
+      :gross          => "%.2f" % self.amount.to_f,
+      :currency       => "USD"
     }
     params.merge!({:test => 'test'}) if Rails.env.staging?
     response = Net::HTTP.post_form(URI.parse(self.notify_url), params)
