@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   include ActiveMerchant::Utils
   ROLES = [:user, :merchant]
 
-  attr_accessor :first_name, :last_name, :phone, :country, :city, :address1, :address2, :state, :zip
+  attr_accessor :first_name, :last_name, :company, :phone, :country, :city, :address1, :address2, :state, :zip
   attr_accessor :billing_address, :shipping_address
 
   # Include default devise modules. Others available are:

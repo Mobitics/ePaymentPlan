@@ -83,7 +83,7 @@
             <%= f.fields_for :billing_address do |b| -%>
               <%= b.hidden_field :first_name, :value => @user.first_name %>
               <%= b.hidden_field :last_name, :value => @user.last_name %>
-              <%= b.hidden_field :company %>
+              <%= b.hidden_field :company, :value => @user.company %>
               <%= b.hidden_field :address1, :value => @user.address1 %>
               <%= b.hidden_field :address2, :value => @user.address2 %>
               <%= b.hidden_field :city, :value => @user.city %>
@@ -96,7 +96,7 @@
             <%= f.fields_for :shipping_address do |b| -%>
               <%= b.hidden_field :first_name, :value => @user.first_name %>
               <%= b.hidden_field :last_name, :value => @user.last_name %>
-              <%= b.hidden_field :company %>
+              <%= b.hidden_field :company, :value => @user.company %>
               <%= b.hidden_field :address1, :value => @user.address1 %>
               <%= b.hidden_field :address2, :value => @user.address2 %>
               <%= b.hidden_field :city, :value => @user.city %>
@@ -194,6 +194,7 @@
                 <%= a.hidden_field :name, :value => "#{@user.first_name} #{@user.last_name}" %>
                 <%= a.hidden_field :first_name, :value => @user.first_name %>
                 <%= a.hidden_field :last_name, :value => @user.last_name %>
+                <%= a.hidden_field :company, :value => @user.company %>
                 <%= a.hidden_field :address1, :value => @user.address1 %>
                 <%= a.hidden_field :address2, :value => @user.address2 %>
                 <%= a.hidden_field :city, :value => @user.city %>

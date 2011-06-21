@@ -67,6 +67,7 @@ class PaymentPlansController < ApplicationController
     user.email            = attributes.delete(:email)
     user.first_name       = attributes.delete(:first_name)
     user.last_name        = attributes.delete(:last_name)
+    user.company          = attributes.delete(:company)
     user.phone            = attributes.delete(:phone)
     user.country          = attributes.delete(:country)
     user.city             = attributes.delete(:city)
