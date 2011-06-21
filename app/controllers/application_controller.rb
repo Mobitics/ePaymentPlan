@@ -3,13 +3,12 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery
   
   def user_merchant?
-    response = current_user.role? :merchant unless current_user.blank?
+    @user = current_user
+    response = @user.role? :merchant unless @user.blank?
     unless response
       flash[:error] = "Access Denied"
       redirect_to root_path
     end
   end
 
-  def index
-  end
 end

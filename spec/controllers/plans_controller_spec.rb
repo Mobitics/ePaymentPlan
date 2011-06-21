@@ -16,7 +16,8 @@ describe PlansController do
   
   context "on METHOD to #action" do
     it "should response success on GET to #index" do
-      @plan = Factory(:plan)
+      @merchant = Factory(:merchant_with_plan)
+      @plan = @merchant.plans.first
       get :index
       assigns[:plans].should_not be_empty
       response.should render_template('index')
@@ -29,21 +30,24 @@ describe PlansController do
     end
     
     it "should response success on GET to #show" do
-      @plan = Factory(:plan)
+      @merchant = Factory(:merchant_with_plan)
+      @plan = @merchant.plans.first
       get :show, :id => @plan.id
       assigns[:plan].should_not be_nil
       response.should render_template('show')
     end
     
     it "should response success on GET to #edit" do
-      @plan = Factory(:plan)
+      @merchant = Factory(:merchant_with_plan)
+      @plan = @merchant.plans.first
       get :edit, :id => @plan.id
       assigns[:plan].should_not be_nil      
       response.should render_template('edit')
     end
     
     it "should response success on PUT to #update" do
-      @plan = Factory(:plan)
+      @merchant = Factory(:merchant_with_plan)
+      @plan = @merchant.plans.first
       attributes = @plan.attributes
       attributes[:name] = "Updated Name" 
       put :update, :id => @plan.id, :plan => attributes
@@ -54,7 +58,8 @@ describe PlansController do
     end
     
     it "should response failed on PUT to #update" do
-      @plan = Factory(:plan)
+      @merchant = Factory(:merchant_with_plan)
+      @plan = @merchant.plans.first
       attributes = @plan.attributes
       name = attributes["name"]
       attributes["name"] = "" 
@@ -66,7 +71,8 @@ describe PlansController do
     end
     
     it "should response success on POST to #create" do
-      @valid_attributes = Factory.attributes_for(:plan)
+      @merchant = Factory(:merchant_with_plan)
+      @valid_attributes = Factory.attributes_for(:plan).merge!(:merchant_id => @merchant.id)
       post :create, :plan => @valid_attributes
       assigns[:plan].should be_valid
       response.should redirect_to(plans_path)      
@@ -83,7 +89,8 @@ describe PlansController do
     end
     
     it "should response success on DELETE to #destroy" do
-      @plan = Factory(:plan)
+      @merchant = Factory(:merchant_with_plan)
+      @plan = @merchant.plans.first
       delete :destroy, :id => @plan.id
       response.should redirect_to(plans_path)    
     end

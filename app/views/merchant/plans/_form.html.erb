@@ -1,0 +1,57 @@
+<%= form_for(@merchant_plan, :url => merchant_plans_path) do |f| %>
+  <% if @merchant_plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@merchant_plan.errors.count, "error") %> prohibited this merchant_plan from being saved:</h2>
+      <ul>
+      <% @merchant_plan.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <fieldset>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :payments_count, "Number of payments" %>
+  <%= f.text_field :payments_count %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :includes_shipping, "1st payment includes shipping" %>
+  <%= f.check_box :includes_shipping %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :includes_tax, "1st payment includes tax" %>
+  <%= f.check_box :includes_tax %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :interest, "Interest" %>
+  <%= f.text_field :interest %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :late_fee, "Late fee" %>
+  <%= f.text_field :late_fee %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :plan_type, "Plan type" %>
+  <%= f.select :plan_type, options_for_select(@plan_types, @merchant_plan.plan_type) %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :min_price, "Min price" %>
+  <%= f.text_field :min_price %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :max_price, "Max price" %>
+  <%= f.text_field :max_price %>
+  </fieldset>
+  <fieldset>
+  <%= f.label :product_id, "Product" %>  
+  <%= f.select :product_id, options_for_select(@products) %>
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

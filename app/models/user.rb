@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => true, :uniqueness => true, :format => {:with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i} 
 
+  has_many :plans, :foreign_key => :merchant_id, :dependent => :destroy
   has_many :payment_profiles, :dependent => :destroy
   has_and_belongs_to_many :roles
   
@@ -27,6 +28,8 @@ class User < ActiveRecord::Base
     if super and create_cim_profile
       return true
     else
+      p "*"*100
+      p self.errors
       self.destroy if self.id
       return false
     end
