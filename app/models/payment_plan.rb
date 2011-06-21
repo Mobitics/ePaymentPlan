@@ -51,14 +51,16 @@ class PaymentPlan < ActiveRecord::Base
     #response = Net::HTTP.new(url.host, url.port).start {|http| http.request(request) }
     Rails.logger.info "Llegue a ePaymentPlans: Order#notify_store"
     transaction = self.payments.first.transactions.last
-    response = Net::HTTP.post_form(URI.parse(self.notify_url), {
+    params = {
       :security_key   => transaction.auth_code,
       :transaction_id => transaction.id,
       :order_id       => self.order_id,
       :received_at    => transaction.created_at,
       :status         => "completed",
-      :test           => 'test'
-    })
+      :gross          => "%.2f" % self.amount.to_f
+    }
+    params.merge!({:test => 'test'}) if Rails.env.staging?
+    response = Net::HTTP.post_form(URI.parse(self.notify_url), params)
     Rails.logger.info "Termine ePaymentPlans: Order#notify_store"
   end
 end
