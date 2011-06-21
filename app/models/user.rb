@@ -28,8 +28,6 @@ class User < ActiveRecord::Base
     if super and create_cim_profile
       return true
     else
-      p "*"*100
-      p self.errors
       self.destroy if self.id
       return false
     end

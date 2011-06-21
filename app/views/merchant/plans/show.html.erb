@@ -1,5 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-
-<%= link_to 'Edit', edit_merchant_plan_path(@merchant_plan) %> |
-<%= link_to 'Back', merchant_plans_path %>
+<div>
+  <p><strong>Name</strong> 
+  <%= @merchant_plan.name %></p>
+  <p><strong>Number of Payments</strong> 
+  <%= @merchant_plan.payments_count %></p>
+  <p><strong>1st payment includes shipping</strong>
+  <%= @merchant_plan.includes_shipping %></p>
+  <p><strong>1st payment includes tax</strong>
+  <%= @merchant_plan.includes_tax %></p>
+  <p><strong>Interest</strong>
+  <%= @merchant_plan.interest %></p>
+  <p><strong>Late fee</strong>
+  <%= @merchant_plan.late_fee %></p>
+  <p><strong>Plan type</strong>
+  <%= @merchant_plan.type %></p>
+  <p><strong>Min price</strong>
+  <%= @merchant_plan.min_price %></p>
+  <p><strong>Max price</strong>
+  <%= @merchant_plan.max_price %></p>
+  <p><strong>Product</strong>
+  <%= @merchant_plan.product_id %></p>
+</div>
+<div>
+  <%= link_to "Edit", edit_merchant_plan_path(@merchant_plan) %> | <%= link_to "Plans", merchant_plans_path %> | <%= link_to "Delete", merchant_plan_path(@merchant_plan), :method => :delete %>
+</div>

@@ -1,5 +1,5 @@
 class Merchant::PlansController < ApplicationController
-  before_filter :user_merchant?
+  before_filter :merchant_required
   # GET /merchant/plans
   # GET /merchant/plans.json
   def index

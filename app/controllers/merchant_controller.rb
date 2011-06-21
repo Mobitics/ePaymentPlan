@@ -1,5 +1,5 @@
 class MerchantController < ApplicationController
-  before_filter :user_merchant?
+  before_filter :merchant_required
   def index
   end
 
