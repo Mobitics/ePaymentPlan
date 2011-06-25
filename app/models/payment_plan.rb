@@ -4,6 +4,7 @@ class PaymentPlan < ActiveRecord::Base
   attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account
 
   belongs_to :payment_profile
+  has_one :user, :through => :payment_profile
   has_many :payments, :dependent => :destroy
 
   def create

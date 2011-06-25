@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :plans, :foreign_key => :merchant_id, :dependent => :destroy
   has_many :payment_profiles, :dependent => :destroy
   has_and_belongs_to_many :roles
+  has_many :payment_plans
   
   def role?(role_sym)
     roles.any? { |r| r.title.underscore.to_sym == role_sym }

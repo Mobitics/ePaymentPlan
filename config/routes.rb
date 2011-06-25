@@ -1,5 +1,13 @@
 Epaymentplans::Application.routes.draw do
 
+  get "clients/index"
+
+  get "clients/show"
+
+  get "payment_plans/index"
+
+  get "payment_plans/show"
+
   get "merchants/index"
 
   mount Resque::Server => "/resque"
@@ -26,7 +34,7 @@ Epaymentplans::Application.routes.draw do
   
   match "merchant" => "merchant#index"
   namespace :merchant do
-    resources :plans, :orders, :payment_plans
+    resources :plans, :orders, :payment_plans, :clients
   end
   
   root :to => 'site#home'

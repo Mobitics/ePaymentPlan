@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   
   def user_merchant?
     @user = current_user
+    p @user
     response = @user.role? :merchant unless @user.blank?
     response
   end
