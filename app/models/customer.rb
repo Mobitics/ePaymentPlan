@@ -46,9 +46,7 @@ class Customer < ActiveRecord::Base
   def create_cim_profile
     @gateway = get_payment_gateway
 
-    @customer = {:profile => user_profile}
-
-    response = @gateway.create_customer_profile(@user)
+    response = @gateway.create_customer_profile({:profile => user_profile})
     if response.success? and response.authorization
       self.update_attribute(:customer_cim_id, response.authorization)
       return true
@@ -62,19 +60,17 @@ class Customer < ActiveRecord::Base
   end
 
   def update_cim_profile
-    if not self.customer_cim_id
-      return false
-    end
+    return false unless self.customer_cim_id
+
     @gateway = get_payment_gateway
 
-    response = @gateway.update_customer_profile(:profile => user_profile.merge({
+    response = @gateway.update_customer_profile(
+      :profile => user_profile.merge({
         :customer_profile_id => self.customer_cim_id
-      }))
+      })
+    )
 
-    if response.success?
-      return true
-    end
-    return false
+    !!response.success?
   end
 
   def delete_cim_profile
@@ -82,10 +78,7 @@ class Customer < ActiveRecord::Base
 
     response = @gateway.delete_customer_profile(:customer_profile_id => self.customer_cim_id)
 
-    if response.success?
-      return true
-    end
-    return false
+    !!response.success?
   end
 
   def user_profile

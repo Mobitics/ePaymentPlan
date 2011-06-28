@@ -1,4 +1,4 @@
-<%= render 'shared/error_messages', :target => @user %>
+<%= render 'shared/error_messages', :target => @customer %>
 
 <div id="main"><!-- begin overview --> 
   <div id="overview" class="clearfix"> 
@@ -15,7 +15,7 @@
     <%= form_for @payment_plan, :url => order_purchase_step2_path, :html => {:class => "new_order"} do |form| %>
     <!-- <form accept-charset="UTF-8" action="/payment_plans" class="order_new" id="order_new" method="post"> -->
       <!-- <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="k9F4XgCro78JUlCQy5cYtQBLnBrslkZO1kFW5xTuZMs=" /></div>  -->
-      <%= form.hidden_field :order_id, :value => @payment_plan.num %>
+      <%= form.hidden_field :order_id %>
       <%= form.hidden_field :amount %>
       <%= form.hidden_field :shipping %>
       <%= form.hidden_field :tax %>
@@ -36,6 +36,10 @@
       </div>
 
       <%= fields_for @user do |u| -%>
+        <%= u.hidden_field :email %>
+      <% end %>
+
+      <%= fields_for @customer do |u| -%>
       <div id="email"> 
         <%= u.label :email, "Your Contact Email" %>
         <%= u.text_field :email %>
@@ -48,31 +52,31 @@
           <table cellspacing="0" cellpadding="0" class="form" id="billing"> 
             <tr> 
               <td class="lbl"><%= b.label :first_name, "First Name" %></td> 
-              <td><%= b.text_field :first_name, :class => "short", :tabindex => "2", :value => @user.first_name %></td> 
+              <td><%= b.text_field :first_name, :class => "short", :tabindex => "2", :value => @customer.first_name %></td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :last_name, "Last Name" %></td> 
-              <td><%= b.text_field :last_name, :class => "short", :tabindex => "3", :value => @user.last_name %></td> 
+              <td><%= b.text_field :last_name, :class => "short", :tabindex => "3", :value => @customer.last_name %></td> 
             </tr> 
             <tr>
               <td class="lbl"><%= b.label :company %></td> 
-              <td><%= b.text_field :company, :class => "short", :tabindex => "4", :value => @user.company %></td> 
+              <td><%= b.text_field :company, :class => "short", :tabindex => "4", :value => @customer.company %></td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :address1, "Address" %></td> 
-              <td style="width: 260px"><%= b.text_field :address1, :tabindex => "5", :value => @user.address1 %></td> 
+              <td style="width: 260px"><%= b.text_field :address1, :tabindex => "5", :value => @customer.address1 %></td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :address2 %></td> 
-              <td style="width: 260px"><%= b.text_field :address2, :tabindex => "6", :value => @user.address2 %></td> 
+              <td style="width: 260px"><%= b.text_field :address2, :tabindex => "6", :value => @customer.address2 %></td> 
             </tr> 
             <tr>
               <td class="lbl"><%= b.label :city %></td> 
-              <td><%= b.text_field :city, :class => "medium", :tabindex => "7", :value => @user.city %></td> 
+              <td><%= b.text_field :city, :class => "medium", :tabindex => "7", :value => @customer.city %></td> 
             </tr> 
             <tr>
               <td class="lbl"><%= b.label :zip, "Postal/ZIP Code" %></td> 
-              <td><%= b.text_field :zip, :class => "short", :tabindex => "8", :value => @user.zip %></td> 
+              <td><%= b.text_field :zip, :class => "short", :tabindex => "8", :value => @customer.zip %></td> 
             </tr> 
             <tr> 
               <td colspan="2" style="width: 360px"> 
@@ -328,14 +332,14 @@
                   </li> 
                   <li id="billing_address_province_li" style="width: 160px;margin-right: 5px">
                     <%= b.label :state, "State / Province" %>
-                    <%= b.text_field :state, :tabindex => "10", :style => "width:150px", :value => @user.state %>
+                    <%= b.text_field :state, :tabindex => "10", :style => "width:150px", :value => @customer.state %>
                   </li> 
                 </ul> 
               </td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :phone %></td> 
-              <td><%= b.text_field :phone, :class => "short", :tabindex => "11", :value => @user.phone %></td> 
+              <td><%= b.text_field :phone, :class => "short", :tabindex => "11", :value => @customer.phone %></td> 
             </tr> 
             <tr id="billing-is-shipping"> 
               <td colspan="2"> 
@@ -355,31 +359,31 @@
           <table id="shipping" cellspacing="0" cellpadding="0" class="form"> 
             <tr> 
               <td class="lbl"><%= b.label :first_name, "First Name" %></td> 
-              <td><%= b.text_field :first_name, :class => "short", :tabindex => "2", :value => @user.first_name %></td> 
+              <td><%= b.text_field :first_name, :class => "short", :tabindex => "2", :value => @customer.first_name %></td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :last_name, "Last Name" %></td> 
-              <td><%= b.text_field :last_name, :class => "short", :tabindex => "3", :value => @user.last_name %></td> 
+              <td><%= b.text_field :last_name, :class => "short", :tabindex => "3", :value => @customer.last_name %></td> 
             </tr> 
             <tr>
               <td class="lbl"><%= b.label :company %></td> 
-              <td><%= b.text_field :company, :class => "short", :tabindex => "4", :value => @user.company %></td> 
+              <td><%= b.text_field :company, :class => "short", :tabindex => "4", :value => @customer.company %></td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :address1, "Address" %></td> 
-              <td style="width: 260px"><%= b.text_field :address1, :tabindex => "5", :value => @user.address1 %></td> 
+              <td style="width: 260px"><%= b.text_field :address1, :tabindex => "5", :value => @customer.address1 %></td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :address2 %></td> 
-              <td style="width: 260px"><%= b.text_field :address2, :tabindex => "6", :value => @user.address2 %></td> 
+              <td style="width: 260px"><%= b.text_field :address2, :tabindex => "6", :value => @customer.address2 %></td> 
             </tr> 
             <tr>
               <td class="lbl"><%= b.label :city %></td> 
-              <td><%= b.text_field :city, :class => "medium", :tabindex => "7", :value => @user.city %></td> 
+              <td><%= b.text_field :city, :class => "medium", :tabindex => "7", :value => @customer.city %></td> 
             </tr> 
             <tr>
               <td class="lbl"><%= b.label :zip, "Postal/ZIP Code" %></td> 
-              <td><%= b.text_field :zip, :class => "short", :tabindex => "8", :value => @user.zip %></td> 
+              <td><%= b.text_field :zip, :class => "short", :tabindex => "8", :value => @customer.zip %></td> 
             </tr> 
             <tr> 
               <td colspan="2"> 
@@ -635,14 +639,14 @@
                   </li> 
                   <li style="width: 150px" id="shipping_address_province_li"> 
                     <%= b.label :state, "State / Province" %>
-                    <%= b.text_field :state, :tabindex => "10", :style => "width:150px", :value => @user.state %>
+                    <%= b.text_field :state, :tabindex => "10", :style => "width:150px", :value => @customer.state %>
                   </li> 
                 </ul> 
               </td> 
             </tr> 
             <tr> 
               <td class="lbl"><%= b.label :phone %></td> 
-              <td><%= b.text_field :phone, :class => "short", :tabindex => "11", :value => @user.phone %></td> 
+              <td><%= b.text_field :phone, :class => "short", :tabindex => "11", :value => @customer.phone %></td> 
             </tr> 
           </table>
           <% end -%>

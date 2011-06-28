@@ -18,8 +18,8 @@
   <p><strong>Payment frequency</strong>
   <%= @payment_plan.frequency.capitalize %></p>
   <p><strong>Customer</strong>
-  <% customer = @payment_plan.user %>
-  <%= link_to "#{customer.email}", store_client_path(customer) %></p>
+  <% customer = @payment_plan.customer %>
+  <%= link_to "#{customer.email}", store_customer_path(customer) %></p>
 </div>
 <div>
 <%= link_to "Payment Plans", store_payment_plans_path %>

@@ -3,14 +3,14 @@ class PaymentProfile < ActiveRecord::Base
   include ActiveMerchant::Billing
   include ActiveMerchant::Utils
   
-  belongs_to :user
+  belongs_to :customer
   has_many :payment_plans
   has_many :transactions, :dependent => :destroy
 
   attr_accessor :address
   attr_accessor :credit_card
 
-  validates_presence_of :user_id, :credit_card, :address
+  validates_presence_of :customer_id, :credit_card, :address
 
   def create
     if super and create_payment_profile
@@ -46,7 +46,7 @@ class PaymentProfile < ActiveRecord::Base
 
     @gateway = get_payment_gateway
     profile = {
-      :customer_profile_id => self.user.customer_cim_id,
+      :customer_profile_id => self.customer.customer_cim_id,
       :customer_payment_profile_id => self.payment_cim_id
     }
     response = @gateway.get_customer_payment_profile(profile)
@@ -76,7 +76,7 @@ class PaymentProfile < ActiveRecord::Base
 
     @gateway = get_payment_gateway
 
-    @profile = {:customer_profile_id => self.user.customer_cim_id,
+    @profile = {:customer_profile_id => self.customer.customer_cim_id,
                 :payment_profile => {:bill_to => self.address,
                                      :payment => {:credit_card => CreditCard.new(self.credit_card)}
                                      }
@@ -95,7 +95,7 @@ class PaymentProfile < ActiveRecord::Base
   def update_payment_profile
     @gateway = get_payment_gateway
 
-    @profile = {:customer_profile_id => self.user.customer_cim_id,
+    @profile = {:customer_profile_id => self.customer.customer_cim_id,
                 :payment_profile => {:customer_payment_profile_id => self.payment_cim_id,
                                      :bill_to => self.address,
                                      :payment => {:credit_card => CreditCard.new(self.credit_card)}
@@ -113,7 +113,7 @@ class PaymentProfile < ActiveRecord::Base
   def delete_payment_profile
     @gateway = get_payment_gateway
 
-    response = @gateway.delete_customer_payment_profile(:customer_profile_id => self.user.customer_cim_id,
+    response = @gateway.delete_customer_payment_profile(:customer_profile_id => self.customer.customer_cim_id,
                                                         :customer_payment_profile_id => self.payment_cim_id)
     if response.success?
       return true

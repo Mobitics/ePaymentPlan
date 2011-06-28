@@ -31,6 +31,7 @@
     <%= form_for @payment_plan do |form| %>
     <!-- <form accept-charset="UTF-8" action="/orders/665272/79d91e39779accb54081bcfe678b3771/commit" method="post"> -->
       <!-- <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="k9F4XgCro78JUlCQy5cYtQBLnBrslkZO1kFW5xTuZMs=" /></div>  -->
+      <%= form.hidden_field :store_id %>
       <%= form.hidden_field :order_id %>
       <%= form.hidden_field :plan_id %>
       <%= form.hidden_field :amount %>
@@ -45,6 +46,7 @@
       <%= form.hidden_field :includes_shipping %>
       <%= form.hidden_field :includes_tax %>
       <%= form.hidden_field :payments_count %>
+      <%= form.hidden_field :frequency %>
 
       <div id="payment" style="display:none;">
         <div class="group clearfix"> 
@@ -78,33 +80,33 @@
               </li> 
             </ul> 
           </div> 
-          <%= fields_for @user do |f| %>
+          <%= fields_for @customer do |f| %>
             <%= f.hidden_field :email %>
             <%= f.fields_for :billing_address do |b| -%>
-              <%= b.hidden_field :first_name, :value => @user.first_name %>
-              <%= b.hidden_field :last_name, :value => @user.last_name %>
-              <%= b.hidden_field :company, :value => @user.company %>
-              <%= b.hidden_field :address1, :value => @user.address1 %>
-              <%= b.hidden_field :address2, :value => @user.address2 %>
-              <%= b.hidden_field :city, :value => @user.city %>
-              <%= b.hidden_field :zip, :value => @user.zip %>
+              <%= b.hidden_field :first_name, :value => @customer.first_name %>
+              <%= b.hidden_field :last_name, :value => @customer.last_name %>
+              <%= b.hidden_field :company, :value => @customer.company %>
+              <%= b.hidden_field :address1, :value => @customer.address1 %>
+              <%= b.hidden_field :address2, :value => @customer.address2 %>
+              <%= b.hidden_field :city, :value => @customer.city %>
+              <%= b.hidden_field :zip, :value => @customer.zip %>
               <!-- The country value is a select box so this is going to be blank while we change that -->
-              <%= b.hidden_field :country, :value => @user.country %>
-              <%= b.hidden_field :state, :value => @user.state %>
-              <%= b.hidden_field :phone, :value => @user.phone %>
+              <%= b.hidden_field :country, :value => @customer.country %>
+              <%= b.hidden_field :state, :value => @customer.state %>
+              <%= b.hidden_field :phone, :value => @customer.phone %>
             <% end -%>
             <%= f.fields_for :shipping_address do |b| -%>
-              <%= b.hidden_field :first_name, :value => @user.first_name %>
-              <%= b.hidden_field :last_name, :value => @user.last_name %>
-              <%= b.hidden_field :company, :value => @user.company %>
-              <%= b.hidden_field :address1, :value => @user.address1 %>
-              <%= b.hidden_field :address2, :value => @user.address2 %>
-              <%= b.hidden_field :city, :value => @user.city %>
-              <%= b.hidden_field :zip, :value => @user.zip %>
+              <%= b.hidden_field :first_name, :value => @customer.first_name %>
+              <%= b.hidden_field :last_name, :value => @customer.last_name %>
+              <%= b.hidden_field :company, :value => @customer.company %>
+              <%= b.hidden_field :address1, :value => @customer.address1 %>
+              <%= b.hidden_field :address2, :value => @customer.address2 %>
+              <%= b.hidden_field :city, :value => @customer.city %>
+              <%= b.hidden_field :zip, :value => @customer.zip %>
               <!-- The country value is a select box so this is going to be blank while we change that -->
-              <%= b.hidden_field :country, :value => @user.country %>
-              <%= b.hidden_field :state, :value => @user.state %>
-              <%= b.hidden_field :phone, :value => @user.phone %>
+              <%= b.hidden_field :country, :value => @customer.country %>
+              <%= b.hidden_field :state, :value => @customer.state %>
+              <%= b.hidden_field :phone, :value => @customer.phone %>
             <% end -%>
           <% end %>
 
@@ -120,8 +122,8 @@
                   <td><%= cc.label :last_name, "Last Name" %></td> 
                 </tr> 
                 <tr> 
-                  <td><%= cc.text_field :first_name, :size => "11", :value => @user.first_name %></td> 
-                  <td><%= cc.text_field :last_name, :size => "13", :value => @user.last_name %></td> 
+                  <td><%= cc.text_field :first_name, :size => "11", :value => @customer.first_name %></td> 
+                  <td><%= cc.text_field :last_name, :size => "13", :value => @customer.last_name %></td> 
                 </tr> 
                 <tr> 
                   <td colspan="2" style="padding-top: 7px">
@@ -191,17 +193,17 @@
             </div> 
             <% end %>
             <%= f.fields_for :address do |a| %>
-                <%= a.hidden_field :name, :value => "#{@user.first_name} #{@user.last_name}" %>
-                <%= a.hidden_field :first_name, :value => @user.first_name %>
-                <%= a.hidden_field :last_name, :value => @user.last_name %>
-                <%= a.hidden_field :company, :value => @user.company %>
-                <%= a.hidden_field :address1, :value => @user.address1 %>
-                <%= a.hidden_field :address2, :value => @user.address2 %>
-                <%= a.hidden_field :city, :value => @user.city %>
-                <%= a.hidden_field :state, :value => @user.state %>
-                <%= a.hidden_field :country, :value => @user.country %>
-                <%= a.hidden_field :zip, :value => @user.zip %>
-                <%= a.hidden_field :phone, :value => @user.phone %>
+                <%= a.hidden_field :name, :value => "#{@customer.first_name} #{@customer.last_name}" %>
+                <%= a.hidden_field :first_name, :value => @customer.first_name %>
+                <%= a.hidden_field :last_name, :value => @customer.last_name %>
+                <%= a.hidden_field :company, :value => @customer.company %>
+                <%= a.hidden_field :address1, :value => @customer.address1 %>
+                <%= a.hidden_field :address2, :value => @customer.address2 %>
+                <%= a.hidden_field :city, :value => @customer.city %>
+                <%= a.hidden_field :state, :value => @customer.state %>
+                <%= a.hidden_field :country, :value => @customer.country %>
+                <%= a.hidden_field :zip, :value => @customer.zip %>
+                <%= a.hidden_field :phone, :value => @customer.phone %>
             <% end %>
           <% end %>
         </div> 

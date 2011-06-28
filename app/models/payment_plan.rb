@@ -1,12 +1,12 @@
 class PaymentPlan < ActiveRecord::Base
-  attr_accessor :plan_id, :num, :account
+  attr_accessor :plan_id
 
   attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account
 
   belongs_to :store
   belongs_to :payment_profile
 
-  has_one :user, :through => :payment_profile
+  has_one :customer, :through => :payment_profile
   has_many :payments, :dependent => :destroy
 
   def create

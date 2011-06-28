@@ -3,10 +3,10 @@ class Store::CustomersController < ApplicationController
 
   def index
     @payment_plans = @store.payment_plans
-    @customers = @payment_plans.collect {|payment_plan| payment_plan.user}
+    @customers = @payment_plans.collect {|payment_plan| payment_plan.customer}
   end
 
   def show
-    @customer = User.find params[:id]
+    @customer = Customer.find params[:id]
   end
 end

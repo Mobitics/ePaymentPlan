@@ -12,14 +12,14 @@ Epaymentplans::Application.routes.draw do
   match "/order/confirmation" => "payment_plans#confirmation"
 
   resources :payment_plans, :only => [:create]
-  resources :orders
-  resources :plans
+  # resources :orders
+  # resources :plans
   
-  resources :users do 
-    resources :payment_profiles do
-      resources :transactions
-    end
-  end
+  # resources :users do 
+  #   resources :payment_profiles do
+  #     resources :transactions
+  #   end
+  # end
   
   namespace :store do
     root :to => "stores#index"

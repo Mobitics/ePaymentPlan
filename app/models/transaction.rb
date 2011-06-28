@@ -27,7 +27,7 @@ class Transaction < ActiveRecord::Base
       :transaction => {
         :type => :auth_capture,
         :amount => self.amount.to_s,
-        :customer_profile_id => self.payment_profile.user.customer_cim_id,
+        :customer_profile_id => self.payment_profile.customer.customer_cim_id,
         :customer_payment_profile_id => self.payment_profile.payment_cim_id
         }
       })
