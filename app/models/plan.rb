@@ -1,10 +1,12 @@
 class Plan < ActiveRecord::Base
-  validates :name, :presence => true, :uniqueness => true
-  validates_presence_of :payments_count, :interest, :late_fee, :merchant_id
+  # belongs_to :merchant, :class_name => "User", :foreign_key => :merchant_id
+  belongs_to :store
+
+  validates_associated :store
+  validates_presence_of :name, :payments_count, :interest, :late_fee, :store_id
   validates_presence_of :min_price, :max_price, :if => :by_price
   #validates_presence_of :product_id, :if => :by_product
-  
-  belongs_to :merchant, :class_name => "User", :foreign_key => :merchant_id
+  validates_uniqueness_of :name, :scope => :store_id
   
   PLAN_TYPES = {'by_price' => 'By price', 'by_product' => 'By product'}
 

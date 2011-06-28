@@ -1,27 +1,16 @@
 Epaymentplans::Application.routes.draw do
 
-  get "clients/index"
-
-  get "clients/show"
-
-  get "payment_plans/index"
-
-  get "payment_plans/show"
-
-  get "merchants/index"
-
   mount Resque::Server => "/resque"
 
   devise_for :users, :controllers => { :sessions => "sessions" }
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
   match "test/order/purchase" => "orders#edit"
   # match "/order/purchase" => "orders#edit"
   match "/order/purchase" => "payment_plans#step1"
   match "/order/purchase/step2" => "payment_plans#step2"
   # match "/order/confirmation" => "orders#confirmation"
   match "/order/confirmation" => "payment_plans#confirmation"
+
   resources :payment_plans, :only => [:create]
   resources :orders
   resources :plans
@@ -32,13 +21,17 @@ Epaymentplans::Application.routes.draw do
     end
   end
   
-  match "merchant" => "merchant#index"
-  namespace :merchant do
-    resources :plans, :orders, :payment_plans, :clients
+  namespace :store do
+    root :to => "stores#index"
+    # resources :orders
+    resources :plans
+    resources :payment_plans, :only => [:index, :show]
+    resources :customers, :only => [:index, :show]
+    resources :settings, :only => [:index]
+    resources :authorize_nets
   end
   
   root :to => 'site#home'
 
   match "/test" => "site#test"
-
 end

@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     else
       render :new
     end
-
   end
   
   def show
@@ -34,8 +33,7 @@ class UsersController < ApplicationController
   
   def destroy
     @user = User.find params[:id]
-    p @user.destroy
+    @user.destroy
     redirect_to users_path
   end
-  
 end

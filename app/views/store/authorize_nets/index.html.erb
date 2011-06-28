@@ -1,0 +1,15 @@
+<h1>Authorize.Net settings</h1>
+
+<% if @store.authorize_net.blank? %>
+  <%= link_to 'Setup Authorize.Net', new_store_authorize_net_path %>
+<% else %>
+  <h2>Current configuration</h2>
+  <p>Api Login ID: <%= @store.authorize_net.api_login_id %></p>
+  <p>Transaction Key: <%= @store.authorize_net.transaction_key.gsub(/\w/, "x") %></p>
+  <p>Test Mode: <%= @store.authorize_net.test_mode %></p>
+  <%= link_to 'Edit', edit_store_authorize_net_path(@store.authorize_net) %>
+  <%= link_to 'Delete', store_authorize_net_path(@store.authorize_net), :method => :delete %>
+<% end %>
+<br>
+<br>
+<%= link_to 'Back to settings', store_settings_path %>

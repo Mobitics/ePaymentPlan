@@ -1,0 +1,29 @@
+<%= form_for([:store,@authorize_net]) do |f| %>
+  <% if @authorize_net.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@authorize_net.errors.count, "error") %> prohibited this Authorize.Net from being saved:</h2>
+      <ul>
+        <% @authorize_net.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <fieldset>
+    <%= f.label :api_login_id %>
+    <%= f.text_field :api_login_id %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :transaction_key %>
+    <%= f.text_field :transaction_key %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :test_mode %>
+    <%= f.check_box :test_mode %>
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

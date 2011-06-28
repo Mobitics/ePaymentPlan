@@ -60,6 +60,9 @@ body {
 }
 
 #top-menu {
+	color:#FFF;
+	font-family: "liberation-sans", Arial, sans-serif;
+	font-size: 12px;
 	position: absolute;
 	right: 5px;
 	top: 44px;
@@ -70,7 +73,7 @@ body {
 	font-size: 12px;
 }
 
-#top-menu a:link {text-decoration: none; color:#FFF; padding-right: 15px;}
+#top-menu a:link {text-decoration: none; color:#FFF; padding-right: 10px; margin-left: 10px;}
 #top-menu a:visited {text-decoration: none; color:#FFF;}
 #top-menu a:active {text-decoration: none; color:#FFF;}
 #top-menu a:hover {text-decoration: underline; color:#FFF;}
@@ -81,7 +84,7 @@ body {
 	margin-left: 5px;
 }
 
-.mid-img {position: relative;}
+.mid-img {position: relative; height:29px}
 
 #content {
 	background: url(/assets/content-mid.png) repeat-y;

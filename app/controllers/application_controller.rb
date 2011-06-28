@@ -1,26 +1,21 @@
 class ApplicationController < ActionController::Base
   #http_basic_authenticate_with :name => "darth", :password => "vader"
-  #protect_from_forgery
+  protect_from_forgery
   
   def after_sign_in_path_for(resource)
-    merchant = user_merchant?
-    welcome_path = merchant ? merchant_path : root_path
-    stored_location_for(resource) || welcome_path
-  end
-  
-  def user_merchant?
-    @user = current_user
-    p @user
-    response = @user.role? :merchant unless @user.blank?
-    response
-  end
-  
-  def merchant_required
-    merchant = user_merchant?
-    unless merchant
-      flash[:notice] = "Access Denied"
-      redirect_to root_path
-    end
+    stored_location_for(resource) || user_path
   end
 
+  def user_path
+    current_user.store? ? store_root_path : root_path
+  end
+
+  def authorized_store
+    unless current_user && current_user.store?
+      flash[:notice] = "Access Denied"
+      redirect_to root_path
+    else
+      @store = current_user.store
+    end
+  end
 end

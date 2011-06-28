@@ -1,3 +1,3 @@
 Factory.define :role do |role|
-  role.title {"merchant"}
+  role.title {"store"}
 end

@@ -1,2 +1,0 @@
-module Merchant::ClientsHelper
-end

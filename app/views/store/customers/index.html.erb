@@ -1,0 +1,17 @@
+<h1>Listing Customers</h1>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th></th>
+  </tr>
+  <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.email %></td>
+      <td><%= link_to 'Show', store_customer_path(customer) %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
+
+<%= link_to 'Home', store_root_path %>

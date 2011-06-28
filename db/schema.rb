@@ -10,22 +10,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110619220807) do
+ActiveRecord::Schema.define(:version => 20110628074524) do
 
-  create_table "active_admin_comments", :force => true do |t|
-    t.integer  "resource_id",   :null => false
-    t.string   "resource_type", :null => false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.text     "body"
+  create_table "authorize_nets", :force => true do |t|
+    t.string   "api_login_id"
+    t.string   "transaction_key"
+    t.boolean  "test_mode",       :default => false
+    t.integer  "store_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "namespace"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+  create_table "customers", :force => true do |t|
+    t.string   "email"
+    t.integer  "customer_cim_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "orders", :force => true do |t|
     t.float    "amount"
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20110619220807) do
     t.string   "cancel_return_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "store_id"
   end
 
   create_table "payment_profiles", :force => true do |t|
@@ -96,7 +98,8 @@ ActiveRecord::Schema.define(:version => 20110619220807) do
     t.string   "max_price"
     t.integer  "product_id"
     t.string   "name"
-    t.integer  "merchant_id"
+    t.integer  "store_id"
+    t.string   "frequency",         :default => "monthly"
   end
 
   create_table "roles", :force => true do |t|
@@ -111,6 +114,20 @@ ActiveRecord::Schema.define(:version => 20110619220807) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "stores", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "state"
+    t.string   "country"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "stores", ["name"], :name => "index_stores_on_name", :unique => true
 
   create_table "transactions", :force => true do |t|
     t.string   "confirmation_id"
@@ -141,6 +158,8 @@ ActiveRecord::Schema.define(:version => 20110619220807) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "customer_cim_id"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

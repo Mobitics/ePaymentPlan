@@ -1,9 +1,9 @@
 require 'active_merchant'
 class User < ActiveRecord::Base
   include ActiveMerchant::Utils
-  ROLES = [:user, :merchant]
 
-  attr_accessor :first_name, :last_name, :company, :phone, :country, :city, :address1, :address2, :state, :zip
+  # attr_accessor :first_name, :last_name, :company, :phone, :country, :city, :address1, :address2, :state, :zip
+  attr_accessor :company, :phone, :country, :city, :address1, :address2, :state, :zip
   attr_accessor :billing_address, :shipping_address
 
   # Include default devise modules. Others available are:
@@ -12,17 +12,31 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :store_attributes
 
   validates :email, :presence => true, :uniqueness => true, :format => {:with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i} 
 
+  has_and_belongs_to_many :roles
   has_many :plans, :foreign_key => :merchant_id, :dependent => :destroy
   has_many :payment_profiles, :dependent => :destroy
-  has_and_belongs_to_many :roles
   has_many :payment_plans
+  has_one :store
+
+  accepts_nested_attributes_for :store, :allow_destroy => true
+
+  after_create :set_default_role
   
   def role?(role_sym)
     roles.any? { |r| r.title.underscore.to_sym == role_sym }
+  end
+
+  def store?
+    role?(:store)
+  end
+
+  def name
+    return "#{first_name} #{last_name}" if first_name && last_name
+    email
   end
 
   def create
@@ -104,5 +118,9 @@ class User < ActiveRecord::Base
 
   def user_profile
     return {:merchant_customer_id => self.id, :email => self.email, :description => self.email}
+  end
+
+  def set_default_role
+    self.roles << Role.store
   end
 end

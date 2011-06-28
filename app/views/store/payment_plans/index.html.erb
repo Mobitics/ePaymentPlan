@@ -1,0 +1,17 @@
+<h1>Listing Payment Plans</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th></th>
+  </tr>
+  <% @payment_plans.each do |payment_plan| %>
+    <tr>
+      <td><%= payment_plan.id %></td>
+      <td><%= link_to 'Show', merchant_payment_plan_path(payment_plan) %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+
+<%= link_to 'Home', store_root_path %>

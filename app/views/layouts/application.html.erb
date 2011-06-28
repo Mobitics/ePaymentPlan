@@ -12,14 +12,18 @@
 <body>
   <div id="wrapper">
     <div id="top">
-      <div id="logo"><a href="/"><h1>ePaymentPlans.com</h1></a></div>
+      <div id="logo"><a href="<%= signed_in? && current_user.store? ? store_root_path : root_path %>"><h1>ePaymentPlans.com</h1></a></div>
       <div id="info-top"><a href="#"><img src="/assets/info-top.png" /></a></div>
-      <div id="top-menu"><a href="#">Log in</a><a href="#"></a></div>
+      <% if signed_in? %>
+      <div id="top-menu">Welcome <%= current_user.name %>!<a href="<%= destroy_user_session_path %>">Sign Out</a></div>
+      <% else %>
+      <div id="top-menu"><a href="<%= new_user_session_path %>">Log in</a><a href="<%= new_user_registration_path %>">Sign Up</a></div>
+      <% end %>
     </div>
-    <% flash.each do |key, text| -%>
-    <p class="<%= key %>"><%= text %></p>
-    <% end -%>
     <div id="mid">
+      <% flash.each do |key, text| -%>
+      <p class="<%= key %>"><%= text %></p>
+      <% end -%>
       <%= yield %>
       <% flash.discard %>
     </div>
