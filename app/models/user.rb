@@ -39,28 +39,28 @@ class User < ActiveRecord::Base
     email
   end
 
-  def create
-    if super and create_cim_profile
-      return true
-    else
-      self.destroy if self.id
-      return false
-    end
-  end
-
-  def update
-    if super and update_cim_profile
-      return true
-    end
-    return false
-  end
-
-  def destroy
-    if delete_cim_profile and super
-      return true
-    end
-    return false
-  end
+  # def create
+  #   if super and create_cim_profile
+  #     return true
+  #   else
+  #     self.destroy if self.id
+  #     return false
+  #   end
+  # end
+  # 
+  # def update
+  #   if super and update_cim_profile
+  #     return true
+  #   end
+  #   return false
+  # end
+  # 
+  # def destroy
+  #   if delete_cim_profile and super
+  #     return true
+  #   end
+  #   return false
+  # end
 
   def has_payment_profile_with?(params)
     self.payment_profiles.each do |payment_profile|
