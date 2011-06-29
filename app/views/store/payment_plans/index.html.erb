@@ -1,17 +1,38 @@
 <h1>Listing Payment Plans</h1>
 
-<table>
-  <tr>
-    <th>Id</th>
-    <th></th>
-  </tr>
-  <% @payment_plans.each do |payment_plan| %>
+<div class="table_wrapper">
+  <table>
     <tr>
-      <td><%= payment_plan.id %></td>
-      <td><%= link_to 'Show', store_payment_plan_path(payment_plan) %></td>
+      <th>Order Id</th>
+      <th>Total Amount</th>
+      <th>Shipping</th>
+      <th>Tax</th>
+      <th>Payments</th>
+      <th>Frequency</th>
+      <th>Interests</th>
+      <th>Late fee</th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
-<br />
+    <% @payment_plans.each do |payment_plan| %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <td><%= payment_plan.order_id %></td>
+        <td><%= "%.2f" % payment_plan.amount %></td>
+        <td><%= "%.2f" % payment_plan.shipping %></td>
+        <td><%= "%.2f" % payment_plan.tax %></td>
+        <td><%= payment_plan.payments_count %></td>
+        <td><%= payment_plan.frequency.capitalize %></td>
+        <td><%= "%.2f" % payment_plan.interest %></td>
+        <td><%= "%.2f" % payment_plan.late_fee %></td>
+        <td>
+          <%= link_to 'Show', store_payment_plan_path(payment_plan) %> |
+          <%= link_to 'Payments', store_payment_plan_path(payment_plan) %> |
+          <%= link_to 'Customer', store_customer_path(payment_plan.customer) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
-<%= link_to 'Home', store_root_path %>
+<div class="breadcrumb">
+  <%= link_to 'Home', store_root_path %>
+</div>

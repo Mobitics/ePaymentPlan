@@ -1,5 +1,8 @@
 <h1>Editing Plan</h1>
 
 <%= render 'form' %>
-<%= link_to 'Show', store_plan_path(@plan) %> |
-<%= link_to 'Back', store_plans_path %>
+
+<div class="breadcrumb">
+  <%= link_to 'Show', store_plan_path(@plan) %> |
+  <%= link_to 'Back', store_plans_path %>
+</div>

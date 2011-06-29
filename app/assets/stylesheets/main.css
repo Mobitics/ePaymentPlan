@@ -7,6 +7,7 @@ body {
 	background: -webkit-gradient(linear, left top, left bottom, from(#e1e5e5), to(#fff)); /* for webkit browsers */
 	background: -moz-linear-gradient(top,  #e1e5e5,  #fff); /* for firefox 3.6+ */
 	background-repeat: no-repeat;
+	font-family: "liberation-sans", Arial, sans-serif;
 	height: 600px;
 	margin: 0;
 }
@@ -139,3 +140,80 @@ body {
 #bot a:active {text-decoration: none; margin-right: 15px;}
 #bot a:hover {text-decoration: none; color: #333; margin-right: 15px;}
 
+ul.menu{
+	list-style:none;
+	padding:0;
+}
+
+ul.menu li{
+	line-height:24px;
+}
+
+dl{}
+
+dt,
+dd{
+	display:inline-block;
+	font-size:13px;
+	line-height:22px;
+}
+
+dt{
+	font-weight:bold;
+	width:120px;
+}
+
+dd{
+	font-style:italic;
+}
+
+form{
+	border:none;
+	padding:0;
+	margin:0;
+	font-size:12px;
+}
+
+fieldset{
+	border:none;
+	padding:2px 0;
+	margin:0;
+}
+
+.breadcrumb{
+	line-height:24px;
+}
+
+.breadcrumb a{
+	font-size:14px;
+	text-decoration:none;
+}
+
+.breadcrumb a:hover{
+	text-decoration:underline;
+}
+
+.table_wrapper{
+	border:1px solid #aaa;
+	border-radius:3px;
+	margin-bottom:30px;
+	padding:1px;
+}
+
+table{
+	font-size:12px;
+	width:100%;
+}
+
+table tr.odd{
+	background:#d1d5d5;
+}
+
+table tr th{
+	background:#e1d5d5;
+	padding:8px 5px;
+}
+
+table tr td{
+	padding:8px 5px;
+}

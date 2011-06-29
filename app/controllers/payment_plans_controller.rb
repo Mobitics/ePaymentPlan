@@ -13,7 +13,7 @@ class PaymentPlansController < ApplicationController
     @user = User.find_by_email(params[:user][:email])
     @store = @user.store
     @plans = @store.plans
-    customer = Customer.find_or_create_by_email(params[:customer][:email])
+    customer = @store.customers.find_or_create_by_email(params[:customer][:email])
     @customer = build_customer(params[:customer], customer)
     @payment_plan = PaymentPlan.new(params[:payment_plan].merge(:store_id => @store.id))
     @payment_profile = PaymentProfile.new
@@ -38,7 +38,9 @@ class PaymentPlansController < ApplicationController
   end
 
   def create
-    customer = Customer.find_by_email(params[:customer][:email])
+    @user = User.find_by_email(params[:user][:email])
+    @store = @user.store
+    customer = @store.customers.find_by_email(params[:customer][:email])
     @customer = build_customer(params[:customer], customer)
     @payment_plan = PaymentPlan.new(params[:payment_plan])
     @payment_profile = @customer.has_payment_profile_with?(params[:payment_profile])

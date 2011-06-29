@@ -6,10 +6,12 @@ class Customer < ActiveRecord::Base
   attr_accessor :first_name, :last_name, :company, :phone, :country, :city, :address1, :address2, :state, :zip
   attr_accessor :billing_address, :shipping_address
 
-  validates :email, :presence => true, :uniqueness => true, :format => {:with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i} 
-
+  belongs_to :store
   has_many :payment_profiles, :dependent => :destroy
   has_many :payment_plans
+
+  validates :email, :presence => true, :uniqueness => {:scope => :store_id}, :format => {:with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i} 
+  validates_associated :store
 
   def create
     if super and create_cim_profile
@@ -41,10 +43,15 @@ class Customer < ActiveRecord::Base
     return nil
   end
 
+  def payment_gateway
+    return get_payment_gateway(store.authorize_net.api_login_id, store.authorize_net.transaction_key) unless store.authorize_net.blank?
+    get_payment_gateway
+  end
+
   private
   
   def create_cim_profile
-    @gateway = get_payment_gateway
+    @gateway = payment_gateway
 
     response = @gateway.create_customer_profile({:profile => user_profile})
     if response.success? and response.authorization
@@ -62,7 +69,7 @@ class Customer < ActiveRecord::Base
   def update_cim_profile
     return false unless self.customer_cim_id
 
-    @gateway = get_payment_gateway
+    @gateway = payment_gateway
 
     response = @gateway.update_customer_profile(
       :profile => user_profile.merge({
@@ -74,7 +81,7 @@ class Customer < ActiveRecord::Base
   end
 
   def delete_cim_profile
-    @gateway = get_payment_gateway
+    @gateway = payment_gateway
 
     response = @gateway.delete_customer_profile(:customer_profile_id => self.customer_cim_id)
 

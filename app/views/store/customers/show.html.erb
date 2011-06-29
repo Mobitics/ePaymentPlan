@@ -1,7 +1,10 @@
 <div>
-  <p><strong>Email</strong> 
-  <%= @customer.email %></p>
+  <dl>
+    <dt>Email</dt><dd><%= @customer.email %></dd><br/>
+    <dt>CIM ID</dt><dd><%= @customer.customer_cim_id %></dd>
+  </dl>
 </div>
-<div>
-<%= link_to "Customer", store_customers_path %>
 
+<div class="breadcrumb">
+  <%= link_to "Customers", store_customers_path %>
+</div>

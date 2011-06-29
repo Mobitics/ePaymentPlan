@@ -80,6 +80,9 @@
               </li> 
             </ul> 
           </div> 
+          <%= fields_for @user do |u| -%>
+            <%= u.hidden_field :email %>
+          <% end %>
           <%= fields_for @customer do |f| %>
             <%= f.hidden_field :email %>
             <%= f.fields_for :billing_address do |b| -%>

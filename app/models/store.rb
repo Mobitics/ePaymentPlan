@@ -4,6 +4,7 @@ class Store < ActiveRecord::Base
   has_one :authorize_net
   has_many :plans
   has_many :payment_plans
+  has_many :customers
 
   validates_associated :user
   validates_presence_of :name

@@ -1,25 +1,19 @@
 <div>
-  <p><strong>Name</strong> 
-  <%= @plan.name %></p>
-  <p><strong>Number of Payments</strong> 
-  <%= @plan.payments_count %></p>
-  <p><strong>1st payment includes shipping</strong>
-  <%= @plan.includes_shipping %></p>
-  <p><strong>1st payment includes tax</strong>
-  <%= @plan.includes_tax %></p>
-  <p><strong>Interest</strong>
-  <%= @plan.interest %></p>
-  <p><strong>Late fee</strong>
-  <%= @plan.late_fee %></p>
-  <p><strong>Plan type</strong>
-  <%= @plan.type %></p>
-  <p><strong>Min price</strong>
-  <%= @plan.min_price %></p>
-  <p><strong>Max price</strong>
-  <%= @plan.max_price %></p>
-  <p><strong>Product</strong>
-  <%= @plan.product_id %></p>
+  <dl>
+    <dt>Name</dt><dd><%= @plan.name %></dd><br/>
+    <dt>Payments</dt><dd><%= @plan.payments_count %></dd><br/>
+    <dt>Frequency</dt><dd><%= @plan.frequency.capitalize %></dd><br/>
+    <dt>Interest</dt><dd><%= @plan.interest %></dd><br/>
+    <dt>Late fee</dt><dd><%= @plan.late_fee %></dd><br/>
+    <dt>Includes shipping?</dt><dd><%= @plan.includes_shipping %></dd><br/>
+    <dt>Includes tax?</dt><dd><%= @plan.includes_tax %></dd><br/>
+    <dt>Plan type</dt><dd><%= @plan.type %></dd><br/>
+    <dt>Min price</dt><dd><%= @plan.min_price %></dd><br/>
+    <dt>Max price</dt><dd><%= @plan.max_price %></dd><br/>
+    <dt>Product</dt><dd><%= @plan.product_id %></dd>
+  </dl>
 </div>
-<div>
+
+<div class="breadcrumb">
   <%= link_to "Edit", edit_store_plan_path(@plan) %> | <%= link_to "Plans", store_plans_path %> | <%= link_to "Delete", store_plan_path(@plan), :method => :delete %>
 </div>

@@ -1,17 +1,22 @@
 <h1>Listing Customers</h1>
 
-<table>
-  <tr>
-    <th>Email</th>
-    <th></th>
-  </tr>
-  <% @customers.each do |customer| %>
+<div class="table_wrapper">
+  <table>
     <tr>
-      <td><%= customer.email %></td>
-      <td><%= link_to 'Show', store_customer_path(customer) %></td>
+      <th>Email</th>
+      <th>CIM ID</th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
-<br>
+    <% @customers.each do |customer| %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <td><%= customer.email %></td>
+        <td><%= customer.customer_cim_id %></td>
+        <td><%= link_to 'Show', store_customer_path(customer) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
-<%= link_to 'Home', store_root_path %>
+<div class="breadcrumb">
+  <%= link_to 'Home', store_root_path %>
+</div>
