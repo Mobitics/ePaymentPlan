@@ -25,7 +25,7 @@
         <td><%= "%.2f" % payment_plan.late_fee %></td>
         <td>
           <%= link_to 'Show', store_payment_plan_path(payment_plan) %> |
-          <%= link_to 'Payments', store_payment_plan_path(payment_plan) %> |
+          <%= link_to 'Payments', store_payment_plan_payments_path(payment_plan) %> |
           <%= link_to 'Customer', store_customer_path(payment_plan.customer) %>
         </td>
       </tr>

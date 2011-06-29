@@ -1,0 +1,46 @@
+<h1>Listing Transactions</h1>
+
+<div style="float:left;">
+  <h3>Payment Plan</h3>
+  <dl>
+    <dt>Total Amount</dt><dd><%= '%.2f' % @payment_plan.amount %></dd><br/>
+    <dt>Payments</dt><dd><%= @payment_plan.payments_count %></dd><br/>
+    <dt>Frequency</dt><dd><%= @payment_plan.frequency.capitalize %></dd><br/>
+  </dl>
+</div>
+<div style="float:left;margin-left:120px;">
+  <h3>Payment</h3>
+  <dl>
+    <dt>Date</dt><dd><%= @payment.created_at %></dd><br/>
+    <dt>Amount</dt><dd><%= '%.2f' % @payment.payment %></dd><br/>
+    <dt>Status</dt><dd><%= @payment.status %></dd><br/>
+  </dl>
+</div>
+<br style="clear:both;"/>
+
+<div class="table_wrapper">
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Confirmation Id</th>
+      <th>Auth Code</th>
+      <th>Error</th>
+      <th>Error Code</th>
+      <th>Error Message</th>
+    </tr>
+    <% @transactions.each do |transaction| %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <td><%= transaction.created_at %></td>
+        <td><%= transaction.confirmation_id %></td>
+        <td><%= transaction.auth_code %></td>
+        <td><%= transaction.error %></td>
+        <td><%= transaction.error_code %></td>
+        <td><%= transaction.error_message %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="breadcrumb">
+  <%= link_to 'Payments', store_payment_plan_payments_path(@payment_plan) %>
+</div>

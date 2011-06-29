@@ -25,7 +25,11 @@ Epaymentplans::Application.routes.draw do
     root :to => "stores#index"
     # resources :orders
     resources :plans
-    resources :payment_plans, :only => [:index, :show]
+    resources :payment_plans, :only => [:index, :show] do
+      resources :payments, :only => [:index] do
+        resources :transactions, :only => [:index]
+      end
+    end
     resources :customers, :only => [:index, :show]
     resources :settings, :only => [:index]
     resources :authorize_nets
