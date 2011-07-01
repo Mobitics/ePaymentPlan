@@ -3,8 +3,10 @@ class PaymentPlansController < ApplicationController
 
   def step1
     @user = User.find_by_email(params[:order].delete(:account))
+    # Error if a user with provided email is not found: STORE DOES NOT EXIST => @user.blank?
     @store = @user.store
     @plans = @store.plans
+    # Error if the store has no available plans => @plans.empty?
     @customer = build_customer(params[:order])
     @payment_plan = PaymentPlan.new(params[:order].merge(:order_id => params[:order].delete(:num)))
   end
