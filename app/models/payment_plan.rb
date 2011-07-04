@@ -75,7 +75,7 @@ class PaymentPlan < ActiveRecord::Base
     # request['Content-Length'] = "#{payload.size}"
     # request['User-Agent'] = "Active Merchant -- http://home.leetsoft.com/am"
     # request['Content-Type'] = "application/x-www-form-urlencoded"
-    request.form_data = parse
+    request.form_data = params
     http = Net::HTTP.new(uri.host, uri.port)
     http.verify_mode  = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl      = true
