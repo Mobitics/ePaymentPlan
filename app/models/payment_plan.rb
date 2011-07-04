@@ -25,8 +25,12 @@ class PaymentPlan < ActiveRecord::Base
     payment = self.payments.build({'payment' => self.amount_to_pay})
     return true if payments_pending? && payment.save
 
-    payment.errors.full_messages.each do |errmsg|
-      errors.add(:payment, errmsg)
+    if payments_pending?
+      payment.errors.full_messages.each do |errmsg|
+        errors.add(:payment, errmsg)
+      end
+    else
+      errors.add(:payments, "have been completed.")
     end
     false
   end
@@ -64,7 +68,21 @@ class PaymentPlan < ActiveRecord::Base
       :currency       => "USD"
     }
     params.merge!({:test => 'test'}) if Rails.env.staging?
-    response = Net::HTTP.post_form(URI.parse(self.notify_url), params)
+    response = ssl_post(self.notify_url, params)
+    Rails.logger.info response.body
     Rails.logger.info "Termine ePaymentPlans: Order#notify_store"
+  end
+
+  def ssl_post(url, params)
+    uri = URI.parse(url)
+    request = Net::HTTP::Post.new(uri.path)
+    # request['Content-Length'] = "#{payload.size}"
+    # request['User-Agent'] = "Active Merchant -- http://home.leetsoft.com/am"
+    # request['Content-Type'] = "application/x-www-form-urlencoded"
+    request.form_data = params
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.verify_mode  = OpenSSL::SSL::VERIFY_NONE
+    http.use_ssl      = true
+    http.request(request)
   end
 end

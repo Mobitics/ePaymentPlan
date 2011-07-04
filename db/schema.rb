@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110628224948) do
+ActiveRecord::Schema.define(:version => 20110701073328) do
 
   create_table "authorize_nets", :force => true do |t|
     t.string   "api_login_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20110628224948) do
     t.datetime "updated_at"
     t.integer  "store_id"
     t.string   "frequency",          :default => "monthly"
+    t.string   "description"
   end
 
   create_table "payment_profiles", :force => true do |t|
