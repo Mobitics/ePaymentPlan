@@ -23,7 +23,10 @@ class PaymentPlan < ActiveRecord::Base
 
   def make_payment
     payment = self.payments.build({'payment' => self.amount_to_pay})
-    return true if payments_pending? && payment.save
+    if payments_pending? && payment.save
+      setup_next_payment if payments_pending?
+      return true
+    end
 
     if payments_pending?
       payment.errors.full_messages.each do |errmsg|
@@ -40,6 +43,11 @@ class PaymentPlan < ActiveRecord::Base
   end
 
   private
+
+  def setup_next_payment
+    frequencies = {"monthly" => 1.month, "weekly" => 1.week, "daily" => 1.day, "hourly" => 1.hour}
+    Resque.enqueue_in(frequencies[self.frequecy], Charge, :payment_plan_id => self.id)
+  end
 
   # Este metodo puede ser utilizado por make_payment con el fin de reutilizar codigo
   # Se renombra y se le da la estructura para poder reutilizarlo
