@@ -79,6 +79,6 @@ class PaymentPlan < ActiveRecord::Base
     http = Net::HTTP.new(uri.host, uri.port)
     http.verify_mode  = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl      = true
-    http.request(request, payload)
+    http.request(request)
   end
 end
