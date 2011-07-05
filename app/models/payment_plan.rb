@@ -35,6 +35,11 @@ class PaymentPlan < ActiveRecord::Base
     else
       errors.add(:payments, "have been completed.")
     end
+    Rails.logger.info "$"*80
+    Rails.logger.info "$"*80
+    Rails.logger.info errors.full_messages
+    Rails.logger.info "$"*80
+    Rails.logger.info "$"*80
     false
   end
 
