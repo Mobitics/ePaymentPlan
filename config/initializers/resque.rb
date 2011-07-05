@@ -2,6 +2,7 @@
 # require 'resque/failure/hoptoad'
 # require 'resque/failure/redis'
 require 'resque/server'
+require 'resque_scheduler'
 
 Resque::Server.use Rack::Auth::Basic do |username, password|
   password == "epaymentplans"
