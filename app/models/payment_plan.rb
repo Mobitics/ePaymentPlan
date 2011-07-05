@@ -40,6 +40,11 @@ class PaymentPlan < ActiveRecord::Base
     Rails.logger.info errors.full_messages
     Rails.logger.info "$"*80
     Rails.logger.info "$"*80
+    puts "$"*80
+    puts "$"*80
+    puts errors.full_messages
+    puts "$"*80
+    puts "$"*80
     false
   end
 

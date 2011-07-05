@@ -4,7 +4,9 @@ require 'resque_scheduler/tasks'
 task "resque:setup" => :environment do
   ENV['QUEUE'] = '*'
 
-  Resque.after_fork = Proc.new { ActiveRecord::Base.establish_connection }
+  Resque.before_fork do |job|
+    ActiveRecord::Base.establish_connection
+  end
 end
 
 task "resque:scheduler" => :environment do
