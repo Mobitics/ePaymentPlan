@@ -46,7 +46,7 @@ class PaymentPlan < ActiveRecord::Base
 
   def setup_next_payment
     frequencies = {"monthly" => 1.month, "weekly" => 1.week, "daily" => 1.day, "hourly" => 1.hour}
-    Resque.enqueue_in(frequencies[self.frequecy], Charge, :payment_plan_id => self.id)
+    Resque.enqueue_in(frequencies[self.frequency], Charge, :payment_plan_id => self.id)
   end
 
   # Este metodo puede ser utilizado por make_payment con el fin de reutilizar codigo
