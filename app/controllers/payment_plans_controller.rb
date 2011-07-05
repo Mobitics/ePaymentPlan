@@ -15,7 +15,7 @@ class PaymentPlansController < ApplicationController
     @user = User.find_by_email(params[:user][:email])
     @store = @user.store
     @plans = @store.plans
-    customer = @store.customers.find_or_create_by_email(params[:customer][:email])
+    customer = @store.customers.find_or_create_by_email(params[:customer][:email].downcase)
     @customer = build_customer(params[:customer], customer)
     @payment_plan = PaymentPlan.new(params[:payment_plan].merge(:store_id => @store.id))
     @payment_profile = PaymentProfile.new
@@ -42,7 +42,7 @@ class PaymentPlansController < ApplicationController
   def create
     @user = User.find_by_email(params[:user][:email])
     @store = @user.store
-    customer = @store.customers.find_by_email(params[:customer][:email])
+    customer = @store.customers.find_by_email(params[:customer][:email].downcase)
     @customer = build_customer(params[:customer], customer)
     @payment_plan = PaymentPlan.new(params[:payment_plan])
     @payment_profile = @customer.has_payment_profile_with?(params[:payment_profile])
@@ -73,7 +73,7 @@ class PaymentPlansController < ApplicationController
   def build_customer(params = {}, customer = nil)
     attributes = params[:billing_address].nil? ? params : params[:billing_address].dup.merge!({:email => params.delete(:email)})
     customer = Customer.new unless customer
-    customer.email            = attributes.delete(:email)
+    customer.email            = attributes.delete(:email).downcase
     customer.first_name       = attributes.delete(:first_name)
     customer.last_name        = attributes.delete(:last_name)
     customer.company          = attributes.delete(:company)
