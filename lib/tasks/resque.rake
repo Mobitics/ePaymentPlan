@@ -6,12 +6,12 @@ task "resque:setup" => :environment do
 end
 
 task "resque:scheduler" => :environment do
-  ENV['QUEUE'] = '*'
   require 'resque'
   require 'resque_scheduler'
   require 'resque/scheduler'
 end
 
 desc "Alias for resque:work (To run workers on Heroku)"
-task "jobs:work" => "resque:scheduler"
+task "jobs:work" => "resque:work"
+
 
