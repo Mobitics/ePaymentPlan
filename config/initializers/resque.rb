@@ -15,8 +15,6 @@ else
   Resque.redis = FakeRedis::Redis.new
 end
 
-Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection }
-
 # Failure notifications
 # Resque::Failure::Hoptoad.configure do |config|
 #   config.api_key = config.api_key = ENV['HOPTOAD_API_KEY']
