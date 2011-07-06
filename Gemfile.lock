@@ -13,13 +13,6 @@ GIT
       rails (>= 3.0.0)
       sass (>= 3.1.0)
 
-GIT
-  remote: git://github.com/guilleiguaran/rack-www-enforcer.git
-  revision: c66b68171fbb7c72954032e245e8739488adb03c
-  specs:
-    rack-www-enforcer (0.0.1)
-      rack
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -127,6 +120,8 @@ GEM
       rack
     rack-test (0.6.0)
       rack (>= 1.0)
+    rack-www-enforcer (0.0.1)
+      rack
     rails (3.1.0.rc4)
       actionmailer (= 3.1.0.rc4)
       actionpack (= 3.1.0.rc4)
@@ -233,7 +228,7 @@ DEPENDENCIES
   jquery-rails
   meta_search (>= 1.1.0.pre)
   pg
-  rack-www-enforcer!
+  rack-www-enforcer
   rails (>= 3.1.0.rc4)
   resque
   resque-scheduler
