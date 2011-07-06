@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: git://github.com/guilleiguaran/rack-www-enforcer.git
-  revision: d757c08d624cf3d33bbb6af67c4f0fbd9d028a2d
+  revision: c66b68171fbb7c72954032e245e8739488adb03c
   specs:
     rack-www-enforcer (0.0.1)
       rack
