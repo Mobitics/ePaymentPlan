@@ -35,16 +35,6 @@ class PaymentPlan < ActiveRecord::Base
     else
       errors.add(:payments, "have been completed.")
     end
-    Rails.logger.info "$"*80
-    Rails.logger.info "$"*80
-    Rails.logger.info errors.full_messages
-    Rails.logger.info "$"*80
-    Rails.logger.info "$"*80
-    puts "$"*80
-    puts "$"*80
-    puts errors.full_messages
-    puts "$"*80
-    puts "$"*80
     false
   end
 
@@ -93,14 +83,24 @@ class PaymentPlan < ActiveRecord::Base
 
   def ssl_post(url, params)
     uri = URI.parse(url)
-    request = Net::HTTP::Post.new(uri.path)
-    # request['Content-Length'] = "#{payload.size}"
-    # request['User-Agent'] = "Active Merchant -- http://home.leetsoft.com/am"
-    # request['Content-Type'] = "application/x-www-form-urlencoded"
-    request.form_data = params
     http = Net::HTTP.new(uri.host, uri.port)
-    http.verify_mode  = OpenSSL::SSL::VERIFY_NONE
-    http.use_ssl      = true
-    http.request(request)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    headers = {
+    'Content-Type' => 'application/x-www-form-urlencoded'
+    }
+    data = params.to_query
+    resp = http.post(uri.path, data, headers)
+
+    # uri = URI.parse(url)
+    # request = Net::HTTP::Post.new(uri.path)
+    # # request['Content-Length'] = "#{payload.size}"
+    # # request['User-Agent'] = "Active Merchant -- http://home.leetsoft.com/am"
+    # # request['Content-Type'] = "application/x-www-form-urlencoded"
+    # request.form_data = params
+    # http = Net::HTTP.new(uri.host, uri.port)
+    # http.verify_mode  = OpenSSL::SSL::VERIFY_NONE
+    # http.use_ssl      = true
+    # http.request(request)
   end
 end
