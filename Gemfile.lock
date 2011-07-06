@@ -14,14 +14,11 @@ GIT
       sass (>= 3.1.0)
 
 GIT
-  remote: git://github.com/guilleiguaran/active_merchant.git
-  revision: fe8ac482cddc6fd522f75b4b3987e813e349cf7a
-  branch: epaymentplan
+  remote: git://github.com/guilleiguaran/rack-www-enforcer.git
+  revision: d757c08d624cf3d33bbb6af67c4f0fbd9d028a2d
   specs:
-    activemerchant (1.15.0)
-      activesupport (>= 2.3.8)
-      braintree (>= 2.0.0)
-      builder (>= 2.0.0)
+    rack-www-enforcer (0.0.1)
+      rack
 
 GEM
   remote: http://rubygems.org/
@@ -42,6 +39,10 @@ GEM
       rack-test (~> 0.6.0)
       sprockets (~> 2.0.0.beta.10)
       tzinfo (~> 0.3.27)
+    activemerchant (1.15.0)
+      activesupport (>= 2.3.8)
+      braintree (>= 2.0.0)
+      builder (>= 2.0.0)
     activemodel (3.1.0.rc4)
       activesupport (= 3.1.0.rc4)
       bcrypt-ruby (~> 2.1.4)
@@ -222,7 +223,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
-  activemerchant!
+  activemerchant
   autotest
   coffee-script
   devise (>= 1.3.0)
@@ -232,6 +233,7 @@ DEPENDENCIES
   jquery-rails
   meta_search (>= 1.1.0.pre)
   pg
+  rack-www-enforcer!
   rails (>= 3.1.0.rc4)
   resque
   resque-scheduler

@@ -6,10 +6,11 @@ gem 'sass-rails', '>= 3.1.0.rc.2'
 gem 'coffee-script'
 gem 'uglifier'
 gem 'jquery-rails'
+gem 'rack-www-enforcer', :git => "git://github.com/guilleiguaran/rack-www-enforcer.git"
 
 
 # Site base
-gem 'activemerchant', :git => 'git://github.com/guilleiguaran/active_merchant.git', :branch => 'epaymentplan'
+gem 'activemerchant'
 gem 'shopify_api'
 gem 'resque'
 gem 'resque-scheduler'

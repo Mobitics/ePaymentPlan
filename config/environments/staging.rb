@@ -24,7 +24,8 @@ Epaymentplans::Application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  config.middleware.insert_before ActionDispatch::Static, Rack::SSL, :host => "www.epaymentplans.com"
+  config.middleware.insert_before ActionDispatch::Static, Rack::WwwEnforcer
+  config.middleware.insert_before ActionDispatch::Static, Rack::SSL
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
