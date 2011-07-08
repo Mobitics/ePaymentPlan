@@ -9,8 +9,10 @@ class PaymentPlan < ActiveRecord::Base
   has_one :customer, :through => :payment_profile
   has_many :payments, :dependent => :destroy
 
+  after_create :notify_store
+
   def create
-    notify_store and return true if super and create_first_payment
+    return true if super and create_first_payment
     self.destroy if self.id
     false
   end
