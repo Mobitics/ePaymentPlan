@@ -60,7 +60,9 @@ class PaymentPlansController < ApplicationController
 
   def confirmation
     Rails.logger.info(params.inspect)
-    transaction = Transaction.find_by_id(params[:transaction_id])
+    Rails.logger.info("Transaction id: #{params[:transaction_id]}")
+    Rails.logger.info("Transaction id: #{params['transaction_id']}")
+    transaction = Transaction.find(params[:transaction_id])
     if transaction # Need to verify all parameters received to match same as sent in notify
       Rails.logger.info("Transaction was found. Rendering text: AUTHORISED")
       render :text => "AUTHORISED"
@@ -79,7 +81,7 @@ class PaymentPlansController < ApplicationController
     customer.first_name       = attributes.delete(:first_name)
     customer.last_name        = attributes.delete(:last_name)
     customer.company          = attributes.delete(:company)
-    customer.phone            = attributes.delete(:phone)
+    customer.phone            = attxributes.delete(:phone)
     customer.country          = attributes.delete(:country)
     customer.city             = attributes.delete(:city)
     customer.address1         = attributes.delete(:address1)
