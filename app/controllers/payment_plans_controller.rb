@@ -60,11 +60,13 @@ class PaymentPlansController < ApplicationController
 
   def confirmation
     Rails.logger.info(params.inspect)
-    transaction = Transaction.find_by_auth_code(params[:security_key])
-    if transaction
-     render :text => "AUTHORISED"
+    transaction = Transaction.find_by_id(params[:transaction_id])
+    if transaction # Need to verify all parameters received to match same as sent in notify
+      Rails.logger.info("Transaction was found. Rendering text: AUTHORISED")
+      render :text => "AUTHORISED"
     else
-     render :text => "DECLINED"
+      Rails.logger.info("Transaction was not found. Rendering text: DECLINED")
+      render :text => "DECLINED"
     end
   end
 

@@ -51,12 +51,6 @@ class PaymentProfile < ActiveRecord::Base
     }
     response = @gateway.get_customer_payment_profile(profile)
     if response.success?
-      Rails.logger.info "="*80
-      Rails.logger.info response.inspect
-      Rails.logger.info "="*80
-      Rails.logger.info params.inspect
-      Rails.logger.info "="*80
-
       cc_info = response.params['payment_profile']['payment']['credit_card']
       bill_info = response.params['payment_profile']['bill_to']
 
