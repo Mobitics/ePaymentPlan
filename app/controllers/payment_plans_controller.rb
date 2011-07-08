@@ -81,7 +81,7 @@ class PaymentPlansController < ApplicationController
     customer.first_name       = attributes.delete(:first_name)
     customer.last_name        = attributes.delete(:last_name)
     customer.company          = attributes.delete(:company)
-    customer.phone            = attxributes.delete(:phone)
+    customer.phone            = attributes.delete(:phone)
     customer.country          = attributes.delete(:country)
     customer.city             = attributes.delete(:city)
     customer.address1         = attributes.delete(:address1)
