@@ -9,7 +9,7 @@ class PaymentPlan < ActiveRecord::Base
   has_one :customer, :through => :payment_profile
   has_many :payments, :dependent => :destroy
 
-  after_create :notify_store
+  # after_create :notify_store
 
   def create
     return true if super and create_first_payment
@@ -44,19 +44,6 @@ class PaymentPlan < ActiveRecord::Base
     self.payments.count < self.payments_count
   end
 
-  private
-
-  def setup_next_payment
-    frequencies = {"monthly" => 1.month, "weekly" => 1.week, "daily" => 1.day, "hourly" => 1.hour}
-    Resque.enqueue_in(frequencies[self.frequency], Charge, self.id)
-  end
-
-  # Este metodo puede ser utilizado por make_payment con el fin de reutilizar codigo
-  # Se renombra y se le da la estructura para poder reutilizarlo
-  def create_first_payment
-    make_payment
-  end
-
   def notify_store
     #url = URI.parse(notify_url)
     #request = Net::HTTP::Post.new(url.path)
@@ -80,6 +67,19 @@ class PaymentPlan < ActiveRecord::Base
     params.merge!({:test => 'test'}) if Rails.env.staging?
     response = ssl_post(self.notify_url, params)
     Rails.logger.info "Termine ePaymentPlans: Order#notify_store"
+  end
+
+  private
+
+  def setup_next_payment
+    frequencies = {"monthly" => 1.month, "weekly" => 1.week, "daily" => 1.day, "hourly" => 1.hour}
+    Resque.enqueue_in(frequencies[self.frequency], Charge, self.id)
+  end
+
+  # Este metodo puede ser utilizado por make_payment con el fin de reutilizar codigo
+  # Se renombra y se le da la estructura para poder reutilizarlo
+  def create_first_payment
+    make_payment
   end
 
   def ssl_post(url, params)

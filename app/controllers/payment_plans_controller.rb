@@ -52,6 +52,7 @@ class PaymentPlansController < ApplicationController
     end
     @payment_plan.payment_profile_id = @payment_profile.id
     if @payment_plan.save
+      @payment_plan.notify_store
       redirect_to @payment_plan.return_url
     else
       render :action => "step2" and return
