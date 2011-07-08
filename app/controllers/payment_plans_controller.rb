@@ -62,6 +62,7 @@ class PaymentPlansController < ApplicationController
     Rails.logger.info(params.inspect)
     Rails.logger.info("Transaction id: #{params[:transaction_id]}")
     Rails.logger.info("Transaction id: #{params['transaction_id']}")
+    Rails.logger.info(Transaction.last.inspect)
     transaction = Transaction.find(params[:transaction_id])
     if transaction # Need to verify all parameters received to match same as sent in notify
       Rails.logger.info("Transaction was found. Rendering text: AUTHORISED")

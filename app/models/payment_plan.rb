@@ -77,7 +77,6 @@ class PaymentPlan < ActiveRecord::Base
     }
     params.merge!({:test => 'test'}) if Rails.env.staging?
     response = ssl_post(self.notify_url, params)
-    Rails.logger.info response.body
     Rails.logger.info "Termine ePaymentPlans: Order#notify_store"
   end
 
