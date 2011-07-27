@@ -5,7 +5,7 @@ class PaymentPlansController < ApplicationController
     @user = User.find_by_email(params[:order].delete(:account))
     # Error if a user with provided email is not found: STORE DOES NOT EXIST => @user.blank?
     @store = @user.store
-    @plans = @store.plans
+    @plans = @store.plans.order('is_readonly DESC')
     customer = @store.customers.find_or_create_by_email(params[:order][:email].downcase)
     @customer = build_customer(params[:order], customer)
     
@@ -45,7 +45,7 @@ class PaymentPlansController < ApplicationController
   def create
     @user = User.find_by_email(params[:user][:email])
     @store = @user.store
-    @plans = @store.plans
+    @plans = @store.plans.order('is_readonly DESC')
     customer = @store.customers.find_by_email(params[:customer][:email].downcase)
     @customer = build_customer(params[:customer], customer)
     @payment_plan = PaymentPlan.new(params[:payment_plan])

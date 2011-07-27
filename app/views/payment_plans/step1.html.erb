@@ -5,7 +5,7 @@
   <div id="overview" class="clearfix"> 
     <h2>You were redirected here from Shopify to pay:</h2> 
     <span id="cost"><%= number_to_currency(@payment_plan.amount) %> <img alt="Spinner_big" id="spinner" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" style="display:none" /></span> 
-    <br /><span id="tax_span" class="hint">.. including <%= number_to_currency(@payment_plan.tax) %> taxes.</span> 
+    <br /><span id="tax_span" class="hint">.. including <%= number_to_currency(@payment_plan.tax) %> taxes and <%= number_to_currency(@payment_plan.shipping) %> shipping.</span> 
     <br /> 
     <div style="clear:left"></div> 
   </div> <!-- /end overview --> 
@@ -40,11 +40,18 @@
       <div class="group clearfix"> 
         <p><strong>Select your Payment Plan:</strong></p>
         <% @plans.each do |plan| %>
-          <p>
+          <% if plan.is_readonly %>
+          <p style="padding:5px;background-color:lightgray;">
+            <%= form.radio_button :plan_id, plan.id %>
+            <%= form.label :plan_id, "One Payment of #{number_to_currency(plan.to_pay(@payment_plan.amount))}", :value => plan.id %>
+          </p>
+          <% else %>
+          <p style="padding:5px;">
             <%= form.radio_button :plan_id, plan.id %>
             <%= form.label :plan_id, plan.name, :value => plan.id %>
-            (Pay <%= number_to_currency(plan.to_pay(@payment_plan.amount)) -%> during <%= plan.payments_count.to_i -%> months)
+            (<%= plan.payments_count.to_i -%> <%= plan.frequency.capitalize -%> Payments of <%= number_to_currency(plan.to_pay(@payment_plan.amount)) -%>)
           </p>
+          <% end %>
         <% end %>
         <p>&nbsp;</p>
       </div>
@@ -213,7 +220,7 @@
         </div> 
         <p style="clear:both;height: 0"></p> 
       </div> 
-      <div id="marketing-box" class="group clearfix"> 
+      <div id="marketing-box" class="group clearfix" style="display:none;"> 
         <h3>Keep me updated</h3> 
         <p class="sst"> 
           <input type="checkbox" name="buyer_accepts_marketing" checked="checked" value="true" id="marketing" /> 
