@@ -40,6 +40,7 @@ class Store::PlansController < ApplicationController
   # GET /store/plans/1/edit
   def edit
     @plan = @store.plans.find(params[:id])
+    flash[:error] = "Cannot edit that plan." and redirect_to store_plans_path if @plan.is_readonly
     @plan_types = Plan::PLAN_TYPES.to_a.map(&:reverse)
     @products = [] #it need be changed when products be done
     @frequences = [["Monthly","monthly"],["Weekly","weekly"],["Daily","daily"],["Hourly","hourly"]]
@@ -68,6 +69,7 @@ class Store::PlansController < ApplicationController
   # PUT /store/plans/1.json
   def update
     @plan = @store.plans.find(params[:id])
+    flash[:error] = "Cannot edit that plan." and redirect_to store_plans_path if @plan.is_readonly
 
     respond_to do |format|
       if @plan.update_attributes(params[:plan])
@@ -87,6 +89,7 @@ class Store::PlansController < ApplicationController
   # DELETE /store/plans/1.json
   def destroy
     @plan = @store.plans.find(params[:id])
+    flash[:error] = "Cannot edit that plan." and redirect_to store_plans_path if @plan.is_readonly
     @plan.destroy
 
     respond_to do |format|

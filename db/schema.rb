@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110701073328) do
+ActiveRecord::Schema.define(:version => 20110727012651) do
 
   create_table "authorize_nets", :force => true do |t|
     t.string   "api_login_id"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20110701073328) do
     t.string   "name"
     t.integer  "store_id"
     t.string   "frequency",         :default => "monthly"
+    t.boolean  "is_readonly",       :default => false
   end
 
   create_table "roles", :force => true do |t|

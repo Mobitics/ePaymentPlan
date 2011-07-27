@@ -15,5 +15,5 @@
 </div>
 
 <div class="breadcrumb">
-  <%= link_to "Edit", edit_store_plan_path(@plan) %> | <%= link_to "Plans", store_plans_path %> | <%= link_to "Delete", store_plan_path(@plan), :method => :delete %>
+  <%= link_to "Edit", edit_store_plan_path(@plan) unless @plan.is_readonly %> | <%= link_to "Plans", store_plans_path %> | <%= link_to "Delete", store_plan_path(@plan), :method => :delete unless @plan.is_readonly %>
 </div>
