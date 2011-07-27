@@ -1,7 +1,106 @@
-<h1>Main Menu</h1>
-<ul class="menu">
-  <li><%= link_to "Plans", store_plans_path %></li>
-  <li><%= link_to "Payment Plans", store_payment_plans_path %></li>
-  <li><%= link_to "Customers", store_customers_path %></li>
-  <li><%= link_to "Settings", store_settings_path %></li>
-</ul>
+<div id="main">
+        <div id="title">
+			<h1>Customers</h1> 
+        </div>
+    <a class="start-hide" href="#">hide</a>
+ 	<div class="colmask threecol">
+	<div class="colmid">
+		<div class="colleft">
+			
+			<div class="col1">
+            <!-- Column 1 start -->
+            <div class="left" style="width:20%;"><img src="/assets/checkbox-1.png" width="40" height="40" alt="Payment Gateway" /></div>
+            <div class="right" style="width:80%;">Add ePaymentPlans as Payment Gateway in your eCommerce Shop</div>
+            <div class="bottom" style="width:93%;"><a class="start-button" href="#">Click here for instructions</a></div>
+            <!-- Column 1 end -->
+            </div>
+			<div class="col2">
+				<!-- Column 2 start -->
+				<div class="left" style="width:20%;"><img src="/assets/checkbox-0.png" width="40" height="40" alt="Payment Gateway" /></div>
+                <div class="right" style="width:80%;">Set up your Payment Gateway in ePaymentPlans</div>
+                <div class="bottom" style="width:93%;"><a class="start-button" href="payment-gtwy.html">Click here to set up Payment Gateway</a></div>
+				<!-- Column 2 end -->
+			</div>
+			<div class="col3">
+				<!-- Column 3 start -->
+				<div class="left" style="width:20%;"><img src="/assets/checkbox-0.png" width="40" height="40" alt="Payment Gateway" /></div>
+                <div class="right" style="width:80%;">Create payment plans</div>
+                <div class="bottom" style="width:93%;"><a class="start-button" href="new.html">Click here to set up Payment Plans</a></div>
+                <!-- Column 3 end -->
+			</div>
+		</div>
+	</div>    
+</div>
+
+<div id="start-stats">
+      <div class="container clearfix">
+        <div class="stats-box" style="margin-left:0px;">
+          <p class="stats-box-label">Total Revenue</p>
+          <p class="stats-box-value" id="stats-box_total_revenue">$0.00</p> 
+        </div>
+        <div class="stats-box">
+          <p class="stats-box-label">Revenue Today</p>
+          <p class="stats-box-value" id="stats-box_todays_revenue">$0.00</p>
+        </div>
+        <div class="stats-box">
+          <p class="stats-box-label">Declined</p>
+          <p class="stats-box-value" id="stats-box_subscriber_count">0</p>
+        </div>
+         <div class="stats-box">
+          <p class="stats-box-label">Expired Cards</p>
+          <p class="stats-box-value" id="stats-box_expired_card_count">0</p>
+        </div>
+      </div>
+    </div>
+<div style="clear:both;"></div>
+<div class="table_wrapper"> 
+  <table> 
+    <tr> 
+      <th>Order No.</th> 
+      <th>Total</th> 
+      <th>Shipping</th> 
+      <th>Tax</th> 
+      <th>Payments</th> 
+      <th>Frequency</th> 
+      <th>Status</th> 
+    </tr> 
+      <tr class="odd"> 
+        <td><a href="#">2015</a></td> 
+        <td>58.00</td> 
+        <td>0.00</td> 
+        <td>0.00</td> 
+        <td>3</td> 
+        <td>Daily</td> 
+        <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td> 
+      </tr> 
+      <tr class="even"> 
+        <td><a href="#">2016</a></td> 
+        <td>77.00</td> 
+        <td>0.00</td> 
+        <td>0.00</td> 
+        <td>3</td> 
+        <td>Daily</td> 
+        <td class="traffic"><img src="/assets/traffic-light-green.png" alt="" width="90" height="30" /></td> 
+      </tr> 
+      <tr class="odd"> 
+        <td><a href="#">2017</a></td> 
+        <td>96.00</td> 
+        <td>0.00</td> 
+        <td>0.00</td> 
+        <td>3</td> 
+        <td>Hourly</td> 
+        <td class="traffic"><img src="/assets/traffic-light-yellow.png" alt="" width="90" height="30" /></td> 
+      </tr> 
+      <tr class="even"> 
+        <td><a href="#">2018</a></td> 
+        <td>115.00</td> 
+        <td>0.00</td> 
+        <td>0.00</td> 
+        <td>4</td> 
+        <td>Hourly</td> 
+        <td class="traffic"><img src="/assets/traffic-light-red.png" alt="" width="90" height="30" /></td> 
+      </tr> 
+  </table> 
+</div>
+</div>
+</div>

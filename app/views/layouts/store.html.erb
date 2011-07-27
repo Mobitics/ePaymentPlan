@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ePaymentPlans :: Give every customer a chance to buy</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <%= stylesheet_link_tag    "store_store" %>
+  <%= yield :stylesheet %>
+  <%= javascript_include_tag "application","store_scripts" %>
+  <%= yield :javascript %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="wrap">
+<div id="header">
+	<div class="container">
+		<div id="logo"><a href="/"><img src="/assets/logo-bot.png" border="0" /></a></div>
+        <ul id="top-menu">
+        	<li>Welcome <%= current_user.name %>!</li>
+            <li><a href="#">My Account</a></li>
+            <li><a href="<%= destroy_user_session_path %>">Sign Out</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+    </div>
+</div>
+<div id="content" style="width:100%;%">
+	<div class="container">
+		<ul id="nav">
+    		    		<li><a href="/store">Dashboard</a></li>
+        	<li><a href="<%=store_plans_path%>">Payment Plans</a></li>
+        	<li><a href="<%=store_payment_plans_path%>">Transactions</a></li>
+        	<li><a href="<%=store_customers_path%>">Customers</a></li>
+        	<li><a href="<%=store_settings_path%>">Settings</a></li>
+    	</ul>
+    	<% flash.each do |key, text| -%>
+      <p class="<%= key %>"><%= text %></p>
+      <% end -%>
+      <%= yield %>
+      <% flash.discard %>
+    	</div>
+</div>
+<div id="footer">
+	<div class="container">
+	    <div id="links"><a href="#">Home</a><a href="#">About Us</a><a href="#">Contact Us</a></div>
+        <div id="tmark"><a href="#"><img src="/assets/logo-bot.png" /></a></div>
+    </div>
+</div>	
+ 
+</body>
+</html>
