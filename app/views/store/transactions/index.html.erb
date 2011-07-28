@@ -1,34 +1,60 @@
-<h1>Listing Transactions</h1>
+<div id="main">
+	<div id="plan">
+			
+			<table class="customer">
+			<tr><th>Payment Plan</th><td><%= @payment_plan.description %></td><th>Plan</th><td></td></tr>
+<tr><th>Total Amount</th><td><%= '%.2f' % @payment_plan.amount %></td> <th>Date</th><td><%= @payment.created_at %></td></tr>
+ <tr><th>Payments</th><td><%= @payment_plan.payments_count %></td><th>Amount</th><td><%= '%.2f' % @payment.payment %></td></tr>
+ <tr><th>Frequency</th><td><%= @payment_plan.frequency.capitalize %></td><th>Status</th><td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td></tr>
+			</table>
+		</div>
+        <div id="title">
+    		<h1>Transactions</h1> 
+            <div id="add-new">
+           	View:
+           	  <label for="transaction-sort"></label>
+           	  <select name="transaction-sort" id="transaction-sort">
+           	    <option value="this-week">This Week</option>
+           	    <option value="last-week">Last Week</option>
+           	    <option value="this-month">This Month</option>
+           	    <option value="last-month">Last Month</option>
+           	    <option value="YTD">This Year to Date</option>
+       	      </select> 
+           	  or Sort From 
+           	  <label for="date-1"></label>
+           	  <input type="text" size="10" name="date-1" id="date-1" value="05/01/2011"/>
+              to
+              <input type="text" size="10" name="date-2" id="date-2" value="05/31/2011"/>
+              Show only 
+                <label for="show-only"></label>
+                <select name="show-only" id="show-only">
+                  <option value="status">Status</option>
+                  <option value="plan">Plan</option>
+                  <option value="owed">Owed</option>
+                </select>
+              of 
+              <label for="show-only-value"></label>
+              <select name="show-only-value" id="show-only-value">
+                <option value="green">Green</option>
+                <option value="yellow">Yellow</option>
+                <option value="red">Red</option>
+              </select>
 
-<div style="float:left;">
-  <h3>Payment Plan</h3>
-  <dl>
-    <dt>Total Amount</dt><dd><%= '%.2f' % @payment_plan.amount %></dd><br/>
-    <dt>Payments</dt><dd><%= @payment_plan.payments_count %></dd><br/>
-    <dt>Frequency</dt><dd><%= @payment_plan.frequency.capitalize %></dd><br/>
-  </dl>
-</div>
-<div style="float:left;margin-left:120px;">
-  <h3>Payment</h3>
-  <dl>
-    <dt>Date</dt><dd><%= @payment.created_at %></dd><br/>
-    <dt>Amount</dt><dd><%= '%.2f' % @payment.payment %></dd><br/>
-    <dt>Status</dt><dd><%= @payment.status %></dd><br/>
-  </dl>
-</div>
-<br style="clear:both;"/>
-
-<div class="table_wrapper">
-  <table>
-    <tr>
+            </div>
+ 		</div>
+        
+<div class="table_wrapper"> 
+  <table> 
+    <tr> 
       <th>Date</th>
       <th>Confirmation Id</th>
       <th>Auth Code</th>
       <th>Error</th>
       <th>Error Code</th>
       <th>Error Message</th>
-    </tr>
-    <% @transactions.each do |transaction| %>
+      
+    </tr> 
+     <% @transactions.each do |transaction| %>
       <tr class="<%= cycle("odd", "even") %>">
         <td><%= transaction.created_at %></td>
         <td><%= transaction.confirmation_id %></td>
@@ -38,9 +64,8 @@
         <td><%= transaction.error_message %></td>
       </tr>
     <% end %>
-  </table>
-</div>
-
-<div class="breadcrumb">
-  <%= link_to 'Payments', store_payment_plan_payments_path(@payment_plan) %>
-</div>
+      </table> 
+</div> 
+<a class="return" href="<%= store_payment_plan_payments_path(@payment_plan)%>">« Return to Payment</a>
+    	</div>
+	</div>
