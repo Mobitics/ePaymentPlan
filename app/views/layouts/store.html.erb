@@ -26,10 +26,10 @@
 	<div class="container">
 		<ul id="nav">
     		    		<li><a href="/store">Dashboard</a></li>
-        	<li><a href="<%=store_plans_path%>">Payment Plans</a></li>
-        	<li><a href="<%=store_payment_plans_path%>">Transactions</a></li>
-        	<li><a href="<%=store_customers_path%>">Customers</a></li>
-        	<li><a href="<%=store_settings_path%>">Settings</a></li>
+    		    		<li><a href="<%=store_plans_path%>">Plans</a></li>
+    		    		<li><a href="<%=store_customers_path%>">Customers</a></li>        	
+        				<li><a href="<%=store_payment_plans_path%>">Payment Plans</a></li>
+        				<li><a href="<%=store_settings_path%>">Settings</a></li>
     	</ul>
     	<% flash.each do |key, text| -%>
       <p class="<%= key %>"><%= text %></p>
