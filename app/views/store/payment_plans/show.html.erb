@@ -1,18 +1,43 @@
-<div>
-  <dl>
-    <dt>Order Id</dt><dd><%= @payment_plan.order_id %></dd><br/>
-    <dt>Total Amount</dt><dd><%= '%.2f' % @payment_plan.amount %></dd><br/>
-    <dt>Shipping</dt><dd><%= '%.2f' % @payment_plan.shipping %></dd><br/>
-    <dt>Tax</dt><dd><%= '%.2f' % @payment_plan.tax %></dd><br/>
-    <dt>Payments</dt><dd><%= @payment_plan.payments_count %></dd><br/>
-    <dt>Frequency</dt><dd><%= @payment_plan.frequency.capitalize %></dd><br/>
-    <dt>Interest</dt><dd><%= '%.2f' % @payment_plan.interest %></dd><br/>
-    <dt>Late fee</dt><dd><%= '%.2f' % @payment_plan.late_fee %></dd><br/>
+<div id="main">
+        <div id="title">
+    		<h1><%=@payment_plan.description%></h1>
+            <div id="add-new">
+            <ul class="buttons"><li class="add"><a href="new.html" class="add">Edit Payment Plan</a></li></ul> 
+ 			</div>
+        </div>
+ 
+<div> 
+<table class="customer">
+  <tbody>
+    <tr>
+      <th>
+        Order Id
+      </th>
+      <td>
+        <%= @payment_plan.order_id %>
+      </td>
+    </tr>
+     <tr><th>Total Amount</th><td><%= '%.2f' % @payment_plan.amount %></td></tr>
+    <tr><th>Shipping</th><td><%= '%.2f' % @payment_plan.shipping %></td></tr>
+    <tr><th>Tax</th><td><%= '%.2f' % @payment_plan.tax %></td></tr>
+    <tr><th>Payments Made</th><td><%= @payment_plan.payments.count %> of <%= @payment_plan.payments_count %></td>
+    <tr><th>Paid to Date</th><td><%= "%.2f" % @payment_plan.payments.sum(:payment) %></td>
+    <tr><th>Owed</th><td><%= "%.2f" % (@payment_plan.amount - @payment_plan.payments.sum(:payment)) %></td>
+    <tr><th>Frequency</th><td><%= @payment_plan.frequency.capitalize %></td></tr>
+    <tr><th>Interest</th><td><%= '%.2f' % @payment_plan.interest %></td></tr>
+    <tr><th>Late fee</th><td><%= '%.2f' % @payment_plan.late_fee %></td></tr>
+    <tr>
     <% customer = @payment_plan.customer %>
-    <dt>Customer</dt><dd><%= link_to "#{customer.email}", store_customer_path(customer) %></dd>
-  </dl>
-</div>
+    <th>Customer</th><td><%= link_to "#{customer.email}", store_customer_path(customer) %></td>
+    </tr>
+        <tr>
+      <th>Status</th>
+      <td><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
+    </tr>
+  </tbody>
+</table> 
+</div> 
 
-<div class="breadcrumb">
-  <%= link_to "Payment Plans", store_payment_plans_path %>
-</div>
+<a class="return" href="<%= store_payment_plans_path%>">« Return to Customers List</a>
+    	</div>
+	</div>
