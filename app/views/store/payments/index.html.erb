@@ -1,33 +1,68 @@
-<h1>Listing Payments</h1>
+<div id="main">
+	<div id="plan">
+			
+			<table class="customer">
+			<tr><th>Payment Plan</th><td><%= @payment_plan.description %></td></tr>
+<tr><th>Total Amount</th><td><%= '%.2f' % @payment_plan.amount %></td></tr>
+ <tr><th>Payments</th><td><%= @payment_plan.payments_count %></td></tr>
+ <tr><th>Frequency</th><td><%= @payment_plan.frequency.capitalize %></td></tr>
+			</table>
+		</div>
+        <div id="title">
+    		<h1>Payments</h1> 
+            <div id="add-new">
+           	View:
+           	  <label for="transaction-sort"></label>
+           	  <select name="transaction-sort" id="transaction-sort">
+           	    <option value="this-week">This Week</option>
+           	    <option value="last-week">Last Week</option>
+           	    <option value="this-month">This Month</option>
+           	    <option value="last-month">Last Month</option>
+           	    <option value="YTD">This Year to Date</option>
+       	      </select> 
+           	  or Sort From 
+           	  <label for="date-1"></label>
+           	  <input type="text" size="10" name="date-1" id="date-1" value="05/01/2011"/>
+              to
+              <input type="text" size="10" name="date-2" id="date-2" value="05/31/2011"/>
+              Show only 
+                <label for="show-only"></label>
+                <select name="show-only" id="show-only">
+                  <option value="status">Status</option>
+                  <option value="plan">Plan</option>
+                  <option value="owed">Owed</option>
+                </select>
+              of 
+              <label for="show-only-value"></label>
+              <select name="show-only-value" id="show-only-value">
+                <option value="green">Green</option>
+                <option value="yellow">Yellow</option>
+                <option value="red">Red</option>
+              </select>
 
-<h3>Payment Plan</h3>
-<dl>
-  <dt>Total Amount</dt><dd><%= '%.2f' % @payment_plan.amount %></dd><br/>
-  <dt>Payments</dt><dd><%= @payment_plan.payments_count %></dd><br/>
-  <dt>Frequency</dt><dd><%= @payment_plan.frequency.capitalize %></dd><br/>
-</dl>
-
-<div class="table_wrapper">
-  <table>
-    <tr>
-      <th>Date</th>
-      <th>Payment amount</th>
+            </div>
+ 		</div>
+        
+<div class="table_wrapper"> 
+  <table> 
+    <tr> 
+      <th>Date</th> 
+      <th>Payment amount</th> 
       <th>Payment status</th>
-      <th></th>
-    </tr>
+      <th></th> 
+    </tr> 
     <% @payments.each do |payment| %>
       <tr class="<%= cycle("odd", "even") %>">
         <td><%= payment.created_at %></td>
         <td><%= "%.2f" % payment.payment %></td>
-        <td><%= payment.status %></td>
+       <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
         <td>
           <%= link_to 'Transactions', store_payment_plan_payment_transactions_path(@payment_plan, payment) %>
         </td>
       </tr>
     <% end %>
-  </table>
-</div>
-
-<div class="breadcrumb">
-  <%= link_to 'Payment Plans', store_payment_plans_path %>
-</div>
+      </table> 
+</div> 
+<a class="return" href="<%= store_payment_plans_path%>">« Return to Payments Plan List</a>
+    	</div>
+	</div>

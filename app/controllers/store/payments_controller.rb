@@ -1,5 +1,6 @@
 class Store::PaymentsController < ApplicationController
   before_filter :authorized_store
+	layout "store"
 
   def index
     @payment_plan = PaymentPlan.find(params[:payment_plan_id])
