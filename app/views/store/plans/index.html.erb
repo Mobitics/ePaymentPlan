@@ -1,18 +1,25 @@
-<h1>Listing Plans</h1>
-
-<div class="table_wrapper">
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Payments</th>
-      <th>Frequency</th>
-      <th>Interests</th>
-      <th>Late Fee</th>
-      <th>Includes Shipping</th>
-      <th>Includes Taxes</th>
-      <th></th>
-    </tr>
-    <% @plans.each do |plan| %>
+<div id="main">
+        <div id="title">
+    		<h1>Plans</h1>
+            <div id="add-new">
+            <ul class="buttons"><li class="add"><a href="<%= new_store_plan_path()%>" class="add">Create New Plan</a></li></ul> 
+ 			</div>
+        </div>
+ 
+<div class="table_wrapper"> 
+  <table> 
+    <tr> 
+      <th>Name</th> 
+      <th>Payments</th> 
+      <th>Frequency</th> 
+      <th>Interests</th> 
+      <th>Late Fee</th> 
+      <th>Includes Shipping</th> 
+      <th>Includes Taxes</th> 
+      <th></th> 
+    </tr> 
+       
+       <% @plans.each do |plan| %>
       <tr class="<%= cycle("odd", "even") %>">
         <td><%= plan.name %></td>
         <td><%= plan.payments_count %></td>
@@ -22,16 +29,13 @@
         <td><%= plan.includes_shipping %></td>
         <td><%= plan.includes_tax %></td>
         <td>
-          <%= link_to 'Show', store_plan_path(plan) %> |
+          <%= link_to 'View', store_plan_path(plan) %> |
           <%= link_to 'Edit', edit_store_plan_path(plan) unless plan.is_readonly %> |
-          <%= link_to 'Destroy', store_plan_path(plan), confirm: 'Are you sure?', method: :delete  unless plan.is_readonly %>
+          <%= link_to 'Delete', store_plan_path(plan), confirm: 'Are you sure?', method: :delete  unless plan.is_readonly %>
         </td>
       </tr>
     <% end %>
-  </table>
+    </table> 
 </div>
-
-<div class="breadcrumb">
-  <%= link_to 'New Plan', new_store_plan_path %> |
-  <%= link_to 'Home', store_root_path %>
+</div>
 </div>

@@ -1,6 +1,6 @@
 class Store::PlansController < ApplicationController
-  before_filter :authorized_store
-
+  	before_filter :authorized_store
+	layout "store"
   # GET /store/plans
   # GET /store/plans.json
   def index
