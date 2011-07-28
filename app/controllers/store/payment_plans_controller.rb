@@ -1,6 +1,6 @@
 class Store::PaymentPlansController < ApplicationController
   before_filter :authorized_store
-
+  layout "store"
   def index
     @payment_plans = @store.payment_plans
 

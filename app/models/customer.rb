@@ -13,6 +13,10 @@ class Customer < ActiveRecord::Base
   validates :email, :presence => true, :uniqueness => {:scope => :store_id}, :format => {:with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i} 
   validates_associated :store
 
+  def full_name
+  "#{first_name} #{last_name}"
+  end
+  
   def create
     if super and create_cim_profile
       return true
@@ -91,4 +95,7 @@ class Customer < ActiveRecord::Base
   def user_profile
     return {:merchant_customer_id => self.id, :email => self.email, :description => self.email}
   end
+  
+  
+
 end
