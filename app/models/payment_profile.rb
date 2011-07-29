@@ -55,12 +55,12 @@ class PaymentProfile < ActiveRecord::Base
       bill_info = response.params['payment_profile']['bill_to']
 
       matches =
-        bill_info['first_name'].eql?( params[:address][:first_name]) &&
-        bill_info['last_name'].eql?(  params[:address][:last_name]) &&
-        bill_info['address'].eql?(    params[:address][:address1]) &&
-        bill_info['city'].eql?(       params[:address][:city]) &&
-        bill_info['state'].eql?(      params[:address][:state]) &&
-        bill_info['zip'].eql?(        params[:address][:zip]) &&
+        bill_info['first_name'].downcase.eql?( params[:address][:first_name].downcase) &&
+        bill_info['last_name'].downcase.eql?(  params[:address][:last_name].downcase) &&
+        bill_info['address'].downcase.eql?(    params[:address][:address1].downcase) &&
+        bill_info['city'].downcase.eql?(       params[:address][:city].downcase) &&
+        bill_info['state'].downcase.eql?(      params[:address][:state].downcase) &&
+        bill_info['zip'].downcase.eql?(        params[:address][:zip].downcase) &&
         # bill_info['country'].eql?(params[:address][:country]) &&
         cc_info['card_number'].last(4).eql?(params[:credit_card][:number].to_s.last(4))
 
