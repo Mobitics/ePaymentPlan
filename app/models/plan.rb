@@ -24,7 +24,7 @@ class Plan < ActiveRecord::Base
 
   def to_pay(amount=0)
     payment = amount.to_f / self.payments_count.to_f
-    interests = payment / (1.0 - (self.interest.to_f / 100.to_f))
-    (payment + interests)
+    payment = payment / (1.0 - (self.interest.to_f / 100.to_f))
+    payment
   end
 end
