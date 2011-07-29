@@ -1,4 +1,21 @@
-<%= form_for([:store,@plan]) do |f| %>
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(document).ready(
+  function() {
+
+    $('div.form-help p').hide();
+          $('input').hover(
+        function() {
+            var matchingExplanationClass = $(this).attr('class');
+            $('p.'+matchingExplanationClass).toggle();
+        }
+    );
+  }
+  );
+
+  </script>
+<% end %>
+<%= form_for([:store,@plan],:html => {:class => "new-plan"}) do |f| %>
   <% if @plan.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@plan.errors.count, "error") %> prohibited this Plan from being saved:</h2>
@@ -11,51 +28,60 @@
   <% end %>
   
   <fieldset>
-    <%= f.label :name, "Name" %>
+    <%= f.label :name, "Plan Name" %>
     <%= f.text_field :name %>
   </fieldset>
   <fieldset>
     <%= f.label :payments_count, "Number of payments" %>
-    <%= f.text_field :payments_count %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :includes_shipping, "1st payment includes shipping" %>
-    <%= f.check_box :includes_shipping %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :includes_tax, "1st payment includes tax" %>
-    <%= f.check_box :includes_tax %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :interest, "Interest" %>
-    <%= f.text_field :interest %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :late_fee, "Late fee" %>
-    <%= f.text_field :late_fee %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :plan_type, "Plan type" %>
-    <%= f.select :plan_type, options_for_select(@plan_types, @plan.plan_type) %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :min_price, "Min price" %>
-    <%= f.text_field :min_price %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :max_price, "Max price" %>
-    <%= f.text_field :max_price %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :product_id, "Product" %>  
-    <%= f.select :product_id, options_for_select(@products) %>
+    <%= f.text_field :payments_count, :class=>"number-pmt" %>
   </fieldset>
   <fieldset>
     <%= f.label :frequency, "Payment frequency" %>  
     <%= f.select :frequency, options_for_select(@frequences, @plan.frequency) %>
   </fieldset>
 
+  <fieldset>
+    <%= f.label :includes_shipping, "First payment includes shipping" %>
+    <div class="first-pmt"> <%= f.check_box :includes_shipping  %></div>
+  </fieldset>
+  <fieldset>
+    <%= f.label :includes_tax, "First payment includes tax" %>
+    <%= f.check_box :includes_tax, :class=>"first-pmt" %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :interest, "Interest (%)" %>
+    <%= f.text_field :interest, :class=>"interest" %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :late_fee, "Late fee (%)" %>
+    <%= f.text_field :late_fee, :class=>"late-fee" %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :min_price, "Min price ($)" %>
+    <%= f.text_field :min_price, :class=>"min-max" %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :max_price, "Max price ($)" %>
+    <%= f.text_field :max_price, :class=>"min-max" %>
+  </fieldset>
+  
+  <fieldset>
+    <%= f.label :plan_type, "Plan type" %>
+    <%= f.select :plan_type, options_for_select(@plan_types, @plan.plan_type) %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :product_id, "Product" %>  
+    <%= f.select :product_id, options_for_select(@products) %>
+  </fieldset>
+  
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class=>'submit-button' %>
   </div>
 <% end %>
+<div class="form-help">
+    <p class="number-pmt">Over how many payments do you want to divide this plan. for example 3 monthly payments or 6 weekly payments. <br /><br />Only enter the number here, the frequency will be entered in the next box.</p>
+    <p class="interest">How much interest would you like to charge? this will be added to the total amount of the purchase, then divded by the number of payments. <br /><br />Please enter interest in percentage, so for 5% interest, enter 5.</p>
+    <p class="late-fee">If a customer is late on a payment, how much will you charge them for it?</p>
+    <p class="min-max">If you want to limit this plan to items within a specific price range enter it here.</p>
+</div>
+
