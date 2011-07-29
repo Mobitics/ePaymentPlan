@@ -19,7 +19,7 @@ class PaymentPlan < ActiveRecord::Base
 
   def amount_to_pay
     payment = self.amount.to_f / self.payments_count.to_f
-    interests = payment * (self.interest.to_f / 100.to_f)
+    interests = payment / (1.0 - (self.interest.to_f / 100.to_f))
     (payment + interests).finite? ? "%.2f" % (payment + interests) : nil
   end
 
