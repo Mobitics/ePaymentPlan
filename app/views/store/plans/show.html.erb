@@ -1,19 +1,33 @@
+<div id="main">
+        <div id="title">
+    		<h1><%=@plan.name%></h1>
+    		<%if(!@plan.is_readonly)%>
+            <div id="add-new">
+            <ul class="buttons"><li class="add"><a href="<%=edit_store_plan_path(@plan)%>" class="add">Edit Plan</a></li></ul>
+             </div>
+             <%end%>
+        </div>
+ 
 <div>
-  <dl>
-    <dt>Name</dt><dd><%= @plan.name %></dd><br/>
-    <dt>Payments</dt><dd><%= @plan.payments_count %></dd><br/>
-    <dt>Frequency</dt><dd><%= @plan.frequency.capitalize %></dd><br/>
-    <dt>Interest</dt><dd><%= @plan.interest %></dd><br/>
-    <dt>Late fee</dt><dd><%= @plan.late_fee %></dd><br/>
-    <dt>Includes shipping?</dt><dd><%= @plan.includes_shipping %></dd><br/>
-    <dt>Includes tax?</dt><dd><%= @plan.includes_tax %></dd><br/>
-    <dt>Plan type</dt><dd><%= @plan.type %></dd><br/>
-    <dt>Min price</dt><dd><%= @plan.min_price %></dd><br/>
-    <dt>Max price</dt><dd><%= @plan.max_price %></dd><br/>
-    <dt>Product</dt><dd><%= @plan.product_id %></dd>
-  </dl>
-</div>
+<table class="customer">
+  <tbody> 
 
-<div class="breadcrumb">
-  <%= link_to "Edit", edit_store_plan_path(@plan) unless @plan.is_readonly %> | <%= link_to "Plans", store_plans_path %> | <%= link_to "Delete", store_plan_path(@plan), :method => :delete unless @plan.is_readonly %>
+  
+  
+    <tr><th>Payments</th><td><%= @plan.payments_count %></td></tr>
+    <tr><th>Frequency</th><td><%= @plan.frequency.capitalize %></td></tr>
+    <tr><th>Interest</th><td><%= @plan.interest %></td></tr>
+    <tr><th>Late fee</th><td><%= @plan.late_fee %></td></tr>
+    <tr><th>Includes shipping?</th><td><%= @plan.includes_shipping %></td></tr>
+    <tr><th>Includes tax?</th><td><%= @plan.includes_tax %></td></tr>
+    <tr><th>Plan type</th><td><%= @plan.type %></td></tr>
+    <tr><th>Min price</th><td><%= @plan.min_price %></td></tr>
+    <tr><th>Max price</th><td><%= @plan.max_price %></td></tr>
+    <tr><th>Product</th><td><%= @plan.product_id %></td></tr>
+  
+</tbody>
+</table>
 </div>
+<a class="return" href="<%= store_plans_path%>">« Return to Plans List</a>
+    	</div>
+	</div>
