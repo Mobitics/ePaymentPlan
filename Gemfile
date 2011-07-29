@@ -17,7 +17,6 @@ gem 'resque-scheduler'
 gem "meta_search",  '>= 1.1.0.pre'
 gem 'devise', '>= 1.3.0'
 gem "meta_search", '>= 1.1.0.pre'
-gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git', :branch => 'rails-3-1'
 
 
 group :development, :test do
@@ -27,7 +26,6 @@ group :development, :test do
   gem 'rspec-rails', '2.6.1.beta1'
   gem 'autotest'
   gem 'factory_girl_rails'
-  gem 'factory_girl'
   gem 'fakeredis'
 end
 

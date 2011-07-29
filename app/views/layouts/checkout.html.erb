@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
 <head> 
   <title>Luxe Designer Handbags - Checkout</title> 
-  <%= stylesheet_link_tag    "application" %>
   <%= stylesheet_link_tag    "checkout" %>
   <%= yield :stylesheet %>
   <%= javascript_include_tag "application" %>
@@ -19,7 +18,7 @@
   <div id="container" class=""> 
     <div id="header"> 
       <div id="logo"><!-- css hook for logos --></div> 
-      <h1 id="tagline"><span class="title">Luxe Designer Handbags</span> <span class="subtitle">Create your order.</span></h1> 
+      <h1 id="tagline"><span class="title"><%= @store.name %></span> <span class="subtitle">Select your payment plan and checkout.</span></h1> 
     </div> 
 
     <% flash.each do |key, text| -%>
@@ -35,7 +34,7 @@
         <a href="/carts/665272/4a84eda009f9f537699ed0b70fd1f1d7/policies?policy_id=221982" onclick="window.open('/carts/665272/4a84eda009f9f537699ed0b70fd1f1d7/policies?policy_id=221982','popup','width=600, height=600, directories=no, location=no, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no'); return false;" style="margin:0 5px;" target="_blank">Privacy Policy</a> 
         <a href="/carts/665272/4a84eda009f9f537699ed0b70fd1f1d7/policies?policy_id=221992" onclick="window.open('/carts/665272/4a84eda009f9f537699ed0b70fd1f1d7/policies?policy_id=221992','popup','width=600, height=600, directories=no, location=no, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no'); return false;" style="margin:0 5px;" target="_blank">Terms of Service</a> 
       </div>
-      <p> All rights reserved. &copy; 2011 Luxe Designer Handbags.</p>
+      <p> All rights reserved. &copy; 2011 <%= @store.name %>.</p>
     </div>
   </div>
   <!-- This element is required to read the background color for highlight effects in custom checkout stylesheets --> 

@@ -1,7 +1,3 @@
-Factory.sequence :email do |n|
-  "email#{n}@example.com"
-end
-
 Factory.define :payment_profile do |pp|
   pp.add_attribute :credit_card, {
     :number => 4007000000027,
