@@ -1,22 +1,34 @@
-<h1>Listing Customers</h1>
+<div id="main">
+        <div id="title">
+    		<h1>Customers</h1>
+        </div>
 
 <div class="table_wrapper">
   <table>
-    <tr>
+     <tr>
+      <th>Name</th>
+      <th>Last Name</th>
       <th>Email</th>
+      <th>Order ID</th>
       <th>CIM ID</th>
       <th></th>
+      <th>Status</th>
     </tr>
     <% @customers.each do |customer| %>
       <tr class="<%= cycle("odd", "even") %>">
+      	<td><%= customer.first_name %></td>
+      	<td><%= customer.last_name %></td>
         <td><%= customer.email %></td>
+        <%
+        p=customer.payment_plans.last
+        %>
+        <td><%= link_to p.order_id,store_payment_plan_path(p) %></td>
         <td><%= customer.customer_cim_id %></td>
         <td><%= link_to 'Show', store_customer_path(customer) %></td>
+        <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
       </tr>
     <% end %>
   </table>
 </div>
-
-<div class="breadcrumb">
-  <%= link_to 'Home', store_root_path %>
+</div>
 </div>

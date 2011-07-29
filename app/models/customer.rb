@@ -4,11 +4,11 @@ class Customer < ActiveRecord::Base
   include ActiveMerchant::Utils
 
   attr_accessor :first_name, :last_name, :company, :phone, :country, :city, :address1, :address2, :state, :zip
-  attr_accessor :billing_address, :shipping_address
+  attr_accessor :billing_address, :shipping_address,:create_at
 
   belongs_to :store
   has_many :payment_profiles, :dependent => :destroy
-  has_many :payment_plans
+  has_many :payment_plans, :through => :payment_profiles
 
   validates :email, :presence => true, :uniqueness => {:scope => :store_id}, :format => {:with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i} 
   validates_associated :store
