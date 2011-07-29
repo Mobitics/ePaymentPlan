@@ -58,7 +58,7 @@
           <% @plans.each do |plan| %>
             <% if plan.is_readonly %>
             <p style="padding:5px;background-color:lightgray;">
-              <% if plan.id.eql?(@payment_plan.plan_id) %>
+              <% if @payment_plan.plan_id.nil? %>
               <%= form.radio_button :plan_id, plan.id, :checked => "checked" %>
               <% else %>
               <%= form.radio_button :plan_id, plan.id %>
