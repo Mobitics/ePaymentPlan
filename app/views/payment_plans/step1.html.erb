@@ -58,7 +58,11 @@
           <% @plans.each do |plan| %>
             <% if plan.is_readonly %>
             <p style="padding:5px;background-color:lightgray;">
+              <% if plan.id.eql?(@payment_plan.plan_id) %>
+              <%= form.radio_button :plan_id, plan.id, :checked => "checked" %>
+              <% else %>
               <%= form.radio_button :plan_id, plan.id %>
+              <% end %>
               <%= form.label :plan_id, "One Payment of #{number_to_currency(plan.to_pay(@payment_plan.amount))}", :value => plan.id %>
             </p>
             <% else %>
