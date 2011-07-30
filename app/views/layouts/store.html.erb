@@ -17,7 +17,7 @@
 		<div id="logo"><a href="/"><img src="/assets/logo-bot.png" border="0" /></a></div>
         <ul id="top-menu">
         	<li>Welcome <%= current_user.name %>!</li>
-            <li><a href="#">My Account</a></li>
+            <li><a href="<%= edit_user_path(current_user) %>">My Account</a></li>
             <li><a href="<%= destroy_user_session_path %>">Sign Out</a></li>
             <li><a href="#">Help</a></li>
         </ul>

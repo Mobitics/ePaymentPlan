@@ -36,7 +36,7 @@ Epaymentplans::Application.routes.draw do
     resources :settings, :only => [:index]
     resources :authorize_nets
   end
-  
+  resources :users, :only => [:edit, :show,:update]
   root :to => 'site#home'
 
   match "/test" => "site#test"

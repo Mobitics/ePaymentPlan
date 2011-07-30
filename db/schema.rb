@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110727012651) do
+ActiveRecord::Schema.define(:version => 20110730062829) do
 
   create_table "authorize_nets", :force => true do |t|
     t.string   "api_login_id"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20110727012651) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address_2"
   end
 
   add_index "stores", ["name"], :name => "index_stores_on_name", :unique => true

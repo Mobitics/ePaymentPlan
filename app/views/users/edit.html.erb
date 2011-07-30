@@ -1,7 +1,7 @@
-<h1>edit User</h1>
-
-<div>
-  <%= form_for @user do |f| %>
-    <%= render 'form', {:f => f, :user => @user} %>
+		<div id="title">
+            <h1>My Account</h1> 
+ 		</div>
+          <%= form_for @user,:html => {:class => "new-plan"} do |f| %>
+    <%= render 'form_account', {:f => f, :user => @user} %>
   <% end %>
-</div>
+  </div>

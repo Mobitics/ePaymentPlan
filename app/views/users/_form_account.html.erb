@@ -1,0 +1,56 @@
+<%= render 'shared/error_messages', :target => user %>
+<fieldset>
+  <%= f.label :first_name%>
+  <%= f.text_field :first_name %>
+</fieldset>
+<fieldset>
+  <%= f.label :last_name%>
+  <%= f.text_field :last_name %>
+</fieldset>
+<fieldset>
+  <%= f.label :email%>
+  <%= f.text_field :email %>
+</fieldset>
+<fieldset>
+	<label > 
+ <%=link_to "Change Password", edit_user_password_path()%>
+ </label>
+</fieldset>
+<div id="title">
+            <h1>My Store</h1> 
+ 		</div>
+ 		<hr />
+  <%= f.fields_for :store do |store_form| %>		
+<fieldset>
+  <%= store_form.label :name%>
+  <%= store_form.text_field :name %>
+</fieldset>
+<fieldset>
+  <%= store_form.label :address_1%>
+  <%= store_form.text_field :address %>
+</fieldset>
+<fieldset>
+  <%= store_form.label :address_2%>
+  <%= store_form.text_field :address_2 %>
+</fieldset>
+<fieldset>
+ <%= store_form.label :city, 'City' %>
+ <%= store_form.select :city, options_for_select(@cities,user.store.city) %>
+ </fieldset>
+ <fieldset>
+ <%= store_form.label :state, 'State' %>
+ <%= store_form.select :state, options_for_select(@states,user.store.state) %>
+ </fieldset>
+<fieldset>
+  <%= store_form.label :zip_code%>
+  <%= store_form.text_field :zip %>
+</fieldset>
+ <fieldset>
+ <%= store_form.label :country, 'Country' %>
+ <%= store_form.select :country, options_for_select(@countries,user.store.country) %>
+ </fieldset>
+<%end%>
+<div class="actions">
+	
+<%= f.submit "Submit", :class=>'submit-button'%>
+</div>
