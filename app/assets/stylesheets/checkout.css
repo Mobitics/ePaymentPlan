@@ -782,3 +782,45 @@ span.sign-in-message {font-size:13px; margin-left:4px;}
 .flash {color:#000; padding:5px 10px; margin:0 0 15px 0;}
 .flash.notice {background:#FFFBE5; border:1px solid #DFDBC5;}
 .flash.error {background: #ffefeb; border: 1px solid #f96;}
+
+/* Messages
+--------------------------------- */
+p.error,
+p.info,
+p.warning,
+p.success {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  background:url("../assets/messages_icons.gif") no-repeat scroll center bottom transparent;
+  clear:both;
+  font-size:12px;
+  margin:0 auto;
+  margin-bottom:20px;
+  margin-left:15px;
+  padding:10px 15px 10px 45px;
+}
+p.error {
+  background-color:#FFEEEB;
+  background-position:10px 11px;
+  border:1px solid #CC0000;
+  color:#B20000;
+}
+
+p.info {
+  background-position: 11px -59px;
+  background-color: #E5F5FA;
+  border: 1px solid #0066CC;
+  color: #0066CC;
+}
+p.warning {
+  background-position: 12px -129px;
+  background-color: #FFFFD9;
+  border: 1px solid #DE8401;
+  color: #E0882F;
+}
+p.success {
+  background-position: 11px -199px;
+  background-color: #EEF6E3;
+  border: 1px solid #649225;
+  color: #4B6D1B;
+}

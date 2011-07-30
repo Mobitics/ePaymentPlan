@@ -22,7 +22,7 @@
     </div> 
 
     <% flash.each do |key, text| -%>
-      <p class="<%= key %>"><%= text %></p>
+      <p class="<%= key -%>"><%= text -%></p>
     <% end -%>
 
     <%= yield %>
