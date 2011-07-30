@@ -1,6 +1,6 @@
 class Store::AuthorizeNetsController < ApplicationController
   before_filter :authorized_store
-
+  layout "store"
   def index
   end
 

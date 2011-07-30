@@ -1,4 +1,4 @@
-<%= form_for([:store,@authorize_net]) do |f| %>
+<%= form_for([:store,@authorize_net],:html => {:class => "new-plan"}) do |f| %>
   <% if @authorize_net.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@authorize_net.errors.count, "error") %> prohibited this Authorize.Net from being saved:</h2>
@@ -24,6 +24,6 @@
   </fieldset>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  :class=>'submit-button'%>
   </div>
 <% end %>
