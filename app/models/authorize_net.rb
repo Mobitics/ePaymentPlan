@@ -1,5 +1,6 @@
 class AuthorizeNet < ActiveRecord::Base
   belongs_to :store
+  
 
   validates_associated :store
   validates_presence_of :api_login_id

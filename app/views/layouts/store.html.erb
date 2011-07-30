@@ -35,7 +35,12 @@
     	<% flash.each do |key, text| -%>
       <p class="<%= key %>"><%= text %></p>
       <% end -%>
+      <div id="main">
+      <%if(controller.controller_name=="settings" or controller.controller_name=="authorize_nets")%>
+      <%= render :partial => "/store/settings/settings_menu"%>
+     <% end%>
       <%= yield %>
+      </div>
       <% flash.discard %>
     	</div>
 </div>

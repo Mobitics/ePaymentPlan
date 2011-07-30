@@ -465,7 +465,7 @@ ul.buttons li a.add {
 	width: 223px;
 	border-right: 1px #999 solid;
 	border-bottom: 1px #999 solid;
-	background: url(../img/left-nav_bg.png) repeat-y;
+	background: url(/assets/left-nav_bg.png) repeat-y;
 }
 
 .left-menu li {
