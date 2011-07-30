@@ -3,7 +3,7 @@ require 'active_merchant'
 class Customer < ActiveRecord::Base
   include ActiveMerchant::Utils
 
-  attr_accessor :first_name, :last_name, :company, :phone, :country, :city, :address1, :address2, :state, :zip
+  attr_accessor :company, :phone, :country, :city, :address1, :address2, :state, :zip
   attr_accessor :billing_address, :shipping_address,:create_at
 
   belongs_to :store
@@ -14,7 +14,7 @@ class Customer < ActiveRecord::Base
   validates_associated :store
 
   def full_name
-  "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}"
   end
   
   def create
