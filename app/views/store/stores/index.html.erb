@@ -16,9 +16,9 @@
             </div>
 			<div class="col2">
 				<!-- Column 2 start -->
-				<div class="left" style="width:20%;"><img src="/assets/checkbox-0.png" width="40" height="40" alt="Payment Gateway" /></div>
+				<div class="left" style="width:20%;"><img src="/assets/checkbox-<%= b_to_i @store.authorize_net!=nil%>.png" width="40" height="40" alt="Payment Gateway" /></div>
                 <div class="right" style="width:80%;">Set up your Payment Gateway in ePaymentPlans</div>
-                <div class="bottom" style="width:93%;"><a class="start-button" href="payment-gtwy.html">Click here to set up Payment Gateway</a></div>
+                <div class="bottom" style="width:93%;"><a class="start-button" href="<%=store_settings_path%>">Click here to set up Payment Gateway</a></div>
 				<!-- Column 2 end -->
 			</div>
 			<div class="col3">
