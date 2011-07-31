@@ -5,23 +5,21 @@
 <div class="table_wrapper">
   <table>
      <tr>
-      <th>Name</th>
+      <th>First Name</th>
       <th>Last Name</th>
       <th>Email</th>
       <th>Order ID</th>
       <th>CIM ID</th>
-      <th></th>
       <th>Status</th>
     </tr>
     <% @customers.each do |customer| %>
       <tr class="<%= cycle("odd", "even") %>">
       	<td><%= customer.first_name %></td>
       	<td><%= customer.last_name %></td>
-        <td><%= customer.email %></td>
+        <td><%= link_to customer.email, store_customer_path(customer) %></td>
         <% payment_plan = customer.payment_plans.last %>
         <td><%= (payment_plan ? link_to(payment_plan.order_id, store_payment_plan_path(payment_plan)) : "N/A") %></td>
         <td><%= customer.customer_cim_id %></td>
-        <td><%= link_to 'Show', store_customer_path(customer) %></td>
         <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
       </tr>
     <% end %>
