@@ -2,7 +2,7 @@
 	<div id="plan">
 			
 			<table class="customer">
-			<tr><th>Payment Plan</th><td><%= @payment_plan.description %></td><th>Plan</th><td></td></tr>
+			<tr><th>Order</th><td><%= @payment_plan.description %></td><th>Plan</th><td></td></tr>
 <tr><th>Total Amount</th><td><%= '%.2f' % @payment_plan.amount %></td> <th>Date</th><td><%= @payment.created_at %></td></tr>
  <tr><th>Payments</th><td><%= @payment_plan.payments_count %></td><th>Amount</th><td><%= '%.2f' % @payment.payment %></td></tr>
  <tr><th>Frequency</th><td><%= @payment_plan.frequency.capitalize %></td><th>Status</th><td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td></tr>

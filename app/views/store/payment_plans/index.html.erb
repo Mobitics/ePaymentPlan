@@ -43,23 +43,17 @@
       <th>Payments Made</th> 
       <th>Paid to Date</th> 
       <th>Owed</th> 
-      <th></th>
       <th>Status</th> 
     </tr> 
     <% @payment_plans.each do |payment_plan| %>
       <tr class="<%= cycle("odd", "even") %>">
-        <td><%= payment_plan.order_id %></td>
-        <td><%= payment_plan.customer.full_name %></td>
+        <td><%= link_to payment_plan.order_id, store_payment_plan_path(payment_plan) %></td>
+        <td><%= link_to payment_plan.customer.full_name, store_customer_path(payment_plan.customer) %></td>
         <td><%= payment_plan.description %></td>
         <td><%= "%.2f" % payment_plan.amount %></td>
-        <td><%= payment_plan.payments.count %> of <%= payment_plan.payments_count %></td>
+        <td><%= link_to "#{payment_plan.payments.count} of #{payment_plan.payments_count}", store_payment_plan_payments_path(payment_plan) %></td>
         <td><%= "%.2f" % payment_plan.payments.sum(:payment) %></td>
         <td><%= "%.2f" % (payment_plan.amount - payment_plan.payments.sum(:payment)) %></td>
-        <td>
-          <%= link_to 'Show', store_payment_plan_path(payment_plan) %> |
-          <%= link_to 'Payments', store_payment_plan_payments_path(payment_plan) %> |
-          <%= link_to 'Customer', store_customer_path(payment_plan.customer) %>
-        </td>
         <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
       </tr>
     <% end %>

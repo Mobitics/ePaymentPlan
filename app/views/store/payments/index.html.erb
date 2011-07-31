@@ -2,7 +2,7 @@
 	<div id="plan">
 			
 			<table class="customer">
-			<tr><th>Payment Plan</th><td><%= @payment_plan.description %></td></tr>
+			<tr><th>Order</th><td><%= @payment_plan.description %></td></tr>
 <tr><th>Total Amount</th><td><%= '%.2f' % @payment_plan.amount %></td></tr>
  <tr><th>Payments</th><td><%= @payment_plan.payments_count %></td></tr>
  <tr><th>Frequency</th><td><%= @payment_plan.frequency.capitalize %></td></tr>
