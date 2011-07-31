@@ -23,9 +23,9 @@
 			</div>
 			<div class="col3">
 				<!-- Column 3 start -->
-				<div class="left" style="width:20%;"><img src="/assets/checkbox-0.png" width="40" height="40" alt="Payment Gateway" /></div>
+				<div class="left" style="width:20%;"><img src="/assets/checkbox-<%= b_to_i @store.plans.count>0%>.png" width="40" height="40" alt="Payment Gateway" /></div>
                 <div class="right" style="width:80%;">Create payment plans</div>
-                <div class="bottom" style="width:93%;"><a class="start-button" href="new.html">Click here to set up Payment Plans</a></div>
+                <div class="bottom" style="width:93%;"><a class="start-button" href="<%=new_store_plan_path()%>">Click here to set up Payment Plans</a></div>
                 <!-- Column 3 end -->
 			</div>
 		</div>

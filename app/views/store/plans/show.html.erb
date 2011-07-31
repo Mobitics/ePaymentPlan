@@ -3,7 +3,7 @@
     		<h1><%=@plan.name%></h1>
     		<%if(!@plan.is_readonly)%>
             <div id="add-new">
-            <ul class="buttons"><li class="add"><a href="<%=edit_store_plan_path(@plan)%>" class="add">Edit Plan</a></li></ul>
+            <ul class="buttons"><li class="add"><a href="<%=edit_store_plan_path(@plan)%>" class="add">Edit Payment Plan</a></li></ul>
              </div>
              <%end%>
         </div>
@@ -28,6 +28,6 @@
 </tbody>
 </table>
 </div>
-<a class="return" href="<%= store_plans_path%>">« Return to Plans List</a>
+<a class="return" href="<%= store_plans_path%>">« Return to Payment Plans List</a>
     	</div>
 
