@@ -23,6 +23,8 @@ Epaymentplans::Application.routes.draw do
   #   end
   # end
   
+  
+  
   namespace :store do
     root :to => "stores#index"
     # resources :orders
@@ -35,6 +37,11 @@ Epaymentplans::Application.routes.draw do
     resources :customers, :only => [:index, :show]
     resources :settings, :only => [:index]
     resources :authorize_nets
+    resources :stores do
+	member do
+    	get 'ecommerce_instructions','complete_ecommerce_instructions'
+  	end
+	end
   end
   resources :users, :only => [:edit, :show,:update]
   root :to => 'site#home'

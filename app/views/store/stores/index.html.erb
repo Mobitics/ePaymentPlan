@@ -9,9 +9,9 @@
 			
 			<div class="col1">
             <!-- Column 1 start -->
-            <div class="left" style="width:20%;"><img src="/assets/checkbox-1.png" width="40" height="40" alt="Payment Gateway" /></div>
+            <div class="left" style="width:20%;"><img src="/assets/checkbox-<%= b_to_i @store.first_step%>.png" width="40" height="40" alt="Payment Gateway" /></div>
             <div class="right" style="width:80%;">Add ePaymentPlans as Payment Gateway in your eCommerce Shop</div>
-            <div class="bottom" style="width:93%;"><a class="start-button" href="#">Click here for instructions</a></div>
+            <div class="bottom" style="width:93%;"><a class="start-button" href="<%=ecommerce_instructions_store_store_path(@store)%>">Click here for instructions</a></div>
             <!-- Column 1 end -->
             </div>
 			<div class="col2">
