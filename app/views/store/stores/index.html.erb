@@ -64,43 +64,19 @@
       <th>Frequency</th> 
       <th>Status</th> 
     </tr> 
-      <tr class="odd"> 
-        <td><a href="#">2015</a></td> 
-        <td>58.00</td> 
-        <td>0.00</td> 
-        <td>0.00</td> 
-        <td>3</td> 
-        <td>Daily</td> 
-        <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td> 
-      </tr> 
-      <tr class="even"> 
-        <td><a href="#">2016</a></td> 
-        <td>77.00</td> 
-        <td>0.00</td> 
-        <td>0.00</td> 
-        <td>3</td> 
-        <td>Daily</td> 
-        <td class="traffic"><img src="/assets/traffic-light-green.png" alt="" width="90" height="30" /></td> 
-      </tr> 
-      <tr class="odd"> 
-        <td><a href="#">2017</a></td> 
-        <td>96.00</td> 
-        <td>0.00</td> 
-        <td>0.00</td> 
-        <td>3</td> 
-        <td>Hourly</td> 
-        <td class="traffic"><img src="/assets/traffic-light-yellow.png" alt="" width="90" height="30" /></td> 
-      </tr> 
-      <tr class="even"> 
-        <td><a href="#">2018</a></td> 
-        <td>115.00</td> 
-        <td>0.00</td> 
-        <td>0.00</td> 
-        <td>4</td> 
-        <td>Hourly</td> 
-        <td class="traffic"><img src="/assets/traffic-light-red.png" alt="" width="90" height="30" /></td> 
-      </tr> 
-  </table> 
+    <% @payment_plans.each do |payment_plan| %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <td><%= link_to payment_plan.order_id, store_payment_plan_path(payment_plan) %></td>
+        <td><%= "%.2f" % payment_plan.amount %></td>
+        <td><%= "%.2f" % payment_plan.shipping %></td>
+        <td><%= payment_plan.tax %></td>
+    	<td><%= payment_plan.payments.count %></td>
+        <td><%= payment_plan.frequency.capitalize %></td>
+        <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
+      </tr>
+    <% end %>
+    </table>
+      
 </div>
 </div>
 
