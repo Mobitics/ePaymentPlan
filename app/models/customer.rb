@@ -17,6 +17,12 @@ class Customer < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   
+  def status_color
+  	if(payment_plans.count>0)
+  		return payment_plans.last.status_color	
+  	end
+  end
+  
   def create
     if super and create_cim_profile
       return true

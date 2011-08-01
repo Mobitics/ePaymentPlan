@@ -20,7 +20,7 @@
         <% payment_plan = customer.payment_plans.last %>
         <td><%= (payment_plan ? link_to(payment_plan.order_id, store_payment_plan_path(payment_plan)) : "N/A") %></td>
         <td><%= customer.customer_cim_id %></td>
-        <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
+        <td class="traffic"><img src="/assets/traffic-light-<%=customer.status_color%>.png" width="90" height="30" /></td>
       </tr>
     <% end %>
   </table>

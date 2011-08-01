@@ -68,6 +68,15 @@ class PaymentPlan < ActiveRecord::Base
     response = ssl_post(self.notify_url, params)
     Rails.logger.info "Termine ePaymentPlans: Order#notify_store"
   end
+  
+  def status_color
+  	if payments.count>0
+  		return "green" if(payments.last.status==Payment::AUTHORISED)
+  		return "yellow" if(payments.last.status==Payment::DECLINED and payment_plans.last.payments.last.transactions.count<=3)
+  	    return "red" if(payments.last.status==Payment::DECLINED)
+  	end
+  	return ""    
+  end
 
   private
 
