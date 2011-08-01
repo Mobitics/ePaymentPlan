@@ -23,7 +23,11 @@ class Plan < ActiveRecord::Base
   end
 
   def to_pay(amount=0)
-    payment = amount.to_f / self.payments_count.to_f
+  	payment = amount.to_f / self.payments_count.to_f
+  	if first_payment_rate!=0
+  		payment = (amount.to_f*first_payment_rate.to_f / 100.to_f)/ (self.payments_count.to_f-1)
+ 		#como mirar si no es el primer pago  	
+  	end
     payment = payment / (1.0 - (self.interest.to_f / 100.to_f))
     payment
   end

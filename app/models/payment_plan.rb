@@ -1,7 +1,7 @@
 class PaymentPlan < ActiveRecord::Base
   attr_accessor :plan_id
 
-  attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account
+  attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account,:first_payment_rate
 
   belongs_to :store
   belongs_to :payment_profile
@@ -19,6 +19,13 @@ class PaymentPlan < ActiveRecord::Base
 
   def amount_to_pay
     payment = self.amount.to_f / self.payments_count.to_f
+    if first_payment_rate!=0
+  		payment = (amount.to_f- (amount.to_f*first_payment_rate.to_f / 100.to_f))/ (self.payments_count.to_f-1)
+ 		if payments.count==0
+ 			payment = amount.to_f* (first_payment_rate.to_f / 100.to_f)
+ 		end 	
+  	end
+    
     payment = payment / (1.0 - (self.interest.to_f / 100.to_f))
     payment.finite? ? "%.2f" % payment : nil
   end
@@ -75,7 +82,6 @@ class PaymentPlan < ActiveRecord::Base
   		return "yellow" if(payments.last.status==Payment::DECLINED and payment_plans.last.payments.last.transactions.count<=3)
   	    return "red" if(payments.last.status==Payment::DECLINED)
   	end
-  	return ""    
   end
 
   private

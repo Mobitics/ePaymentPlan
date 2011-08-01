@@ -36,6 +36,10 @@
     <%= f.text_field :payments_count, :class=>"number-pmt" %>
   </fieldset>
   <fieldset>
+    <%= f.label :first_payment_rate, "First Payment Rate" %>
+    <%= f.text_field :first_payment_rate, :class=>"first-rate" %>
+  </fieldset>
+  <fieldset>
     <%= f.label :frequency, "Payment frequency" %>  
     <%= f.select :frequency, options_for_select(@frequences, @plan.frequency) %>
   </fieldset>
@@ -80,6 +84,7 @@
 <% end %>
 <div class="form-help">
     <p class="number-pmt">Over how many payments do you want to divide this plan. for example 3 monthly payments or 6 weekly payments. <br /><br />Only enter the number here, the frequency will be entered in the next box.</p>
+    <p class="first-rate">If you want to give more rate to first payment change this value.</p>
     <p class="interest">How much interest would you like to charge? this will be added to the total amount of the purchase, then divded by the number of payments. <br /><br />Please enter interest in percentage, so for 5% interest, enter 5.</p>
     <p class="late-fee">If a customer is late on a payment, how much will you charge them for it?</p>
     <p class="min-max">If you want to limit this plan to items within a specific price range enter it here.</p>

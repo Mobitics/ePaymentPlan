@@ -15,6 +15,7 @@
   
   
     <tr><th>Payments</th><td><%= @plan.payments_count %></td></tr>
+    <tr><th>First Payment Rate</th><td><%= (@plan.first_payment_rate==0? "Calculated":"#{@plan.first_payment_rate}") %></td></tr>
     <tr><th>Frequency</th><td><%= @plan.frequency.capitalize %></td></tr>
     <tr><th>Interest</th><td><%= @plan.interest %></td></tr>
     <tr><th>Late fee</th><td><%= @plan.late_fee %></td></tr>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110731171006) do
+ActiveRecord::Schema.define(:version => 20110801031122) do
 
   create_table "authorize_nets", :force => true do |t|
     t.string   "api_login_id"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20110731171006) do
     t.integer  "store_id"
     t.string   "frequency",          :default => "monthly"
     t.string   "description"
+    t.float    "first_payment_rate", :default => 0.0
   end
 
   create_table "payment_profiles", :force => true do |t|
@@ -105,8 +106,9 @@ ActiveRecord::Schema.define(:version => 20110731171006) do
     t.integer  "product_id"
     t.string   "name"
     t.integer  "store_id"
-    t.string   "frequency",         :default => "monthly"
-    t.boolean  "is_readonly",       :default => false
+    t.string   "frequency",          :default => "monthly"
+    t.boolean  "is_readonly",        :default => false
+    t.float    "first_payment_rate", :default => 0.0
   end
 
   create_table "roles", :force => true do |t|

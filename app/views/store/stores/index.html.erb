@@ -72,7 +72,7 @@
         <td><%= payment_plan.tax %></td>
     	<td><%= payment_plan.payments.count %></td>
         <td><%= payment_plan.frequency.capitalize %></td>
-        <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
+        <td class="traffic"><img src="/assets/traffic-light-<%=payment_plan.status_color%>.png" width="90" height="30" /></td>
       </tr>
     <% end %>
     </table>
