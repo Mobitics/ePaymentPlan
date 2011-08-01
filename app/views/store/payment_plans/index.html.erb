@@ -3,7 +3,7 @@
             <div id="add-new">
            	View:
            	  <label for="transaction-sort"></label>
-           	  <select name="transaction-sort" id="transaction-sort">
+           	  <select name="transaction-sort" id="transaction-sort" onchange="showByPeriod()">
            	    <option value="this-week">This Week</option>
            	    <option value="last-week">Last Week</option>
            	    <option value="this-month">This Month</option>
@@ -12,9 +12,9 @@
        	      </select> 
            	  or Sort From 
            	  <label for="date-1"></label>
-           	  <input type="text" size="10" name="date-1" id="date-1" value="05/01/2011"/>
+           	  <input type="text" size="10" name="date-1" id="date-1" value="05/01/2011" onchange="showByDate()"/>
               to
-              <input type="text" size="10" name="date-2" id="date-2" value="05/31/2011"/>
+              <input type="text" size="10" name="date-2" id="date-2" value="05/31/2011" onchange="showByDate()"/>
               Show only 
                 <label for="show-only"></label>
                 <select name="show-only" id="show-only">
@@ -33,31 +33,40 @@
             </div>
  		</div>
         
-<div class="table_wrapper"> 
-  <table> 
-    <tr> 
-      <th>Order Id</th> 
-      <th>Customer</th> 
-      <th>Plan</th>
-      <th>Total Amount</th> 
-      <th>Payments Made</th> 
-      <th>Paid to Date</th> 
-      <th>Owed</th> 
-      <th>Status</th> 
-    </tr> 
-    <% @payment_plans.each do |payment_plan| %>
-      <tr class="<%= cycle("odd", "even") %>">
-        <td><%= link_to payment_plan.order_id, store_payment_plan_path(payment_plan) %></td>
-        <td><%= link_to payment_plan.customer.full_name, store_customer_path(payment_plan.customer) %></td>
-        <td><%= payment_plan.description %></td>
-        <td><%= "%.2f" % payment_plan.amount %></td>
-        <td><%= link_to "#{payment_plan.payments.count} of #{payment_plan.payments_count}", store_payment_plan_payments_path(payment_plan) %></td>
-        <td><%= "%.2f" % payment_plan.payments.sum(:payment) %></td>
-        <td><%= "%.2f" % (payment_plan.amount - payment_plan.payments.sum(:payment)) %></td>
-        <td class="traffic"><img src="/assets/traffic-light-<%=payment_plan.status_color%>.png" width="90" height="30" /></td>
-      </tr>
-    <% end %>
-      </table> 
+<div class="table_wrapper" id="table_wrapper"> 
+  <%= render "table"%> 
 </div> 
     	</div>
+    	
 
+<% content_for :javascript do %>
+<script type="text/javascript">
+	function showByPeriod(){
+		var period=($("#transaction-sort option:selected").val());
+		var params="?period="+period;
+		loadOrders(params);
+	}
+	function showByDate(){
+		var init_date=($("#date-1").val());
+		var end_date=($("#date-2").val());
+		var params="?init_date="+init_date+"&end_date="+end_date;
+		loadOrders(params);
+	}
+	function loadOrders(params){
+		var link="<%=store_payment_plans_path()%>"+params;
+		$.ajax({
+        type: 'GET',
+        url: link,
+        success: function(response) {
+      // 	alert(response);
+          $('#table_wrapper').html(response);
+         
+        },
+        error: function(XMLHttpRequest, textStatus) {
+          alert('Sorry unexpected Issue.');
+         
+        }
+      });
+	}
+</script>	
+<%end%>
