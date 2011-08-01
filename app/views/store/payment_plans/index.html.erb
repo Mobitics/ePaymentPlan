@@ -54,7 +54,7 @@
         <td><%= link_to "#{payment_plan.payments.count} of #{payment_plan.payments_count}", store_payment_plan_payments_path(payment_plan) %></td>
         <td><%= "%.2f" % payment_plan.payments.sum(:payment) %></td>
         <td><%= "%.2f" % (payment_plan.amount - payment_plan.payments.sum(:payment)) %></td>
-        <td class="traffic"><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
+        <td class="traffic"><img src="/assets/traffic-light-<%=payment_plan.status_color%>.png" width="90" height="30" /></td>
       </tr>
     <% end %>
       </table> 
