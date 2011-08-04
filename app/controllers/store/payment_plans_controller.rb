@@ -28,13 +28,26 @@ class Store::PaymentPlansController < ApplicationController
     	  end	
     	else	
     		@payment_plans = @store.payment_plans
-    	end	
+    	end
     	time_range=init_date .. end_date
-    	@payment_plans = @store.payment_plans.where(:created_at => time_range)	
-       	render :layout => false, :partial => 'table'
+    	if(params[:start_owed]!=nil)
+    		start_owed=params[:start_owed]
+    	    end_owed=params[:end_owed]
+    	    owed_range=start_owed .. end_owed
+    	    #953055577
+    		#@payment_plans = @store.payment_plans.join(:payments)
+    		@payment_plans = @store.payment_plans.where(:created_at => time_range)
+    		#@payment_plans = Store.join("payment_plans","payments")
+    	elsif(params[:plan]!=nil)
+    		@payment_plans = @store.payment_plans.where(:created_at => time_range,:plan_id=>params[:plan])
+    	else
+    		@payment_plans = @store.payment_plans.where(:created_at => time_range)
+    	end	
+    	render :layout => false, :partial => 'table'
        	return  
     else
-    	@payment_plans = @store.payment_plans
+    	@payment_plans = @store.payment_plans(:limit=>1)
+    	@plans= @store.plans.map { |plan| [plan.name, plan.id] } 
     	respond_to do |format|
     		format.html # index.html.erb
       		format.json { render json: @payment_plans }

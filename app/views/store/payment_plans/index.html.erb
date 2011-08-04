@@ -12,24 +12,31 @@
        	      </select> 
            	  or Sort From 
            	  <label for="date-1"></label>
-           	  <input type="text" size="10" name="date-1" id="date-1" value="05/01/2011" onchange="showByDate()"/>
+           	  <input type="text" size="10" name="date-1" id="date-1" value="<%=Time.now.beginning_of_month().strftime("%m/%d/%Y")%>" onchange="showByDate()"/>
               to
-              <input type="text" size="10" name="date-2" id="date-2" value="05/31/2011" onchange="showByDate()"/>
+              <input type="text" size="10" name="date-2" id="date-2" value="<%=Time.now.end_of_month().strftime("%m/%d/%Y")%>" onchange="showByDate()"/>
               Show only 
                 <label for="show-only"></label>
-                <select name="show-only" id="show-only">
-                  <option value="status">Status</option>
-                  <option value="plan">Plan</option>
-                  <option value="owed">Owed</option>
+                <select name="show-only" id="show-only" onchange="hideParams()">
+                  <option value="0">Status</option>
+                  <option value="1">Plan</option>
+                  <option value="2">Owed</option>
                 </select>
               of 
               <label for="show-only-value"></label>
-              <select name="show-only-value" id="show-only-value">
+             
+              <select name="show-only-value" id="show-only-value" style="display:" onchange="showByDate()">
                 <option value="green">Green</option>
                 <option value="yellow">Yellow</option>
                 <option value="red">Red</option>
               </select>
-
+             <select name="show-only-plan" id="show-only-plan" style="display:none" onchange="showByDate()">
+                <%=options_for_select(@plans)%>
+              </select>
+              <div id="section_owed" style="display:none;">
+				<input type="text" size="5" id="start_owed" onchange="showByDate()" value="0" />
+				..<input type="text" size="5" id="end_owed" onchange="showByDate()" value="50000"/>
+				</div>
             </div>
  		</div>
         
@@ -38,9 +45,33 @@
 </div> 
     	</div>
     	
-
+    	<script>showByDate();</script>
 <% content_for :javascript do %>
 <script type="text/javascript">
+
+var STATUS=0;
+var PLAN=1;
+var OWED=2;
+	function hideParams(){
+		var param=($("#show-only option:selected").val());
+		//alert("parametro "+param);
+		if(param==STATUS){
+			$("#section_owed").css("display", "none");
+			$("#show-only-plan").css("display", "none");
+			$("#show-only-value").css("display", "");
+		}else if(param==PLAN){
+		//	alert("paramss");
+			$("#section_owed").css("display", "none");
+			$("#show-only-plan").css("display", "");
+			$("#show-only-value").css("display", "none");
+		}else{
+			$("#section_owed").css("display", "");
+			$("#show-only-plan").css("display", "none");
+			$("#show-only-value").css("display", "none");
+		}
+		showByDate();
+			
+	}
 	function showByPeriod(){
 		var period=($("#transaction-sort option:selected").val());
 		var params="?period="+period;
@@ -50,10 +81,19 @@
 		var init_date=($("#date-1").val());
 		var end_date=($("#date-2").val());
 		var params="?init_date="+init_date+"&end_date="+end_date;
+		var param=($("#show-only option:selected").val());
+		if(param==STATUS){
+			params+="&status="+($("#show-only-value option:selected").val())
+		}else if(param==PLAN){
+			params+="&plan="+($("#show-only-plan option:selected").val())
+		}else{
+			params+="&start_owed="+($("#start_owed").val())+"&end_owed="+($("#end_owed").val());
+		}
 		loadOrders(params);
 	}
 	function loadOrders(params){
 		var link="<%=store_payment_plans_path()%>"+params;
+	//	alert(link);
 		$.ajax({
         type: 'GET',
         url: link,
@@ -63,10 +103,19 @@
          
         },
         error: function(XMLHttpRequest, textStatus) {
-          alert('Sorry unexpected Issue.');
+          alert('Sorry unexpected Issue.'+XMLHttpRequest.statusText);
          
         }
       });
 	}
+//	$(document).ready(showByDate());
+$(function() {
+		$( "#date-1" ).datepicker({
+			showButtonPanel: true
+		});
+		$( "#date-2" ).datepicker({
+			showButtonPanel: true
+		});
+	});
 </script>	
 <%end%>

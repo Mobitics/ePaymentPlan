@@ -3,9 +3,9 @@
 <head>
   <title>ePaymentPlans :: Give every customer a chance to buy</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <%= stylesheet_link_tag    "store_store" %>
-  <%= yield :stylesheet %>
-  <%= javascript_include_tag "application","store_scripts" %>
+  <%= stylesheet_link_tag    "store_store","jquery-ui-1.8.14.custom" %>
+  <%= yield :stylesheet %>"
+  <%= javascript_include_tag "application","store_scripts","jquery.ui.core","jquery.ui.widget","jquery.ui.datepicker" %>
    
   <%= yield :javascript %>
   <%= csrf_meta_tags %>

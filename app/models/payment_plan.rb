@@ -1,5 +1,5 @@
 class PaymentPlan < ActiveRecord::Base
-  attr_accessor :plan_id
+  
 
   attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account,:first_payment_rate
 
@@ -10,6 +10,16 @@ class PaymentPlan < ActiveRecord::Base
   has_many :payments, :dependent => :destroy
 
   # after_create :notify_store
+  before_create :validate_payment_inactive
+  
+  def validate_payment_inactive
+    errors[:base] << "This customer have a active plan" if customer.active_orders? 
+  end
+
+  def active_orders?
+    !self.payment_plans.where(:active => true).empty?
+  end
+  
 
   def create
     return true if super and create_first_payment
@@ -33,7 +43,11 @@ class PaymentPlan < ActiveRecord::Base
   def make_payment
     payment = self.payments.build({'payment' => self.amount_to_pay})
     if payments_pending? && payment.save
-      setup_next_payment if payments_pending?
+      if payments_pending?
+      	setup_next_payment 
+      else
+      	self.update_attribute(:active,false)
+      end
       return true
     end
 
