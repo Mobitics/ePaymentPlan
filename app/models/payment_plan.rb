@@ -13,13 +13,11 @@ class PaymentPlan < ActiveRecord::Base
   before_create :validate_payment_inactive
   
   def validate_payment_inactive
-    errors[:base] << "This customer have a active plan" if customer.active_orders? 
+    errors.add(:customer, "This customer have a active plan")  if customer.active_orders? 
   end
 
-  def active_orders?
-    !self.payment_plans.where(:active => true).empty?
-  end
-  
+
+
 
   def create
     return true if super and create_first_payment

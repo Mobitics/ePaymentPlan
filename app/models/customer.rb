@@ -17,6 +17,15 @@ class Customer < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   
+  def active_orders
+  self.payment_plans.where(:active => true)
+end
+
+def active_orders?
+  !self.active_orders.empty?
+end
+
+  
   def status_color
   	if(payment_plans.count>0)
   		return payment_plans.last.status_color	
