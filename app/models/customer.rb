@@ -16,22 +16,21 @@ class Customer < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
-  
+
   def active_orders
-  self.payment_plans.where(:active => true)
-end
-
-def active_orders?
-  !self.active_orders.empty?
-end
-
-  
-  def status_color
-  	if(payment_plans.count>0)
-  		return payment_plans.last.status_color	
-  	end
+    self.payment_plans.where(:active => true)
   end
-  
+
+  def active_orders?
+    !self.active_orders.empty?
+  end
+
+  def status_color
+    if(payment_plans.count>0)
+      return payment_plans.last.status_color	
+    end
+  end
+
   def create
     if super and create_cim_profile
       return true
@@ -68,7 +67,7 @@ end
   end
 
   private
-  
+
   def create_cim_profile
     @gateway = payment_gateway
 
@@ -89,28 +88,19 @@ end
     return false unless self.customer_cim_id
 
     @gateway = payment_gateway
-
     response = @gateway.update_customer_profile(
-      :profile => user_profile.merge({
-        :customer_profile_id => self.customer_cim_id
-      })
+    :profile => user_profile.merge({:customer_profile_id => self.customer_cim_id})
     )
-
     !!response.success?
   end
 
   def delete_cim_profile
     @gateway = payment_gateway
-
     response = @gateway.delete_customer_profile(:customer_profile_id => self.customer_cim_id)
-
     !!response.success?
   end
 
   def user_profile
     return {:merchant_customer_id => self.id, :email => self.email, :description => self.email}
   end
-  
-  
-
 end

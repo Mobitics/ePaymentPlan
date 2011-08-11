@@ -1,66 +1,36 @@
 <div id="title">
-    		<h1><%=@customer.full_name%></h1>
-        </div>
- 
+  <h1><%= @customer.full_name %></h1>
 </div>
 <div>
-<table class="customer">
-  <tbody> 
-
-  
-  
-    <tr>
-      <th>
-        ID
-      </th>
-      <td>
-        <%= @customer.customer_cim_id %>
-      </td>
-    </tr>
-    <tr>
-      <th>
-        Email
-      </th>
-      <td>
-        <a href="mailto:<%= @customer.email %>"><%= @customer.email %></a>
-      </td>
-    </tr>
-    <tr>
-      <th>Phone</th>
-      <td><%= @customer.phone %></td>
-    </tr>
-    <tr>
-      <th>
-        Customer Since
-        </th>
-      <td>
-        <%= @customer.create_at %>
+  <table class="customer">
+    <tbody> 
+      <tr>
+        <th>Name</th>
+        <td><%= @customer.full_name %></td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td><a href="mailto:<%= @customer.email %>"><%= @customer.email %></a></td>
+      </tr>
+      <tr>
+        <th>Customer Since</th>
+        <td>
+          <%= @customer.created_at %>
         </td>
-    </tr>
-    <tr>
-      <th>Transactions</th>
-      <%
-        p=@customer.payment_plans.last
-        %>
-        <td><%= link_to p.order_id,store_payment_plan_path(p) %></td>
-        
-    </tr>
-    <tr>
-      <th>Shipping Address</th>
-      <td><%= @customer.shipping_address %></td>
-    </tr>
-    <tr>
-      <th>Credit Cards</th>
-      <td><%= @customer.payment_profiles.last.credit_card %></td>
-    </tr>
-    <tr>
-      <th>Status</th>
-      <td><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
-    </tr>
+      </tr>
+      <tr>
+        <th>Transactions</th>
+        <% payment_plan = @customer.payment_plans.last %>
+        <td><%= (payment_plan ? link_to(payment_plan.order_id, store_payment_plan_path(payment_plan)) : "N/A") %></td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td><img src="/assets/traffic-light-green.png" width="90" height="30" /></td>
+      </tr>
     </tbody>
-    </table>
-    </div>
+  </table>
+</div>
 <a class="return" href="<%= store_customers_path%>">« Return to Customers List</a>
-    	</div>
+</div>
 
 

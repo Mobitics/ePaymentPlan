@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(:version => 20110803052737) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "address_2"
-    t.boolean  "first_step"
+    t.boolean  "first_step", :default => false
   end
 
   add_index "stores", ["name"], :name => "index_stores_on_name", :unique => true
