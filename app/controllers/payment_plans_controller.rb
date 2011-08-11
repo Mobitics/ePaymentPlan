@@ -70,12 +70,12 @@ class PaymentPlansController < ApplicationController
       flash[:error] = "Please select a valid payment plan from the list."
       render :action => "step1" and return
     end
-    @payment_profile = @customer.has_payment_profile_with?(params[:payment_profile])
+    @payment_profile = customer.has_payment_profile_with?(params[:payment_profile])
     puts "1" * 80
     puts @payment_profile
     puts "1" * 80
     unless @payment_profile
-      @payment_profile = @customer.payment_profiles.build params[:payment_profile]
+      @payment_profile = customer.payment_profiles.build params[:payment_profile]
       puts "2" * 80
       puts @payment_profile.inspect
       puts "2" * 80
