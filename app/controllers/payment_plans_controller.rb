@@ -2,22 +2,22 @@ class PaymentPlansController < ApplicationController
   layout "checkout"
 
   def step1
-    puts "0" * 80
-    puts params.inspect
-    puts "0" * 80
+    # puts "0" * 80
+    # puts params.inspect
+    # puts "0" * 80
     @user = User.find_by_email(params[:order].delete(:account))
     # Error if a user with provided email is not found: STORE DOES NOT EXIST => @user.blank?
     @store = @user.store
     @plans = @store.plans.order('is_readonly DESC')
     customer = @store.customers.find_or_create_by_email(params[:order][:email].downcase)
-    puts "a" * 80
-    puts customer.inspect
-    puts customer.errors.full_messages
-    puts "a" * 80
+    # puts "a" * 80
+    # puts customer.inspect
+    # puts customer.errors.full_messages
+    # puts "a" * 80
     @customer = build_customer(params[:order], customer)
-    puts "b" * 80
-    puts @customer.inspect
-    puts "b" * 80
+    # puts "b" * 80
+    # puts @customer.inspect
+    # puts "b" * 80
     
     @payment_plan = PaymentPlan.new(params[:order].merge(:order_id => params[:order].delete(:num), :store_id => @store.id))
     @payment_profile = PaymentProfile.new
