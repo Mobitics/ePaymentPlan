@@ -105,9 +105,9 @@ class PaymentPlansController < ApplicationController
 
   private
 
-  def build_customer(params = {}, customer = nil)
+  def build_customer(params = {}, thecustomer = nil)
     attributes = params[:billing_address].nil? ? params : params[:billing_address].dup.merge!({:email => params.delete(:email)})
-    customer = Customer.new unless customer
+    customer = thecustomer.nil? ? Customer.new : thecustomer.dup
     customer.email            = attributes.delete(:email).downcase
     customer.first_name       = attributes.delete(:first_name)
     customer.last_name        = attributes.delete(:last_name)
