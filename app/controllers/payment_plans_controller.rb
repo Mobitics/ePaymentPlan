@@ -7,6 +7,10 @@ class PaymentPlansController < ApplicationController
     @store = @user.store
     @plans = @store.plans.order('is_readonly DESC')
     customer = @store.customers.find_or_create_by_email(params[:order][:email].downcase)
+    puts "0" * 80
+    puts customer.inspect
+    puts customer.errors.full_messages
+    puts "0" * 80
     @customer = build_customer(params[:order], customer)
     
     @payment_plan = PaymentPlan.new(params[:order].merge(:order_id => params[:order].delete(:num), :store_id => @store.id))
@@ -63,9 +67,21 @@ class PaymentPlansController < ApplicationController
       render :action => "step1" and return
     end
     @payment_profile = @customer.has_payment_profile_with?(params[:payment_profile])
+    puts "1" * 80
+    puts @payment_profile
+    puts "1" * 80
     unless @payment_profile
       @payment_profile = @customer.payment_profiles.build params[:payment_profile]
-      render :action => "step1" and return unless @payment_profile.save
+      puts "2" * 80
+      puts @payment_profile.inspect
+      puts "2" * 80
+      unless @payment_profile.save
+        puts "3" * 80
+        puts @payment_profile.inspect
+        puts @payment_profile.errors.full_messages
+        puts "3" * 80
+        render :action => "step1" and return
+      end
     end
     @payment_plan.payment_profile_id = @payment_profile.id
     if @payment_plan.save
@@ -96,9 +112,9 @@ class PaymentPlansController < ApplicationController
   end
   private
 
-  def build_customer(params = {}, customer = nil)
+  def build_customer(params = {}, thecustomer = nil)
     attributes = params[:billing_address].nil? ? params : params[:billing_address].dup.merge!({:email => params.delete(:email)})
-    customer = Customer.new unless customer
+    customer = thecustomer.nil? ? Customer.new : thecustomer.dup
     customer.email            = attributes.delete(:email).downcase
     customer.first_name       = attributes.delete(:first_name)
     customer.last_name        = attributes.delete(:last_name)

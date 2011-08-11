@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # Stack
-gem 'rails', '>= 3.1.0.rc4'
+gem 'rails', '>= 3.1.0.rc5'
 gem 'sass-rails', '>= 3.1.0.rc.2'
 gem 'coffee-script'
 gem 'uglifier'
