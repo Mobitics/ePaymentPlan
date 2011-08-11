@@ -51,6 +51,10 @@ class PaymentPlansController < ApplicationController
     @store = @user.store
     @plans = @store.plans.order('is_readonly DESC')
     customer = @store.customers.find_by_email(params[:customer][:email].downcase)
+    puts "9" * 80
+    puts customer.inspect
+    puts customer.errors.full_messages
+    puts "9" * 80
     @customer = build_customer(params[:customer], customer)
     @payment_plan = PaymentPlan.new(params[:payment_plan])
     @payment_profile = PaymentProfile.new
