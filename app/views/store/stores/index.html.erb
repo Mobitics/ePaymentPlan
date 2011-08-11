@@ -2,6 +2,7 @@
         <div id="title">
 			<h1>Dashboard</h1> 
         </div>
+     <%if !b_to_i @store.first_step or !b_to_i @store.authorize_net!=nil or !b_to_i @store.plans.count>0%>   
     <a class="start-hide" href="#">hide</a>
  	<div class="colmask threecol">
 	<div class="colmid">
@@ -31,7 +32,7 @@
 		</div>
 	</div>    
 </div>
-
+<%end%>
 <div id="start-stats">
       <div class="container clearfix">
         <div class="stats-box" style="margin-left:0px;">
