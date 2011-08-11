@@ -10,6 +10,7 @@ class PaymentPlan < ActiveRecord::Base
   has_many :payments, :dependent => :destroy
 
   # after_create :notify_store
+
   # before_create :validate_payment_inactive
   # 
   # def validate_payment_inactive

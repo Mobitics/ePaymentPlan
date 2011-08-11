@@ -63,6 +63,7 @@ class PaymentPlansController < ApplicationController
       render :action => "step1" and return
     end
     @payment_profile = @customer.has_payment_profile_with?(params[:payment_profile])
+    puts "Nojoda" * 20
     unless @payment_profile
       @payment_profile = @customer.payment_profiles.build params[:payment_profile]
       render :action => "step1" and return unless @payment_profile.save
