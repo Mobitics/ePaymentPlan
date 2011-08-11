@@ -62,7 +62,7 @@ class Customer < ActiveRecord::Base
   end
 
   def payment_gateway
-    return get_payment_gateway(store.authorize_net.api_login_id, store.authorize_net.transaction_key) unless store.authorize_net.blank?
+    return get_payment_gateway(store.authorize_net.api_login_id, store.authorize_net.transaction_key, store.authorize_net.test_mode) unless store.authorize_net.blank?
     get_payment_gateway
   end
 
