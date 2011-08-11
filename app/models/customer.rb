@@ -35,7 +35,7 @@ class Customer < ActiveRecord::Base
     if super and create_cim_profile
       return true
     else
-      self.destroy if self.id
+      self.delete if self.persisted?
       return false
     end
   end
