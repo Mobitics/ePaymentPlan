@@ -92,6 +92,12 @@ class PaymentPlan < ActiveRecord::Base
   	    return "red" if(payments.last.status==Payment::DECLINED)
   	end
   end
+  
+  def self.recent
+    table = PaymentPlan.arel_table
+    conditions = table[:created_at].gteq(Date.today.beginning_of_day).and(table[:created_at].lteq(Date.today.end_of_day))
+    self.where(conditions)
+  end
 
   private
 
