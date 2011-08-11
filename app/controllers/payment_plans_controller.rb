@@ -7,6 +7,10 @@ class PaymentPlansController < ApplicationController
     @store = @user.store
     @plans = @store.plans.order('is_readonly DESC')
     customer = @store.customers.find_or_create_by_email(params[:order][:email].downcase)
+    puts "0" * 80
+    puts customer.inspect
+    puts customer.errors.full_messages
+    puts "0" * 80
     @customer = build_customer(params[:order], customer)
     
     @payment_plan = PaymentPlan.new(params[:order].merge(:order_id => params[:order].delete(:num), :store_id => @store.id))
