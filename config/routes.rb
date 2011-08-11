@@ -8,6 +8,7 @@ Epaymentplans::Application.routes.draw do
   # match "/order/purchase" => "orders#edit"
   
   match "/order/purchase" => "payment_plans#step1"
+  match "/order/show_contract" => "payment_plans#show_contract"
   # match "/order/purchase/step2" => "payment_plans#step2"
   
   # match "/order/confirmation" => "orders#confirmation"

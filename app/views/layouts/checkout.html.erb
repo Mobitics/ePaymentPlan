@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
 <head> 
   <title><%= @store.name %> - Checkout</title> 
-  <%= stylesheet_link_tag    "checkout" %>
+  <%= stylesheet_link_tag    "checkout","colorbox" %>
   <%= yield :stylesheet %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application","jquery.colorbox-min" %>
   <%= yield :javascript %>
   <%= csrf_meta_tags %>
 </head> 
