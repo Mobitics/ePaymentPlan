@@ -16,9 +16,6 @@ class PaymentPlan < ActiveRecord::Base
     errors.add(:customer, "This customer have a active plan")  if customer.active_orders? 
   end
 
-
-
-
   def create
     return true if super and create_first_payment
     self.destroy if self.id
@@ -94,6 +91,12 @@ class PaymentPlan < ActiveRecord::Base
   		return "yellow" if(payments.last.status==Payment::DECLINED and payment_plans.last.payments.last.transactions.count<=3)
   	    return "red" if(payments.last.status==Payment::DECLINED)
   	end
+  end
+  
+  def self.recent
+    table = PaymentPlan.arel_table
+    conditions = table[:created_at].gteq(Date.today.beginning_of_day).and(table[:created_at].lteq(Date.today.end_of_day))
+    self.where(conditions)
   end
 
   private
