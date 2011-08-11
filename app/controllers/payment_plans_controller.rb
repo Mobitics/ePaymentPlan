@@ -69,11 +69,12 @@ class PaymentPlansController < ApplicationController
     unless @payment_profile
       @payment_profile = @customer.payment_profiles.build params[:payment_profile]
       puts "2" * 80
-      puts @payment_profile
+      puts @payment_profile.inspect
       puts "2" * 80
       unless @payment_profile.save
         puts "3" * 80
-        puts @payment_profile
+        puts @payment_profile.inspect
+        puts @payment_profile.errors.full_messages
         puts "3" * 80
         render :action => "step1" and return
       end
