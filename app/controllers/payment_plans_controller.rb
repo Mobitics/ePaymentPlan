@@ -63,10 +63,20 @@ class PaymentPlansController < ApplicationController
       render :action => "step1" and return
     end
     @payment_profile = @customer.has_payment_profile_with?(params[:payment_profile])
-    puts "Nojoda" * 20
+    puts "1" * 80
+    puts @payment_profile
+    puts "1" * 80
     unless @payment_profile
       @payment_profile = @customer.payment_profiles.build params[:payment_profile]
-      render :action => "step1" and return unless @payment_profile.save
+      puts "2" * 80
+      puts @payment_profile
+      puts "2" * 80
+      unless @payment_profile.save
+        puts "3" * 80
+        puts @payment_profile
+        puts "3" * 80
+        render :action => "step1" and return
+      end
     end
     @payment_plan.payment_profile_id = @payment_profile.id
     if @payment_plan.save
