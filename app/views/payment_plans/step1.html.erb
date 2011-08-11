@@ -249,7 +249,7 @@
       </div> 
       <table border="0" cellspacing="0" cellpadding="0" style="height: 55px; width: 100%" id="buttons"> 
         <tr> 
-          <td style="vertical-align:middle"><input id="complete-purchase" name="commit" onclick="this.setAttribute('originalValue', this.value);this.disabled=true;this.value='Completing order...';;result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute('originalValue'); this.disabled = false };return false" type="submit" value="Complete my purchase" />  <small id="cancel-purchase">or <a href="<%= @payment_plan.cancel_return_url %>">cancel, and return to store</a></small></td> 
+          <td style="vertical-align:middle"><input id="complete-purchase" name="commit" onclick="loadToColorBox('#cbx-show-contract','400','200','/order/show_contract');" type="button" value="Complete my purchase" />  <small id="cancel-purchase">or <a href="<%= @payment_plan.cancel_return_url %>">cancel, and return to store</a></small></td> 
           <td style="text-align:right;vertical-align:bottom"><span id="purchase-progress" style="display:none"><img alt="Spinner_big" src="https://cdn.shopify.com/s/images/spinner_big.gif?2ecdc17fef99b94dd8eea4beacd3e171d350335b" /></span></td> 
         </tr> 
       </table> 
@@ -257,3 +257,18 @@
     <% end %>
   </div> 
 </div> 
+<div style='display:none'>
+  <div id='cbx-show-contract'>
+  	
+     
+  </div>
+</div>
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  function send(){
+  	$.fn.colorbox.close();
+  var button=document.getElementById("complete-purchase");
+    button.setAttribute('originalValue', button.value);button.disabled=true;button.value='Completing order...';;result = (button.form.onsubmit ? (button.form.onsubmit() ? button.form.submit() : false) : button.form.submit());if (result == false) { button.value = button.getAttribute('originalValue'); button.disabled = false };return false
+  }
+  </script>
+<% end %>

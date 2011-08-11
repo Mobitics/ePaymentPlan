@@ -18,12 +18,12 @@ class Customer < ActiveRecord::Base
   end
   
   def active_orders
-  self.payment_plans.where(:active => true)
-end
+    self.payment_plans.where(:active => true)
+  end
 
-def active_orders?
-  !self.active_orders.empty?
-end
+  def active_orders?
+    !self.active_orders.empty?
+  end
 
   
   def status_color

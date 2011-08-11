@@ -91,6 +91,9 @@ class PaymentPlansController < ApplicationController
     end
   end
 
+  def show_contract
+  	render :layout=>false
+  end
   private
 
   def build_customer(params = {}, customer = nil)
