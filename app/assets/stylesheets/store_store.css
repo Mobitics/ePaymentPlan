@@ -522,6 +522,17 @@ label.checkbox {display: inline;}
 	font: 14px Verdana, Geneva, sans-serif;
 }
 
+/* column container */
+.colmask-only {
+    position:relative;  /* This fixes the IE7 overflow hidden bug */
+    clear:both;
+    float:left;
+    width:100%;         /* width of whole page */
+    overflow:hidden;        /* This chops off any overhanging divs */
+	z-index:1;
+	
+}
+
 /* common column settings */
 .colright,
 .colmid,

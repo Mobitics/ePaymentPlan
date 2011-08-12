@@ -2,10 +2,13 @@
         <div id="title">
 			<h1>Dashboard</h1> 
         </div>
-     <%if !b_to_i @store.first_step or !b_to_i @store.authorize_net!=nil or !b_to_i @store.plans.count>0%>   
+        
+     <%if showSteps(@store)%>  
     <a class="start-hide" href="#">hide</a>
+    
  	<div class="colmask threecol">
 	<div class="colmid">
+		
 		<div class="colleft">
 			
 			<div class="col1">
@@ -29,10 +32,13 @@
                 <div class="bottom" style="width:93%;"><a class="start-button" href="<%=new_store_plan_path()%>">Click here to set up Payment Plans</a></div>
                 <!-- Column 3 end -->
 			</div>
+			
 		</div>
+		
 	</div>    
 </div>
 <%end%>
+<div class="colmask-only threecol">
 <div id="start-stats">
       <div class="container clearfix">
         <div class="stats-box" style="margin-left:0px;">
@@ -52,6 +58,7 @@
           <p class="stats-box-value" id="stats-box_expired_card_count">0</p>
         </div>
       </div>
+    </div>
     </div>
 <div style="clear:both;"></div>
 <div class="table_wrapper"> 
@@ -80,4 +87,5 @@
       
 </div>
 </div>
+
 
