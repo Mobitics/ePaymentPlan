@@ -22,7 +22,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def process
-    @gateway = get_payment_gateway
+    @gateway = self.payment_profile.customer.payment_gateway
     response = @gateway.create_customer_profile_transaction({
       :transaction => {
         :type => :auth_capture,
