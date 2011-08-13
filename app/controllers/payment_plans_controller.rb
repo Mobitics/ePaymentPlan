@@ -7,12 +7,11 @@ class PaymentPlansController < ApplicationController
     @store = @user.store
     @plans = @store.plans.order('is_readonly DESC')
     customer = @store.customers.find_or_create_by_email(params[:order][:email].downcase,{:first_name=>params[:order][:first_name],:last_name=>params[:order][:last_name]})
-    puts "0" * 80
-    puts customer.inspect
-    puts customer.errors.full_messages
-    puts "0" * 80
     @customer = build_customer(params[:order], customer)
     
+    puts "0" * 80
+    puts params[:order].inspect
+    puts "0" * 80
     @payment_plan = PaymentPlan.new(params[:order].merge(:order_id => params[:order].delete(:num), :store_id => @store.id))
     @payment_profile = PaymentProfile.new
     @customer.send(:create_cim_profile) unless @customer.customer_cim_id?
@@ -71,19 +70,9 @@ class PaymentPlansController < ApplicationController
       render :action => "step1" and return
     end
     @payment_profile = customer.has_payment_profile_with?(params[:payment_profile])
-    puts "1" * 80
-    puts @payment_profile
-    puts "1" * 80
     unless @payment_profile
       @payment_profile = customer.payment_profiles.build params[:payment_profile]
-      puts "2" * 80
-      puts @payment_profile.inspect
-      puts "2" * 80
       unless @payment_profile.save
-        puts "3" * 80
-        puts @payment_profile.inspect
-        puts @payment_profile.errors.full_messages
-        puts "3" * 80
         render :action => "step1" and return
       end
     end
