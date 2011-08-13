@@ -196,7 +196,24 @@ p.stats-box-value {
 	font-weight: bold;
 }
 
+#only-values{
+	float:right;
+}
+
+
 #add-new{
+	float:right;
+}
+
+#add-new-modified{
+	float:right;
+	width: 830px;
+}
+#add-new-rest{
+	float:left;
+	width: 650px;
+}
+#section-owed{
 	float:right;
 }
 
