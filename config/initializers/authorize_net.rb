@@ -1,6 +1,6 @@
 AuthorizeConfig = YAML.load_file(File.open("#{Rails.root}/config/stores.yml"))
 
-# ActiveMerchant::Billing::Base.mode = :test # unless Rails.env.production?
+ActiveMerchant::Billing::Base.mode = :test unless Rails.env.production?
 
 module ActiveMerchant
   module Utils
