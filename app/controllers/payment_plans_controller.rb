@@ -6,7 +6,7 @@ class PaymentPlansController < ApplicationController
     # Error if a user with provided email is not found: STORE DOES NOT EXIST => @user.blank?
     @store = @user.store
     @plans = @store.plans.order('is_readonly DESC')
-    customer = @store.customers.find_or_create_by_email(params[:order][:email].downcase)
+    customer = @store.customers.find_or_create_by_email(params[:order][:email].downcase,{:first_name=>params[:order][:first_name],:last_name=>params[:order][:last_name]})
     puts "0" * 80
     puts customer.inspect
     puts customer.errors.full_messages

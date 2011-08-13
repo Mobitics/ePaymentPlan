@@ -5,6 +5,7 @@ class PaymentPlan < ActiveRecord::Base
 
   belongs_to :store
   belongs_to :payment_profile
+  belongs_to :plan
 
   has_one :customer, :through => :payment_profile
   has_many :payments, :dependent => :destroy
@@ -98,6 +99,13 @@ class PaymentPlan < ActiveRecord::Base
     table = PaymentPlan.arel_table
     conditions = table[:created_at].gteq(Date.today.beginning_of_day).and(table[:created_at].lteq(Date.today.end_of_day))
     self.where(conditions)
+  end
+  
+  def interest_amount
+  	return self.amount/(1-(self.interest/100.0))
+  end
+  def owed
+  	return (interest_amount - self.payments.sum(:payment))
   end
 
   private

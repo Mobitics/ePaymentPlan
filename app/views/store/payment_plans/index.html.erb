@@ -1,6 +1,7 @@
 <div id="title">
     		<h1>Orders</h1> 
-            <div id="add-new">
+            <div id="add-new-modified">
+            	<div id="add-new-rest">
            	View:
            	  <label for="transaction-sort"></label>
            	  <select name="transaction-sort" id="transaction-sort" onchange="showByPeriod()">
@@ -22,21 +23,26 @@
                   <option value="1">Plan</option>
                   <option value="2">Owed</option>
                 </select>
-              of 
+                
+              of
+                    </div>
+                <div id="section_owed" style="">     
               <label for="show-only-value"></label>
              
-              <select name="show-only-value" id="show-only-value" style="display:" onchange="showByDate()">
+              <select name="show-only-value" id="show-only-value" style="display:; margin-top:3px;" onchange="showByDate()">
                 <option value="green">Green</option>
                 <option value="yellow">Yellow</option>
                 <option value="red">Red</option>
               </select>
-             <select name="show-only-plan" id="show-only-plan" style="display:none" onchange="showByDate()">
+             <select name="show-only-plan" id="show-only-plan" style="display:none; margin-top:3px;" onchange="showByDate()">
                 <%=options_for_select(@plans)%>
               </select>
-              <div id="section_owed" style="display:none;">
-				<input type="text" size="5" id="start_owed" onchange="showByDate()" value="0" />
-				..<input type="text" size="5" id="end_owed" onchange="showByDate()" value="50000"/>
+        
+              <div id="section_owed2" style="display:none">
+				<input type="text" size="5" id="start_owed" onchange="showByDate()" value="0" />..<input type="text" size="5" id="end_owed" onchange="showByDate()" value="50000"/>
 				</div>
+				</div>
+				
             </div>
  		</div>
         
@@ -56,16 +62,16 @@ var OWED=2;
 		var param=($("#show-only option:selected").val());
 		//alert("parametro "+param);
 		if(param==STATUS){
-			$("#section_owed").css("display", "none");
+			$("#section_owed2").css("display", "none");
 			$("#show-only-plan").css("display", "none");
 			$("#show-only-value").css("display", "");
 		}else if(param==PLAN){
 		//	alert("paramss");
-			$("#section_owed").css("display", "none");
+			$("#section_owed2").css("display", "none");
 			$("#show-only-plan").css("display", "");
 			$("#show-only-value").css("display", "none");
 		}else{
-			$("#section_owed").css("display", "");
+			$("#section_owed2").css("display", "");
 			$("#show-only-plan").css("display", "none");
 			$("#show-only-value").css("display", "none");
 		}

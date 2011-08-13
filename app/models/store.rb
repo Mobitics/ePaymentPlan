@@ -24,7 +24,7 @@ class Store < ActiveRecord::Base
       :min_price          => 0,
       :max_price          => 100000,
       :store_id           => self.id,
-      :frequency          =>'monthly',
+      :frequency          =>'none',
       :is_readonly        => true
     })
   end
