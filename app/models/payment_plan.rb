@@ -102,7 +102,7 @@ class PaymentPlan < ActiveRecord::Base
   end
   
   def interest_amount
-  	return self.amount*(1+(self.interest/100.0))
+  	return self.amount/(1-(self.interest/100.0))
   end
   def owed
   	return (interest_amount - self.payments.sum(:payment))
