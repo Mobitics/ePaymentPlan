@@ -61,6 +61,10 @@ class PaymentPlan < ActiveRecord::Base
   def payments_pending?
     self.payments.count < self.payments_count
   end
+  
+  def update_time
+  	self.update_attribute(:updated_at,Time.now)
+  end
 
   def notify_store
     #url = URI.parse(notify_url)
@@ -97,8 +101,8 @@ class PaymentPlan < ActiveRecord::Base
   
   def self.recent
     table = PaymentPlan.arel_table
-    conditions = table[:created_at].gteq(Date.today.beginning_of_day).and(table[:created_at].lteq(Date.today.end_of_day))
-    self.where(conditions)
+    conditions = table[:updated_at].gteq(Date.today.beginning_of_day).and(table[:updated_at].lteq(Date.today.end_of_day))
+    self.where(conditions).order("updated_at DESC")
   end
   
   def interest_amount

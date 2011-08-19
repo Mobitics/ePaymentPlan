@@ -9,6 +9,11 @@ class Transaction < ActiveRecord::Base
   attr_accessor :amount
   
   validates_presence_of :amount
+  after_create :update_payment_plan
+  
+  def update_payment_plan
+  	 self.payment.payment_plan.update_time
+  end 
 
   def create
     if super and process

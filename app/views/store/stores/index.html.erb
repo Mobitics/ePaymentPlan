@@ -34,20 +34,22 @@
     <tr> 
       <th>Order No.</th> 
       <th>Total</th> 
+      <th>Customer</th>
       <th>Shipping</th> 
       <th>Tax</th> 
       <th>Payments</th> 
-      <th>Frequency</th> 
+      <th>Payment Plan</th> 
       <th>Status</th> 
     </tr> 
     <% @payment_plans.each do |payment_plan| %>
       <tr class="<%= cycle("odd", "even") %>">
         <td><%= link_to payment_plan.order_id, store_payment_plan_path(payment_plan) %></td>
         <td><%= "%.2f" % payment_plan.amount %></td>
+        <td><%= payment_plan.customer.full_name %></td>
         <td><%= "%.2f" % payment_plan.shipping %></td>
         <td><%= payment_plan.tax %></td>
-    	<td><%= payment_plan.payments.count %></td>
-        <td><%= payment_plan.frequency.capitalize %></td>
+    	<td><%= "#{payment_plan.payments.count} of #{payment_plan.payments_count}" %></td>
+        <td><%= payment_plan.plan.name %></td>
         <td class="traffic"><img src="/assets/traffic-light-<%=payment_plan.status_color%>.png" width="90" height="30" /></td>
       </tr>
     <% end %>
