@@ -37,4 +37,8 @@ class Store < ActiveRecord::Base
   	Store.sum(:payment,:joins=>{:payment_plans=>:payments}, :conditions => {:payments => {:status => Payment::AUTHORISED,:created_at=>Time.now.beginning_of_day() .. Time.now.end_of_day()},:stores => {:id => self.id}})
   end
   
+  def total_transactions_declined
+  	Store.count(:payment,:joins=>{:payment_plans=>:payments}, :conditions => {:payments => {:status => Payment::DECLINED},:stores => {:id => self.id}})
+  end
+  
 end

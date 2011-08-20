@@ -23,7 +23,7 @@
         </div>
          <div class="stats-box">
           <p class="stats-box-label">Expired Cards</p>
-          <p class="stats-box-value" id="stats-box_expired_card_count">0</p>
+          <p class="stats-box-value" id="stats-box_expired_card_count"><%= "%.0f" % @store.total_transactions_declined %></p>
         </div>
       </div>
     </div>
