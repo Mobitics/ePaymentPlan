@@ -28,9 +28,13 @@ class Store < ActiveRecord::Base
       :is_readonly        => true
     })
   end
+  
   def total_revenue
     return Store.sum(:payment,:joins=>{:payment_plans=>:payments}, :conditions => {:payments => {:status => Payment::AUTHORISED},:stores => {:id => self.id}})
   end
   
+  def total_revenue_today
+  	Store.sum(:payment,:joins=>{:payment_plans=>:payments}, :conditions => {:payments => {:status => Payment::AUTHORISED,:created_at=>Time.now.beginning_of_day() .. Time.now.end_of_day()},:stores => {:id => self.id}})
+  end
   
 end
