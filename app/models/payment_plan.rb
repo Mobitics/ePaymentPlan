@@ -2,6 +2,7 @@ class PaymentPlan < ActiveRecord::Base
   
 
   attr_readonly :amount, :shipping, :tax, :notify_url, :return_url, :cancel_return_url, :num, :account,:first_payment_rate
+  
 
   belongs_to :store
   belongs_to :payment_profile
@@ -108,10 +109,11 @@ class PaymentPlan < ActiveRecord::Base
   def interest_amount
   	return self.amount/(1-(self.interest/100.0))
   end
+  
   def owed
   	return (interest_amount - self.payments.sum(:payment))
   end
-
+  
   private
 
   def setup_next_payment

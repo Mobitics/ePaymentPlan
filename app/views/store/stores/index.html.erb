@@ -11,11 +11,11 @@
       <div class="container clearfix">
         <div class="stats-box" style="margin-left:0px;">
           <p class="stats-box-label">Total Revenue</p>
-          <p class="stats-box-value" id="stats-box_total_revenue">$0.00</p> 
+          <p class="stats-box-value" id="stats-box_total_revenue">$<%= "%.2f" % @store.total_revenue %></p> 
         </div>
         <div class="stats-box">
           <p class="stats-box-label">Revenue Today</p>
-          <p class="stats-box-value" id="stats-box_todays_revenue">$0.00</p>
+          <p class="stats-box-value" id="stats-box_todays_revenue">$<%= "%.2f" % @store.total_revenue_today %></p>
         </div>
         <div class="stats-box">
           <p class="stats-box-label">Declined</p>
